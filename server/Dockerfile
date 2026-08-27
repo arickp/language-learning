@@ -3,6 +3,7 @@ FROM rust:1.88-bookworm AS builder
 WORKDIR /app
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
+COPY seed ./seed
 RUN cargo build --release --locked
 
 FROM debian:bookworm-slim AS runtime
