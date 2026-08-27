@@ -30,8 +30,15 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
@@ -742,7 +749,12 @@ private fun QuizScreen(
                                             primary = isRecording
                                         )
                                         practiceFeedback?.let {
-                                            Text(it, modifier = Modifier.padding(top = 12.dp), lineHeight = 22.sp, textAlign = TextAlign.Center)
+                                            AgentMarkdownText(
+                                                markdown = it,
+                                                modifier = Modifier.padding(top = 12.dp),
+                                                fontSize = 16.sp,
+                                                lineHeight = 22.sp
+                                            )
                                         }
                                     }
                                 }
@@ -768,7 +780,11 @@ private fun QuizScreen(
                                     Text("Searching ${exampleSource.label}…", modifier = Modifier.padding(top = 6.dp))
                                 }
                                 is ExampleDiscoveryState.Found -> {
-                                    Text(discovery.result.summary, textAlign = TextAlign.Center, fontSize = 15.sp)
+                                    AgentMarkdownText(
+                                        markdown = discovery.result.summary,
+                                        fontSize = 15.sp,
+                                        lineHeight = 22.sp
+                                    )
                                     if (discovery.result.nsfw) {
                                         Text(
                                             "NSFW",
@@ -1050,6 +1066,12 @@ private fun emojiForAnswer(answer: String): String = when (answer.lowercase()) {
     "to stand" -> "🧍"
     "to stop" -> "🛑"
     "to become" -> "🔄"
+    "snack" -> "🍿"
+    "mid-morning snack (swiss german)", "afternoon snack (swiss german)" -> "🍪"
+    "snack bar / takeaway stand" -> "🌭"
+    "pen" -> "🖊️"
+    "electric bicycle / e-bike" -> "🚲"
+    "hospital", "hospital (swiss german; krankenhaus in germany)" -> "🏥"
     else -> "💬"
 }
 
@@ -1144,5 +1166,73 @@ private fun FocusActionButton(
                 fontWeight = if (focused) FontWeight.Black else FontWeight.Bold
             )
         }
+    }
+}
+
+@Composable
+private fun AgentMarkdownText(
+    markdown: String,
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = 15.sp,
+    lineHeight: TextUnit = 22.sp,
+    color: Color = Ink
+) {
+    val styled = remember(markdown) { markdown.toInlineMarkdownAnnotatedString() }
+    Text(
+        text = styled,
+        modifier = modifier,
+        color = color,
+        fontSize = fontSize,
+        lineHeight = lineHeight,
+        textAlign = TextAlign.Center
+    )
+}
+
+/** Lightweight markdown for short model replies (**bold**, *italic*, `code`, [links](url), ```fences```). */
+private fun String.toInlineMarkdownAnnotatedString(): AnnotatedString {
+    val normalized = trim()
+        // Drop fenced code blocks but keep their inner text (often a URL).
+        .replace(Regex("""```[a-zA-Z0-9_-]*\s*\n?(.*?)```""", RegexOption.DOT_MATCHES_ALL)) { match ->
+            match.groupValues[1].trim()
+        }
+        // Models often append a redundant URL block; the Open button already covers that.
+        .replace(Regex("""(?im)^\s*Exact item URL:?\s*\n?.*$"""), "")
+        .replace(Regex("""https?://\S+"""), "")
+        .replace(Regex("""(?m)^#{1,6}\s+"""), "")
+        .replace(Regex("""\n{3,}"""), "\n\n")
+        .replace("()", "")
+        .replace("[]", "")
+        .trim()
+    return buildAnnotatedString {
+        val pattern = Regex(
+            """(\*\*\*(.+?)\*\*\*|\*\*(.+?)\*\*|\*(.+?)\*|_(.+?)_|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\))""",
+            RegexOption.DOT_MATCHES_ALL
+        )
+        var cursor = 0
+        for (match in pattern.findAll(normalized)) {
+            append(normalized.substring(cursor, match.range.first))
+            when {
+                match.groupValues[2].isNotEmpty() -> withStyle(
+                    SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)
+                ) { append(match.groupValues[2]) }
+                match.groupValues[3].isNotEmpty() -> withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(match.groupValues[3])
+                }
+                match.groupValues[4].isNotEmpty() -> withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
+                    append(match.groupValues[4])
+                }
+                match.groupValues[5].isNotEmpty() -> withStyle(SpanStyle(fontStyle = FontStyle.Italic)) {
+                    append(match.groupValues[5])
+                }
+                match.groupValues[6].isNotEmpty() -> withStyle(
+                    SpanStyle(fontFamily = FontFamily.Monospace, background = Ink.copy(alpha = 0.08f))
+                ) { append(match.groupValues[6]) }
+                match.groupValues[7].isNotEmpty() -> withStyle(
+                    SpanStyle(fontWeight = FontWeight.SemiBold, color = Green)
+                ) { append(match.groupValues[7]) }
+            }
+            cursor = match.range.last + 1
+        }
+        if (cursor < normalized.length) append(normalized.substring(cursor))
     }
 }
