@@ -1,4 +1,4 @@
-package com.arick.languagelearning
+package io.github.arickp.languagelearning
 
 import android.media.AudioAttributes
 import android.media.AudioFormat

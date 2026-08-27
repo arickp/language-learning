@@ -1,4 +1,4 @@
-package com.arick.languagelearning
+package io.github.arickp.languagelearning
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

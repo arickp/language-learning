@@ -16,11 +16,11 @@ val serverUrl = localProperties.getProperty("SERVER_URL", "")
     .replace("\"", "\\\"")
 
 android {
-    namespace = "com.arick.languagelearning"
+    namespace = "io.github.arickp.languagelearning"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.arick.languagelearning"
+        applicationId = "io.github.arickp.languagelearning"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

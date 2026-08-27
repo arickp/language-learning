@@ -1,4 +1,4 @@
-package com.arick.languagelearning
+package io.github.arickp.languagelearning
 
 import android.Manifest
 import android.content.Context
