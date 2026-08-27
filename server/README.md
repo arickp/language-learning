@@ -25,12 +25,19 @@ Before a broad public launch, replace the contact wording in both legal pages wi
 
 1. Install Rust from [rustup.rs](https://rustup.rs/) if `cargo` is not already available.
 2. Create an OpenAI API project and a **Restricted** API key.
-3. Give the key these permissions:
-   - **Responses: Write** for user-requested public-example searches.
-   - **Audio/Speech: Write** for pronunciation.
-   - Leave unrelated permissions set to **None**.
+3. Give the key these permissions (OpenAI's labels change over time):
+   - Under **Model capabilities**, first set the parent dropdown to **Request** (this unlocks a hidden `model.request` scope — setting only the children to Mixed often causes 401s).
+   - Then keep:
+     - **Responses** → **Write** (example search, sample sentences)
+     - **Text-to-speech** → **Request** (read-it-aloud / pronunciation)
+     - **Chat completions** → **Request** (spoken practice evaluation)
+   - Set unrelated model capabilities back to **None**.
+   - Leave Assistants, Threads, Files, etc. at **None**.
 4. Copy `.env.example` to a new file named `.env` in this folder.
 5. Replace `sk-your-key-here` in `.env` with your real API key.
+6. Restart the companion server after changing the key or its permissions.
+
+Failed OpenAI calls and empty example searches print to the server terminal (`OpenAI … failed: HTTP …`).
 
 Do not put the API key in `local.properties`, the Android source, or the APK. The `.env` file is excluded by the project's `.gitignore`.
 

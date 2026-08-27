@@ -150,6 +150,7 @@ private fun QuizGame() {
     var revealedHintCounts by remember { mutableStateOf(emptyMap<Int, Int>()) }
     var exampleStates by remember { mutableStateOf(emptyMap<Int, ExampleDiscoveryState>()) }
     var exampleSources by remember { mutableStateOf(emptyMap<Int, ExampleSource>()) }
+    var startError by remember { mutableStateOf<String?>(null) }
     val coroutineScope = rememberCoroutineScope()
 
     fun start(variant: LanguageVariant, category: QuizCategory?) {
@@ -180,6 +181,12 @@ private fun QuizGame() {
             .shuffled()
             .sortedBy { recentQuestionKeys.lastIndexOf(it.historyKey()) }
         questions = (notRecentlySeen + recentlySeen).take(10)
+        if (questions.isEmpty()) {
+            val label = category?.label?.lowercase() ?: "mixed"
+            startError = "No $label questions for ${variant.label} · ${selectedDifficulty.label}."
+            return
+        }
+        startError = null
         recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() }).takeLast(30)
         index = 0; score = 0; streak = 0; bestStreak = 0
         answeredChoices = emptyMap()
@@ -217,7 +224,8 @@ private fun QuizGame() {
                     preferences.edit().putString("difficulty", difficulty.name).apply()
                 },
                 onStart = ::start,
-                onSettings = { screen = Screen.SETTINGS }
+                onSettings = { screen = Screen.SETTINGS },
+                startError = startError
             )
             Screen.SETTINGS -> SettingsScreen(
                 allowExplicitContent = allowExplicitContent,
@@ -227,50 +235,57 @@ private fun QuizGame() {
                 },
                 onBack = { screen = Screen.HOME }
             )
-            Screen.QUIZ -> QuizScreen(
-                item = questions[index], number = index + 1, total = questions.size,
-                variant = selectedVariant,
-                score = score, streak = streak,
-                chosen = answeredChoices[index],
-                onChoose = { answer -> answeredChoices = answeredChoices + (index to answer) },
-                revealedHintCount = revealedHintCounts[index] ?: 0,
-                exampleState = exampleStates[index] ?: ExampleDiscoveryState.Idle,
-                exampleSource = exampleSources[index] ?: ExampleSource.REDDIT,
-                onExampleSourceChange = { source ->
-                    exampleSources = exampleSources + (index to source)
-                    exampleStates = exampleStates + (index to ExampleDiscoveryState.Idle)
-                },
-                onRevealHint = {
-                    val currentCount = revealedHintCounts[index] ?: 0
-                    if (currentCount < questions[index].hints.size) {
-                        revealedHintCounts = revealedHintCounts + (index to currentCount + 1)
-                    }
-                },
-                onAnswer = { correct ->
-                    if (correct) {
-                        AnswerSoundPlayer.correct()
-                        score++; streak++; bestStreak = maxOf(bestStreak, streak)
-                    } else {
-                        AnswerSoundPlayer.incorrect()
-                        streak = 0
-                    }
-                },
-                onFindExample = { source ->
-                    val requestedIndex = index
-                    val requestedItem = questions[requestedIndex]
-                    if (exampleStates[requestedIndex] !is ExampleDiscoveryState.Loading) {
-                        exampleStates = exampleStates + (requestedIndex to ExampleDiscoveryState.Loading)
-                        coroutineScope.launch {
-                            val result = ExampleDiscovery.find(requestedItem, source, allowExplicitContent)
-                            exampleStates = exampleStates + (requestedIndex to result)
-                        }
-                    }
-                },
-                onNext = {
-                    if (index == questions.lastIndex) screen = Screen.RESULTS else index++
-                },
-                onQuit = { screen = Screen.HOME }
-            )
+            Screen.QUIZ -> {
+                val item = questions.getOrNull(index)
+                if (item != null) {
+                    QuizScreen(
+                        item = item, number = index + 1, total = questions.size,
+                        variant = selectedVariant,
+                        score = score, streak = streak,
+                        chosen = answeredChoices[index],
+                        onChoose = { answer -> answeredChoices = answeredChoices + (index to answer) },
+                        revealedHintCount = revealedHintCounts[index] ?: 0,
+                        exampleState = exampleStates[index] ?: ExampleDiscoveryState.Idle,
+                        exampleSource = exampleSources[index] ?: ExampleSource.REDDIT,
+                        onExampleSourceChange = { source ->
+                            exampleSources = exampleSources + (index to source)
+                            exampleStates = exampleStates + (index to ExampleDiscoveryState.Idle)
+                        },
+                        onRevealHint = {
+                            val currentCount = revealedHintCounts[index] ?: 0
+                            if (currentCount < item.hints.size) {
+                                revealedHintCounts = revealedHintCounts + (index to currentCount + 1)
+                            }
+                        },
+                        onAnswer = { correct ->
+                            if (correct) {
+                                AnswerSoundPlayer.correct()
+                                score++; streak++; bestStreak = maxOf(bestStreak, streak)
+                            } else {
+                                AnswerSoundPlayer.incorrect()
+                                streak = 0
+                            }
+                        },
+                        onFindExample = { source ->
+                            val requestedIndex = index
+                            val requestedItem = questions[requestedIndex]
+                            if (exampleStates[requestedIndex] !is ExampleDiscoveryState.Loading) {
+                                exampleStates = exampleStates + (requestedIndex to ExampleDiscoveryState.Loading)
+                                coroutineScope.launch {
+                                    val result = ExampleDiscovery.find(requestedItem, source, allowExplicitContent)
+                                    exampleStates = exampleStates + (requestedIndex to result)
+                                }
+                            }
+                        },
+                        onNext = {
+                            if (index == questions.lastIndex) screen = Screen.RESULTS else index++
+                        },
+                        onQuit = { screen = Screen.HOME }
+                    )
+                } else {
+                    LaunchedEffect(questions, index) { screen = Screen.HOME }
+                }
+            }
             Screen.RESULTS -> ResultsScreen(
                 score = score, total = questions.size, bestStreak = bestStreak,
                 language = selectedVariant.language,
@@ -289,7 +304,8 @@ private fun HomeScreen(
     difficulty: Difficulty,
     onDifficultyChange: (Difficulty) -> Unit,
     onStart: (LanguageVariant, QuizCategory?) -> Unit,
-    onSettings: () -> Unit
+    onSettings: () -> Unit,
+    startError: String? = null
 ) {
     var languageMenuExpanded by remember { mutableStateOf(false) }
     var difficultyMenuExpanded by remember { mutableStateOf(false) }
@@ -374,6 +390,15 @@ private fun HomeScreen(
             }
         }
         Spacer(Modifier.height(28.dp))
+        if (startError != null) {
+            Text(
+                startError,
+                color = Red,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 16.dp)
+            )
+        }
         CategoryButton("Mixed challenge", "Vocabulary + articles + grammar", Gold) { onStart(variant, null) }
         CategoryButton("Vocabulary", "Words, expressions, and verbs", Green) { onStart(variant, QuizCategory.VOCABULARY) }
         CategoryButton("Articles", "Practice noun gender and articles", Color(0xFF4A67A1)) { onStart(variant, QuizCategory.ARTICLES) }
@@ -526,7 +551,7 @@ private fun QuizScreen(
             autoAdvanceProgress.snapTo(1f)
             autoAdvanceProgress.animateTo(
                 targetValue = 0f,
-                animationSpec = tween(durationMillis = 5_000, easing = LinearEasing)
+                animationSpec = tween(durationMillis = 10_000, easing = LinearEasing)
             )
             onNext()
         } else {
