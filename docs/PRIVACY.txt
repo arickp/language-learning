@@ -1,0 +1,62 @@
+LANGUAGE LEARNING PRIVACY POLICY
+Effective August 27, 2026
+
+THE FRIENDLY VERSION
+Learn languages and have fun. We do not sell your personal information. Optional AI features send only the material needed to provide the feature, and only after you choose to use them.
+
+1. WHO AND WHAT THIS COVERS
+This policy explains how the Language Learning Android app and its companion server (together, the “Service”) handle information. The friendly summary above is helpful, but the sections below are the complete policy.
+
+2. INFORMATION HANDLED BY THE SERVICE
+Guest use: Quiz history, settings, selected language variety, and downloaded word-bank data may be kept locally on your device.
+
+Signed-in use: If you choose Google or Microsoft sign-in, the Service may receive your provider account identifier and basic profile information such as your name, email address, and profile picture. These are used only to sign you in, identify your account, and support user-facing features such as synchronizing settings and learning progress.
+
+Usage and technical data: The server may process ordinary connection data needed to operate and secure the Service, such as request time, network address, device or browser information, and error details. Hosting providers may also create operational logs.
+
+Content you submit: This can include itinerary text or files, links, pronunciation recordings, and words or sentences you ask the Service to process.
+
+3. GOOGLE AND MICROSOFT ACCOUNT DATA
+Signing in is optional. Continuing as a guest remains available. Basic sign-in data is used only to provide and improve features that you can see and use. It is not sold, used for advertising, used to determine creditworthiness, or used to train a general-purpose AI model.
+
+Basic sign-in does not give the Service access to Google Drive, Google Docs, OneDrive, Outlook, or other account files. If file-provider integration is added later, the app will request separate permission and explain the access before you grant it. Google Workspace API data will not be used to develop, improve, or train generalized or non-personalized AI or machine-learning models.
+
+4. OPTIONAL AI FEATURES AND OPENAI
+The Service uses OpenAI’s API for optional features such as generating a practice sentence, producing pronunciation audio, evaluating a pronunciation recording, finding a relevant public example, or preparing trip vocabulary. These requests occur only after you select the feature; they are not made automatically during ordinary quiz play.
+
+When you use one of these features, the companion server sends OpenAI the minimum content reasonably needed for that request. Depending on the feature, that may include a word, its English meaning, a sentence, selected language and dialect, selected search source, explicit-content preference, pronunciation recording, or itinerary text.
+
+For a public-example search, the learning word or concept, its English meaning, the selected language, the selected source, and the explicit-content preference are sent to the companion server and OpenAI only after you press the search button. Google or Microsoft sign-in data is not included unless it is itself part of content you deliberately submit.
+
+The Service requests that generated Responses not be stored as application state where the API supports that setting. OpenAI may nevertheless retain content and metadata for limited periods for safety, abuse prevention, legal compliance, or operation of its services under OpenAI’s own policies. The Service does not control that independent processing.
+
+5. ITINERARY PRIVACY
+If you use “Prepare me for my trip,” your uploaded file, pasted text, or fetched public-link content is sent through the companion server and may be sent to OpenAI to identify useful travel vocabulary. The Service does not intentionally retain the original itinerary in its database after processing. It may retain the resulting Trip Pack—such as selected vocabulary and learning progress—so you can use it again. Temporary copies may exist in device storage, server memory, transit systems, or short-lived operational logs while the request is processed.
+
+Please remove information that is not needed for language preparation, especially passport numbers, payment details, medical information, private reservation codes, or highly sensitive personal details.
+
+6. PRONUNCIATION RECORDINGS AND GENERATED AUDIO
+A pronunciation recording is sent only when you ask for feedback. The Service does not intentionally add the recording to its database. A temporary on-device recording may exist long enough to upload and process it. Generated pronunciation audio and practice results may be cached on your device or in server memory to reduce cost and make replay faster.
+
+7. PUBLIC-EXAMPLE SEARCHES AND EXPLICIT CONTENT
+If you request a public example, the Service asks OpenAI to search your selected source, which may include Reddit, Bluesky, gutefrage, Jeuxvideo.com forums, Der Spiegel, Radio-Canada, or Le Monde. Your explicit-content setting controls whether results marked as explicit may be shown. Each source and linked site has its own privacy practices.
+
+8. STORAGE, RETENTION, AND DELETION
+Local settings and quiz history remain until you clear the app’s data or uninstall it. Server-side account data, synced progress, saved Trip Packs, or administrative records are kept only as long as reasonably needed to provide the Service, secure it, satisfy legal obligations, or resolve disputes. When account deletion becomes available, requesting deletion will remove or de-identify account-linked Service data unless retention is legally required. Backups and security logs may expire on a delayed schedule.
+
+9. SHARING
+Information may be shared with service providers only as needed to operate user-facing features—for example, OpenAI for requested AI processing, Google or Microsoft for sign-in, hosting providers, and a file provider you specifically authorize. Information may also be disclosed when required by law, to protect users or the Service, or as part of a transfer of the Service with appropriate notice. Personal information is not sold.
+
+10. SECURITY
+Reasonable safeguards are used, including keeping the OpenAI key on the server rather than in the Android app and using encrypted connections when the Service is publicly hosted. No Internet service can promise perfect security. Do not send sensitive information that the feature does not need.
+
+11. YOUNG USERS
+The Service is intended for language learners. If local law requires a parent or guardian’s consent for a young person to use an online service, that consent must be obtained. Do not submit a child’s sensitive personal information through optional AI or itinerary features.
+
+12. INTERNATIONAL PROCESSING AND CHANGES
+Providers may process information in countries other than your own. This policy may be updated as features or legal requirements change. The effective date above will be updated, and material changes will be communicated where reasonably practical.
+
+13. CONTACT
+For privacy questions or requests, use the developer contact address shown in the app’s Google Play listing or on its Google OAuth consent screen.
+
+This policy should be reviewed again before a broad public launch or after adding new data integrations.
