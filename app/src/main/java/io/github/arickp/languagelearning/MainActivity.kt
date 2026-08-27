@@ -158,13 +158,13 @@ private fun QuizGame() {
         selectedCategory = category
         val exactPool = QuizData.items.filter {
             it.language == language &&
-                (it.variant == null || it.variant == variant.name) &&
+                it.appliesTo(variant) &&
                 it.difficulty == selectedDifficulty &&
                 (category == null || it.category == category)
         }
         val supplementalPool = QuizData.items.filter {
             it.language == language &&
-                (it.variant == null || it.variant == variant.name) &&
+                it.appliesTo(variant) &&
                 it.difficulty != selectedDifficulty &&
                 (category == null || it.category == category)
         }.sortedBy { kotlin.math.abs(it.difficulty.ordinal - selectedDifficulty.ordinal) }

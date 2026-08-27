@@ -59,6 +59,9 @@ data class QuizItem(
     val spokenText: String? = null
 )
 
+fun QuizItem.appliesTo(selectedVariant: LanguageVariant): Boolean =
+    variant == null || variant.split(',').any { it.trim() == selectedVariant.name }
+
 object QuizData {
     var items: List<QuizItem> = emptyList()
         private set
