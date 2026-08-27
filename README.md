@@ -2,6 +2,14 @@
 
 Public legal text for OAuth setup is available in [`docs/PRIVACY.txt`](docs/PRIVACY.txt) and [`docs/TERMS.txt`](docs/TERMS.txt).
 
+![Vocabulary quiz on Android: correct answer for “die Geschichte,” with hear/sample-sentence tools, read-aloud feedback, and a Reddit example-search control](docs/screenshot1.jpg)
+
+*A mid-quiz vocabulary screen after a correct answer for **die Geschichte** (“history / story”). The learner can hear the word, get a sample sentence, practice reading it aloud with scored feedback, then optionally search a real-world source such as Reddit.*
+
+![Final vocabulary question with a Reddit usage example for “stören”](docs/screenshot2.jpg)
+
+*End of a 10-question run: **stören** answered correctly as “to disturb / bother,” with a Reddit-sourced real-world example and an **Open on Reddit** button to the cited thread.*
+
 An offline Kotlin/Jetpack Compose quiz game for phones, tablets, and Android TV. It includes German content generated from the supplied vocabulary and grammar documents plus a starter French question set.
 
 The home-screen language dropdown supports regional German and French varieties with country flags. All regions share the relevant German or French quiz bank; the selected region controls the accent requested when the user taps the pronunciation button after answering.

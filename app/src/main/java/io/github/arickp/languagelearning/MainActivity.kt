@@ -775,10 +775,7 @@ private fun QuizScreen(
                                     modifier = Modifier.widthIn(max = 460.dp).fillMaxWidth().heightIn(min = 54.dp),
                                     primary = false
                                 )
-                                ExampleDiscoveryState.Loading -> {
-                                    CircularProgressIndicator(Modifier.size(28.dp), strokeWidth = 3.dp)
-                                    Text("Searching ${exampleSource.label}…", modifier = Modifier.padding(top = 6.dp))
-                                }
+                                ExampleDiscoveryState.Loading -> Unit
                                 is ExampleDiscoveryState.Found -> {
                                     AgentMarkdownText(
                                         markdown = discovery.result.summary,
@@ -814,19 +811,32 @@ private fun QuizScreen(
                                 )
                             }
                         }
-                        if (autoAdvanceThisAnswer) {
-                            Spacer(Modifier.height(8.dp))
-                            LinearProgressIndicator(
-                                progress = { autoAdvanceProgress.value },
-                                modifier = Modifier
-                                    .widthIn(max = 300.dp)
-                                    .fillMaxWidth(.55f)
-                                    .height(8.dp),
-                                color = Gold,
-                                trackColor = Ink.copy(alpha = .10f)
-                            )
-                        } else {
-                            Text("Reviewing your previous answer", color = Ink.copy(alpha = .65f), fontSize = 14.sp)
+                        val aiWorking = exampleState is ExampleDiscoveryState.Loading ||
+                            practiceBusy ||
+                            pronunciationState is PronunciationState.Loading
+                        when {
+                            autoAdvanceThisAnswer -> {
+                                Spacer(Modifier.height(8.dp))
+                                LinearProgressIndicator(
+                                    progress = { autoAdvanceProgress.value },
+                                    modifier = Modifier
+                                        .widthIn(max = 300.dp)
+                                        .fillMaxWidth(.55f)
+                                        .height(8.dp),
+                                    color = Gold,
+                                    trackColor = Ink.copy(alpha = .10f)
+                                )
+                            }
+                            aiWorking -> {
+                                Spacer(Modifier.height(8.dp))
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                ) {
+                                    CircularProgressIndicator(Modifier.size(18.dp), strokeWidth = 2.dp, color = Green)
+                                    Text("Working", color = Ink.copy(alpha = .65f), fontSize = 14.sp)
+                                }
+                            }
                         }
                     }
                 }

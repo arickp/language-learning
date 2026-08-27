@@ -28,6 +28,18 @@ use tokio::sync::RwLock;
 use url::Url;
 
 #[derive(Clone)]
+struct RequestLogContext {
+    ip: String,
+    user_agent: String,
+    method: String,
+    endpoint: String,
+}
+
+tokio::task_local! {
+    static REQUEST_LOG_CONTEXT: RequestLogContext;
+}
+
+#[derive(Clone)]
 struct AppState {
     client: Client,
     api_key: String,
@@ -240,13 +252,17 @@ async fn log_requests(
         .unwrap_or("-")
         .to_string();
     let ip = client_ip(request.headers(), addr);
+    let ctx = RequestLogContext {
+        ip: ip.clone(),
+        user_agent: user_agent.clone(),
+        method: method.to_string(),
+        endpoint: path.clone(),
+    };
     let started = Instant::now();
-    let response = next.run(request).await;
+    let response = REQUEST_LOG_CONTEXT.scope(ctx, next.run(request)).await;
     let status = response.status().as_u16();
     let elapsed_ms = started.elapsed().as_millis();
-    log_line(&format!(
-        "method={method} endpoint={path} ip={ip} ua=\"{user_agent}\" status={status} duration_ms={elapsed_ms}"
-    ));
+    log_line(&format!("status={status} duration_ms={elapsed_ms}"));
     response
 }
 
@@ -270,7 +286,16 @@ fn client_ip(headers: &HeaderMap, addr: SocketAddr) -> String {
 }
 
 fn log_line(message: &str) {
-    println!("{} {message}", Utc::now().format("%Y-%m-%dT%H:%M:%SZ"));
+    let stamp = Utc::now().format("%Y-%m-%dT%H:%M:%SZ");
+    match REQUEST_LOG_CONTEXT.try_with(|ctx| {
+        format!(
+            "{stamp} method={} endpoint={} ip={} ua=\"{}\" {message}",
+            ctx.method, ctx.endpoint, ctx.ip, ctx.user_agent
+        )
+    }) {
+        Ok(line) => println!("{line}"),
+        Err(_) => println!("{stamp} {message}"),
+    }
 }
 
 async fn practice_sentence(
@@ -641,7 +666,7 @@ async fn find_example(
         return Err(openai_upstream_error("example search", status, &body));
     }
     log_web_search_diagnostics(&body, source.id);
-    let (summary, title, url) = extract_result(&body, &source.domains).ok_or_else(|| {
+    let (summary, mut title, url) = extract_result(&body, &source.domains).ok_or_else(|| {
         log_line(&format!(
             "example search ({}) returned no usable citation for “{}”",
             source.id, request.term
@@ -652,7 +677,16 @@ async fn find_example(
         )
     })?;
     let nsfw = if source.id == "reddit" {
-        reddit_is_nsfw(&state.client, &url).await.unwrap_or(false)
+        if let Some(meta) = reddit_post_meta(&state.client, &url).await {
+            if is_generic_example_title(&title) {
+                if let Some(fetched_title) = meta.title {
+                    title = fetched_title;
+                }
+            }
+            meta.nsfw
+        } else {
+            false
+        }
     } else {
         false
     };
@@ -661,6 +695,9 @@ async fn find_example(
             StatusCode::NOT_FOUND,
             "The result was marked NSFW and explicit content is blocked".into(),
         ));
+    }
+    if is_generic_example_title(&title) {
+        title = title_from_summary_or_url(&summary, &url, source.label);
     }
     let found = ExampleResult {
         title,
@@ -673,7 +710,12 @@ async fn find_example(
     Ok(Json(found))
 }
 
-async fn reddit_is_nsfw(client: &Client, thread_url: &str) -> Option<bool> {
+struct RedditPostMeta {
+    title: Option<String>,
+    nsfw: bool,
+}
+
+async fn reddit_post_meta(client: &Client, thread_url: &str) -> Option<RedditPostMeta> {
     let mut url = Url::parse(thread_url).ok()?;
     url.set_query(None);
     url.set_fragment(None);
@@ -690,8 +732,52 @@ async fn reddit_is_nsfw(client: &Client, thread_url: &str) -> Option<bool> {
         .json()
         .await
         .ok()?;
-    body.pointer("/0/data/children/0/data/over_18")
-        .and_then(Value::as_bool)
+    let post = body.pointer("/0/data/children/0/data")?;
+    let title = post
+        .get("title")
+        .and_then(Value::as_str)
+        .map(str::trim)
+        .filter(|title| !title.is_empty())
+        .map(str::to_string);
+    let nsfw = post.get("over_18").and_then(Value::as_bool).unwrap_or(false);
+    Some(RedditPostMeta { title, nsfw })
+}
+
+fn is_generic_example_title(title: &str) -> bool {
+    let trimmed = title.trim();
+    trimmed.is_empty()
+        || trimmed.eq_ignore_ascii_case("A related real-world example")
+        || trimmed.eq_ignore_ascii_case("A related real world example")
+}
+
+fn title_from_summary_or_url(summary: &str, page_url: &str, source_label: &str) -> String {
+    let cleaned = sanitize_example_summary(summary);
+    if let Some(sentence) = cleaned
+        .split(['.', '!', '?'])
+        .map(str::trim)
+        .find(|part| part.chars().count() >= 12)
+    {
+        let mut title: String = sentence.chars().take(80).collect();
+        if sentence.chars().count() > 80 {
+            title.push('…');
+        }
+        return title;
+    }
+    if let Ok(parsed) = Url::parse(page_url) {
+        if let Some(slug) = parsed
+            .path_segments()
+            .into_iter()
+            .flatten()
+            .rev()
+            .find(|segment| !segment.is_empty() && *segment != "comments" && segment.len() > 3)
+        {
+            let nice = slug.replace('_', " ").replace('-', " ");
+            if !nice.chars().all(|c| c.is_ascii_digit()) {
+                return nice;
+            }
+        }
+    }
+    format!("Open on {source_label}")
 }
 
 fn sanitize_example_summary(summary: &str) -> String {
