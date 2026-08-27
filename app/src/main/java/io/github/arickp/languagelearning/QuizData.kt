@@ -59,8 +59,17 @@ data class QuizItem(
     val spokenText: String? = null
 )
 
-fun QuizItem.appliesTo(selectedVariant: LanguageVariant): Boolean =
-    variant == null || variant.split(',').any { it.trim() == selectedVariant.name }
+fun QuizItem.appliesTo(selectedVariant: LanguageVariant): Boolean {
+    val regions = variant?.trim()?.takeUnless { it.isEmpty() || it.equals("null", ignoreCase = true) }
+        ?: return true
+    return regions.split(',').any { it.trim() == selectedVariant.name }
+}
+
+/** org.json's optString turns JSON null into the literal "null" — treat that as absent. */
+private fun JSONObject.optionalString(key: String): String? {
+    if (!has(key) || isNull(key)) return null
+    return optString(key).trim().takeUnless { it.isEmpty() || it.equals("null", ignoreCase = true) }
+}
 
 object QuizData {
     var items: List<QuizItem> = emptyList()
@@ -103,28 +112,30 @@ object QuizData {
             val difficulty = runCatching {
                 Difficulty.valueOf(entry.optString("difficulty", "MEDIUM"))
             }.getOrDefault(Difficulty.MEDIUM)
+            val variant = entry.optionalString("variant")
+            val spokenLanguage = entry.optionalString("spokenLanguage")
             loaded += QuizItem(
                 prompt = "What does “$term” mean?",
                 answer = translation,
                 category = QuizCategory.VOCABULARY,
                 difficulty = difficulty,
-                variant = entry.optString("variant").ifBlank { null },
-                spokenLanguage = entry.optString("spokenLanguage").ifBlank { null },
+                variant = variant,
+                spokenLanguage = spokenLanguage,
                 explanation = "$term = $translation",
                 language = language,
                 spokenText = term
             )
 
-            val article = entry.optString("article")
-            val noun = entry.optString("noun")
-            if (article.isNotBlank() && noun.isNotBlank()) {
+            val article = entry.optionalString("article")
+            val noun = entry.optionalString("noun")
+            if (article != null && noun != null) {
                 loaded += QuizItem(
                     prompt = "Choose the article: ___ $noun",
                     answer = article,
                     category = QuizCategory.ARTICLES,
                     difficulty = difficulty,
-                    variant = entry.optString("variant").ifBlank { null },
-                    spokenLanguage = entry.optString("spokenLanguage").ifBlank { null },
+                    variant = variant,
+                    spokenLanguage = spokenLanguage,
                     explanation = "$noun uses the article $article: $article $noun.",
                     language = language,
                     translation = translation,
@@ -149,11 +160,11 @@ object QuizData {
                 difficulty = runCatching {
                     Difficulty.valueOf(entry.optString("difficulty", "MEDIUM"))
                 }.getOrDefault(Difficulty.MEDIUM),
-                explanation = entry.optString("explanation"),
+                explanation = entry.optionalString("explanation").orEmpty(),
                 language = Language.valueOf(entry.optString("language", "GERMAN")),
-                translation = entry.optString("translation").ifBlank { null },
+                translation = entry.optionalString("translation"),
                 hints = hints,
-                spokenText = entry.optString("spokenText").ifBlank { null }
+                spokenText = entry.optionalString("spokenText")
             )
         }
 

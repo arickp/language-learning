@@ -7,7 +7,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 enum class ExampleSource(val apiName: String, val label: String, val icon: String) {
-    REDDIT("reddit", "Reddit", "👽"),
+    REDDIT("reddit", "Reddit", "🌐"),
     BLUESKY("bluesky", "Bluesky", "🦋"),
     GUTEFRAGE("gutefrage", "gutefrage", "💬"),
     JEUXVIDEO("jeuxvideo", "Jeuxvideo.com forums", "🎮"),

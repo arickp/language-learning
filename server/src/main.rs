@@ -241,10 +241,7 @@ async fn practice_sentence(
     let status = response.status();
     let body: Value = response.json().await.map_err(internal_error)?;
     if !status.is_success() {
-        return Err((
-            StatusCode::BAD_GATEWAY,
-            format!("OpenAI sentence request failed: {status}"),
-        ));
+        return Err(openai_upstream_error("sentence", status, &body));
     }
     let text = extract_output_text(&body)
         .ok_or((StatusCode::BAD_GATEWAY, "No sentence was generated".into()))?;
@@ -290,10 +287,7 @@ async fn practice_evaluate(
     let status = response.status();
     let body: Value = response.json().await.map_err(internal_error)?;
     if !status.is_success() {
-        return Err((
-            StatusCode::BAD_GATEWAY,
-            format!("OpenAI audio evaluation failed: {status}"),
-        ));
+        return Err(openai_upstream_error("audio evaluation", status, &body));
     }
     let feedback = body
         .pointer("/choices/0/message/content")
@@ -509,10 +503,8 @@ async fn pronunciation(
         .send().await.map_err(internal_error)?;
     let status = response.status();
     if !status.is_success() {
-        return Err((
-            StatusCode::BAD_GATEWAY,
-            format!("OpenAI speech request failed: {status}"),
-        ));
+        let body: Value = response.json().await.unwrap_or_else(|_| json!({}));
+        return Err(openai_upstream_error("speech", status, &body));
     }
     let audio = response.bytes().await.map_err(internal_error)?.to_vec();
     state.speech_cache.write().await.insert(key, audio.clone());
@@ -583,15 +575,18 @@ async fn find_example(
     let status = response.status();
     let body: Value = response.json().await.map_err(internal_error)?;
     if !status.is_success() {
-        return Err((
-            StatusCode::BAD_GATEWAY,
-            format!("OpenAI request failed: {status}"),
-        ));
+        return Err(openai_upstream_error("example search", status, &body));
     }
-    let (summary, title, url) = extract_result(&body, &source.domains).ok_or((
-        StatusCode::NOT_FOUND,
-        "No matching public example was found".into(),
-    ))?;
+    let (summary, title, url) = extract_result(&body, &source.domains).ok_or_else(|| {
+        eprintln!(
+            "example search ({}) returned no usable citation for “{}”",
+            source.id, request.term
+        );
+        (
+            StatusCode::NOT_FOUND,
+            "No matching public example was found".into(),
+        )
+    })?;
     let nsfw = if source.id == "reddit" {
         reddit_is_nsfw(&state.client, &url).await.unwrap_or(false)
     } else {
@@ -754,5 +749,18 @@ fn internal_error(error: impl std::fmt::Display) -> (StatusCode, String) {
     (
         StatusCode::BAD_GATEWAY,
         "The lookup service is temporarily unavailable".into(),
+    )
+}
+
+fn openai_upstream_error(feature: &str, status: reqwest::StatusCode, body: &Value) -> (StatusCode, String) {
+    let detail = body
+        .pointer("/error/message")
+        .and_then(Value::as_str)
+        .or_else(|| body.get("error").and_then(Value::as_str))
+        .unwrap_or("(no error message)");
+    eprintln!("OpenAI {feature} failed: HTTP {status} — {detail}");
+    (
+        StatusCode::BAD_GATEWAY,
+        format!("OpenAI {feature} request failed: {status}"),
     )
 }
