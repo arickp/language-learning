@@ -1,0 +1,24 @@
+services:
+  language-learning-helper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: language-learning-helper:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-41082}:${PORT:-41082}"
+    volumes:
+      - language-learning-data:/app/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://127.0.0.1:${PORT:-41082}/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  language-learning-data:

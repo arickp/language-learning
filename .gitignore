@@ -1,0 +1,32 @@
+.gradle/
+.idea/
+.kotlin/
+**/build/
+local.properties
+server/target/
+server/data/
+*.swp
+
+# VS Code: ignore personal workspace state, but allow useful shared project config
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.vscode-test/
+.history/
+
+# Cursor: ignore local state, but allow checked-in rules and reusable commands
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+!.cursor/commands/
+!.cursor/commands/**
+
+# Secrets and local environment configuration
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
