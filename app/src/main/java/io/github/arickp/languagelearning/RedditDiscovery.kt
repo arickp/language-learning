@@ -61,7 +61,7 @@ object ExampleDiscovery {
                 connection.doOutput = true
                 connection.setRequestProperty("Content-Type", "application/json")
                 val body = JSONObject()
-                    .put("term", item.prompt)
+                    .put("term", item.exampleSearchPhrase())
                     .put("answer", item.answer)
                     .put("language", item.language.label)
                     .put("source", source.apiName)
@@ -84,4 +84,33 @@ object ExampleDiscovery {
             }
         }.getOrElse { ExampleDiscoveryState.Unavailable }
     }
+}
+
+/** Prefer the spoken word/phrase over quiz-prompt wording like “What does … mean?”. */
+private fun QuizItem.exampleSearchPhrase(): String {
+    val raw = when {
+        !spokenText.isNullOrBlank() -> spokenText
+        else -> {
+            Regex("""What does [“"«](.+?)[”"»] mean\?""").find(prompt)?.groupValues?.getOrNull(1)
+                ?: Regex("""Choose the article:\s*___\s*(.+)""").find(prompt)?.groupValues?.getOrNull(1)
+                ?: if ("___" in prompt) {
+                    prompt.substringBefore('(').trim().replace("___", answer)
+                } else {
+                    prompt
+                }
+        }
+    }
+    // Bare nouns/verbs match real posts far more often than “der/die/das …” dictionary forms.
+    return raw.stripLeadingArticle()
+}
+
+private fun String.stripLeadingArticle(): String {
+    val stripped = trim().replace(
+        Regex(
+            """^(?:der|die|das|den|dem|des|ein|eine|einer|einem|einen|le|la|les|l'|un|une|des|du)\s+""",
+            RegexOption.IGNORE_CASE
+        ),
+        ""
+    ).trim()
+    return stripped.ifEmpty { trim() }
 }

@@ -3,11 +3,13 @@ mod database;
 use axum::{
     Json, Router,
     body::Body,
-    extract::{Path as AxumPath, State},
+    extract::{ConnectInfo, Path as AxumPath, Request, State},
     http::{HeaderMap, StatusCode, header},
+    middleware::{self, Next},
     response::{Html, Response},
     routing::{get, post},
 };
+use chrono::Utc;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -20,6 +22,7 @@ use std::{
         Arc,
         atomic::{AtomicUsize, Ordering},
     },
+    time::Instant,
 };
 use tokio::sync::RwLock;
 use url::Url;
@@ -161,7 +164,7 @@ async fn main() {
         .expect("could not add core beginner vocabulary");
     let admin_token = env::var("ADMIN_TOKEN").unwrap_or_default();
     if admin_token.is_empty() {
-        eprintln!("Warning: ADMIN_TOKEN is not set; word-bank changes are disabled.");
+        log_line("Warning: ADMIN_TOKEN is not set; word-bank changes are disabled.");
     }
     let state = AppState {
         client: Client::new(),
@@ -204,13 +207,70 @@ async fn main() {
         .route("/pronunciation", post(pronunciation))
         .route("/practice/sentence", post(practice_sentence))
         .route("/practice/evaluate", post(practice_evaluate))
+        .layer(middleware::from_fn(log_requests))
         .with_state(state);
     let address = SocketAddr::from(([0, 0, 0, 0], port));
-    println!("Language Learning helper listening on http://{address}");
+    log_line(&format!("Language Learning helper listening on http://{address}"));
     let listener = tokio::net::TcpListener::bind(address)
         .await
         .expect("could not bind server");
-    axum::serve(listener, app).await.expect("server failed");
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<SocketAddr>(),
+    )
+    .await
+    .expect("server failed");
+}
+
+async fn log_requests(
+    ConnectInfo(addr): ConnectInfo<SocketAddr>,
+    request: Request,
+    next: Next,
+) -> Response {
+    let method = request.method().clone();
+    let path = request
+        .uri()
+        .path_and_query()
+        .map(|pq| pq.as_str().to_string())
+        .unwrap_or_else(|| request.uri().path().to_string());
+    let user_agent = request
+        .headers()
+        .get(header::USER_AGENT)
+        .and_then(|value| value.to_str().ok())
+        .unwrap_or("-")
+        .to_string();
+    let ip = client_ip(request.headers(), addr);
+    let started = Instant::now();
+    let response = next.run(request).await;
+    let status = response.status().as_u16();
+    let elapsed_ms = started.elapsed().as_millis();
+    log_line(&format!(
+        "method={method} endpoint={path} ip={ip} ua=\"{user_agent}\" status={status} duration_ms={elapsed_ms}"
+    ));
+    response
+}
+
+fn client_ip(headers: &HeaderMap, addr: SocketAddr) -> String {
+    headers
+        .get("x-forwarded-for")
+        .and_then(|value| value.to_str().ok())
+        .and_then(|value| value.split(',').next())
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(str::to_string)
+        .or_else(|| {
+            headers
+                .get("x-real-ip")
+                .and_then(|value| value.to_str().ok())
+                .map(str::trim)
+                .filter(|value| !value.is_empty())
+                .map(str::to_string)
+        })
+        .unwrap_or_else(|| addr.ip().to_string())
+}
+
+fn log_line(message: &str) {
+    println!("{} {message}", Utc::now().format("%Y-%m-%dT%H:%M:%SZ"));
 }
 
 async fn practice_sentence(
@@ -551,12 +611,13 @@ async fn find_example(
         "Exclude sexually explicit, graphically violent, and source-marked NSFW content."
     };
     let prompt = format!(
-        "Find one interesting public {source_name} item genuinely related to this {language} language-learning word or concept. Prefer a real-world use of the learned language that is memorable and understandable in context. Return a short English description and cite the exact item. Do not cite a search page, account/profile page, or a different website. Never invent a result. {content_instruction}\n\nLearning word or question: {term}\nEnglish meaning or answer: {answer}",
+        "Search site:{primary_domain} for a real article or page that uses the {language} word or expression “{term}”.\n\nFind one public {source_name} item where someone naturally uses that word in context. Prefer news articles, features, or reported quotes over dictionary/glossary pages. Write 1-3 short sentences in plain English describing how the word appears there. Do not include URLs, markdown code fences, headings, or an “Exact item URL” section — the app already shows an open button from your citation. Do not cite a search page, account/profile page, or a different website. Never invent a result. {content_instruction}\n\nEnglish gloss / quiz answer (context only): {answer}",
         source_name = source.label,
         language = request.language,
         term = request.term,
         answer = request.answer,
-        content_instruction = content_instruction
+        content_instruction = content_instruction,
+        primary_domain = source.domains.first().copied().unwrap_or(source.label),
     );
     let response = state
         .client
@@ -566,8 +627,10 @@ async fn find_example(
             "model": state.model,
             "store": false,
             "tools": [{"type": "web_search", "filters": {"allowed_domains": source.domains}}],
+            "tool_choice": "required",
+            "include": ["web_search_call.action.sources"],
             "input": prompt,
-            "max_output_tokens": 220
+            "max_output_tokens": 300
         }))
         .send()
         .await
@@ -577,11 +640,12 @@ async fn find_example(
     if !status.is_success() {
         return Err(openai_upstream_error("example search", status, &body));
     }
+    log_web_search_diagnostics(&body, source.id);
     let (summary, title, url) = extract_result(&body, &source.domains).ok_or_else(|| {
-        eprintln!(
+        log_line(&format!(
             "example search ({}) returned no usable citation for “{}”",
             source.id, request.term
-        );
+        ));
         (
             StatusCode::NOT_FOUND,
             "No matching public example was found".into(),
@@ -601,7 +665,7 @@ async fn find_example(
     let found = ExampleResult {
         title,
         url,
-        summary,
+        summary: sanitize_example_summary(&summary),
         nsfw,
         source: source.label.into(),
     };
@@ -630,6 +694,33 @@ async fn reddit_is_nsfw(client: &Client, thread_url: &str) -> Option<bool> {
         .and_then(Value::as_bool)
 }
 
+fn sanitize_example_summary(summary: &str) -> String {
+    let mut cleaned = summary.trim().replace('`', "");
+    for url in urls_in_text(&cleaned) {
+        cleaned = cleaned.replace(&url, "");
+    }
+    cleaned
+        .lines()
+        .map(str::trim)
+        .filter(|line| {
+            !line.is_empty()
+                && !line.eq_ignore_ascii_case("text")
+                && !line.to_ascii_lowercase().starts_with("exact item url")
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
+        .replace("()", "")
+        .replace("[]", "")
+        .replace("( )", "")
+        .split_whitespace()
+        .collect::<Vec<_>>()
+        .join(" ")
+        .trim()
+        .trim_matches(|c: char| matches!(c, ':' | '-' | '–' | '—'))
+        .trim()
+        .to_string()
+}
+
 fn extract_output_text(body: &Value) -> Option<String> {
     for output in body.get("output")?.as_array()? {
         for content in output
@@ -647,6 +738,9 @@ fn extract_output_text(body: &Value) -> Option<String> {
 }
 
 fn extract_result(body: &Value, allowed_domains: &[&str]) -> Option<(String, String, String)> {
+    let mut seen_hosts = Vec::new();
+    let message_text = extract_output_text(body).unwrap_or_default();
+
     for output in body.get("output")?.as_array()? {
         for content in output
             .get("content")
@@ -660,32 +754,187 @@ fn extract_result(body: &Value, allowed_domains: &[&str]) -> Option<(String, Str
                 .unwrap_or("")
                 .trim()
                 .to_string();
-            for annotation in content
+            let annotations = content
                 .get("annotations")
                 .and_then(Value::as_array)
                 .into_iter()
                 .flatten()
-            {
+                .chain(
+                    output
+                        .get("annotations")
+                        .and_then(Value::as_array)
+                        .into_iter()
+                        .flatten(),
+                );
+
+            for annotation in annotations {
                 let citation = annotation.get("url_citation").unwrap_or(annotation);
-                let raw_url = citation.get("url").and_then(Value::as_str)?;
-                let parsed = Url::parse(raw_url).ok()?;
-                let host = parsed.host_str().unwrap_or_default();
-                if allowed_domains
-                    .iter()
-                    .any(|domain| host == *domain || host.ends_with(&format!(".{domain}")))
-                {
-                    let title = citation
-                        .get("title")
-                        .and_then(Value::as_str)
-                        .filter(|title| !title.trim().is_empty())
-                        .unwrap_or("A related real-world example")
-                        .to_string();
-                    return Some((text, title, raw_url.to_string()));
+                let Some(raw_url) = citation
+                    .get("url")
+                    .or_else(|| annotation.get("url"))
+                    .and_then(Value::as_str)
+                else {
+                    continue;
+                };
+                let Ok(parsed) = Url::parse(raw_url) else {
+                    continue;
+                };
+                let host = parsed.host_str().unwrap_or_default().to_ascii_lowercase();
+                seen_hosts.push(host.clone());
+                if !domain_allowed(&host, allowed_domains) {
+                    continue;
                 }
+                let title = citation
+                    .get("title")
+                    .or_else(|| annotation.get("title"))
+                    .and_then(Value::as_str)
+                    .filter(|title| !title.trim().is_empty())
+                    .unwrap_or("A related real-world example")
+                    .to_string();
+                let summary = if text.is_empty() {
+                    format!("Found a related article: {title}")
+                } else {
+                    text
+                };
+                return Some((summary, title, raw_url.to_string()));
             }
         }
     }
+
+    // Fallback: sources consulted by web_search when the model omitted url_citation annotations.
+    for (url, host) in web_search_source_urls(body) {
+        seen_hosts.push(host.clone());
+        if !domain_allowed(&host, allowed_domains) {
+            continue;
+        }
+        let summary = if message_text.is_empty() {
+            format!("Found a related page on {host}")
+        } else {
+            message_text.clone()
+        };
+        return Some((summary, "A related real-world example".into(), url));
+    }
+
+    if let Some(url) = first_allowed_url_in_text(&message_text, allowed_domains) {
+        return Some((message_text, "A related real-world example".into(), url));
+    }
+    if let Some(host) = first_host_in_text(&message_text) {
+        seen_hosts.push(host);
+    }
+
+    if !seen_hosts.is_empty() {
+        seen_hosts.sort();
+        seen_hosts.dedup();
+        log_line(&format!(
+            "example search citations rejected; allowed={allowed_domains:?} seen_hosts={seen_hosts:?}"
+        ));
+    } else {
+        log_line("example search returned no URL citations in the model response");
+    }
     None
+}
+
+fn web_search_source_urls(body: &Value) -> Vec<(String, String)> {
+    let mut urls = Vec::new();
+    let Some(output) = body.get("output").and_then(Value::as_array) else {
+        return urls;
+    };
+    for item in output {
+        if item.get("type").and_then(Value::as_str) != Some("web_search_call") {
+            continue;
+        }
+        let sources = item
+            .pointer("/action/sources")
+            .or_else(|| item.pointer("/action/sources"))
+            .and_then(Value::as_array)
+            .into_iter()
+            .flatten();
+        for source in sources {
+            let Some(raw_url) = source.get("url").and_then(Value::as_str) else {
+                continue;
+            };
+            let Ok(parsed) = Url::parse(raw_url) else {
+                continue;
+            };
+            let host = parsed.host_str().unwrap_or_default().to_ascii_lowercase();
+            urls.push((raw_url.to_string(), host));
+        }
+    }
+    urls
+}
+
+fn log_web_search_diagnostics(body: &Value, source_id: &str) {
+    let mut search_calls = 0;
+    let mut source_count = 0;
+    let mut sample_hosts = Vec::new();
+    if let Some(output) = body.get("output").and_then(Value::as_array) {
+        for item in output {
+            if item.get("type").and_then(Value::as_str) != Some("web_search_call") {
+                continue;
+            }
+            search_calls += 1;
+            for (_url, host) in web_search_source_urls(&json!({ "output": [item] })) {
+                source_count += 1;
+                if sample_hosts.len() < 5 {
+                    sample_hosts.push(host);
+                }
+            }
+            if let Some(status) = item.get("status").and_then(Value::as_str) {
+                log_line(&format!(
+                    "example search ({source_id}) web_search_call status={status}"
+                ));
+            }
+        }
+    }
+    log_line(&format!(
+        "example search ({source_id}) web_search_calls={search_calls} sources={source_count} hosts={sample_hosts:?}"
+    ));
+}
+
+fn domain_allowed(host: &str, allowed_domains: &[&str]) -> bool {
+    allowed_domains.iter().any(|domain| {
+        let domain = domain.to_ascii_lowercase();
+        host == domain || host.ends_with(&format!(".{domain}"))
+    })
+}
+
+fn first_allowed_url_in_text(text: &str, allowed_domains: &[&str]) -> Option<String> {
+    for raw_url in urls_in_text(text) {
+        let Ok(parsed) = Url::parse(&raw_url) else {
+            continue;
+        };
+        let host = parsed.host_str()?.to_ascii_lowercase();
+        if domain_allowed(&host, allowed_domains) {
+            return Some(raw_url);
+        }
+    }
+    None
+}
+
+fn first_host_in_text(text: &str) -> Option<String> {
+    urls_in_text(text).into_iter().find_map(|raw_url| {
+        Url::parse(&raw_url)
+            .ok()
+            .and_then(|parsed| parsed.host_str().map(|host| host.to_ascii_lowercase()))
+    })
+}
+
+fn urls_in_text(text: &str) -> Vec<String> {
+    let mut urls = Vec::new();
+    for (idx, _) in text.match_indices("http") {
+        if !(text[idx..].starts_with("https://") || text[idx..].starts_with("http://")) {
+            continue;
+        }
+        let rest = &text[idx..];
+        let end = rest
+            .find(|c: char| c.is_whitespace() || matches!(c, ')' | ']' | '"' | '\'' | '<' | '>'))
+            .unwrap_or(rest.len());
+        let url = rest[..end].trim_end_matches(['.', ',', ';', ':']).to_string();
+        if Url::parse(&url).is_ok() {
+            urls.push(url);
+        }
+    }
+    urls
 }
 
 struct SearchSource {
@@ -720,7 +969,8 @@ impl SearchSource {
             "der_spiegel" if language.eq_ignore_ascii_case("German") => Self {
                 id: "der_spiegel",
                 label: "Der Spiegel",
-                domains: vec!["spiegel.de"],
+                // Include common Spiegel hosts; subdomain matching also accepts www/m/etc.
+                domains: vec!["spiegel.de", "spiegelgruppe.de"],
             },
             "radio_canada" if language.eq_ignore_ascii_case("French") => Self {
                 id: "radio_canada",
@@ -745,7 +995,7 @@ impl SearchSource {
 }
 
 fn internal_error(error: impl std::fmt::Display) -> (StatusCode, String) {
-    eprintln!("{error}");
+    log_line(&format!("{error}"));
     (
         StatusCode::BAD_GATEWAY,
         "The lookup service is temporarily unavailable".into(),
@@ -758,7 +1008,7 @@ fn openai_upstream_error(feature: &str, status: reqwest::StatusCode, body: &Valu
         .and_then(Value::as_str)
         .or_else(|| body.get("error").and_then(Value::as_str))
         .unwrap_or("(no error message)");
-    eprintln!("OpenAI {feature} failed: HTTP {status} — {detail}");
+    log_line(&format!("OpenAI {feature} failed: HTTP {status} — {detail}"));
     (
         StatusCode::BAD_GATEWAY,
         format!("OpenAI {feature} request failed: {status}"),
