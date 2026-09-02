@@ -18,6 +18,11 @@ enum class Difficulty(val label: String, val description: String) {
     HARD("Hard", "Less common words, tricky forms, and specialist terms")
 }
 
+enum class QuestionOrder(val label: String, val description: String) {
+    MIXED("Mixed", "A fresh mix of matching questions"),
+    NEWEST("Newest first", "Prioritize recently added words")
+}
+
 enum class Language(val label: String, val greeting: String) {
     GERMAN("German", "Deutsch"), FRENCH("French", "Français")
 }
@@ -56,7 +61,12 @@ data class QuizItem(
     val language: Language = Language.GERMAN,
     val translation: String? = null,
     val hints: List<String> = emptyList(),
-    val spokenText: String? = null
+    val spokenText: String? = null,
+    val dateAdded: String? = null,
+    val explicit: Boolean = false,
+    val emoji: String? = null,
+    /** Answer decoys supplied with the question; when empty the shared word bank is used instead. */
+    val distractors: List<String> = emptyList()
 )
 
 fun QuizItem.appliesTo(selectedVariant: LanguageVariant): Boolean {
@@ -75,9 +85,24 @@ object QuizData {
     var items: List<QuizItem> = emptyList()
         private set
 
+    private const val CACHE_NAME = "quiz-data-cache.json"
+
+    suspend fun clearLocalCaches(context: Context): Int = withContext(Dispatchers.IO) {
+        var removed = 0
+        val wordBank = File(context.filesDir, CACHE_NAME)
+        if (wordBank.exists() && wordBank.delete()) removed++
+        context.cacheDir.listFiles()?.forEach { file ->
+            val name = file.name
+            if (name.startsWith("pronunciation-") || name.startsWith("practice-recording")) {
+                if (file.delete()) removed++
+            }
+        }
+        removed
+    }
+
     suspend fun load(context: Context): Result<Boolean> = withContext(Dispatchers.IO) {
         runCatching {
-            val cache = File(context.filesDir, "quiz-data-cache.json")
+            val cache = File(context.filesDir, CACHE_NAME)
             var refreshed = false
             val json = runCatching {
                 require(BuildConfig.SERVER_URL.isNotBlank()) { "SERVER_URL is not configured" }
@@ -114,6 +139,9 @@ object QuizData {
             }.getOrDefault(Difficulty.MEDIUM)
             val variant = entry.optionalString("variant")
             val spokenLanguage = entry.optionalString("spokenLanguage")
+            val dateAdded = entry.optionalString("dateAdded")
+            val explicit = entry.optBoolean("explicit", false)
+            val emoji = entry.optionalString("emoji")
             loaded += QuizItem(
                 prompt = "What does “$term” mean?",
                 answer = translation,
@@ -123,7 +151,10 @@ object QuizData {
                 spokenLanguage = spokenLanguage,
                 explanation = "$term = $translation",
                 language = language,
-                spokenText = term
+                spokenText = term,
+                dateAdded = dateAdded,
+                explicit = explicit,
+                emoji = emoji
             )
 
             val article = entry.optionalString("article")
@@ -139,7 +170,9 @@ object QuizData {
                     explanation = "$noun uses the article $article: $article $noun.",
                     language = language,
                     translation = translation,
-                    spokenText = "$article $noun"
+                    spokenText = "$article $noun",
+                    dateAdded = dateAdded,
+                    explicit = explicit
                 )
             }
         }
@@ -164,7 +197,8 @@ object QuizData {
                 language = Language.valueOf(entry.optString("language", "GERMAN")),
                 translation = entry.optionalString("translation"),
                 hints = hints,
-                spokenText = entry.optionalString("spokenText")
+                spokenText = entry.optionalString("spokenText"),
+                explicit = entry.optBoolean("explicit", false)
             )
         }
 

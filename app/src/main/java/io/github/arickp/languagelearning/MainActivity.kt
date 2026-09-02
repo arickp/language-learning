@@ -14,6 +14,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -25,11 +26,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -38,10 +42,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 private val Cream = Color(0xFFFFF9F2)
 private val Ink = Color(0xFF23313A)
@@ -66,8 +72,13 @@ private fun WordBankLoader() {
         result = QuizData.load(context)
     }
     when (val current = result) {
-        null -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        null -> Box(
+            Modifier.fillMaxSize().background(Cream),
+            contentAlignment = Alignment.Center
+        ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                AppLogo(size = 220.dp)
+                Spacer(Modifier.height(28.dp))
                 CircularProgressIndicator()
                 Spacer(Modifier.height(14.dp))
                 Text("Loading the word bank…", fontWeight = FontWeight.Bold)
@@ -123,7 +134,28 @@ private fun LanguageLearningTheme(content: @Composable () -> Unit) {
     )
 }
 
-private enum class Screen { HOME, SETTINGS, QUIZ, RESULTS }
+@Composable
+private fun AppLogo(size: Dp, modifier: Modifier = Modifier) {
+    Image(
+        painter = painterResource(R.drawable.ic_launcher),
+        contentDescription = "Language Learning",
+        contentScale = ContentScale.Fit,
+        modifier = modifier.size(size).clip(RoundedCornerShape(size / 12))
+    )
+}
+
+private enum class Screen { HOME, SETTINGS, TRIP_QUIZ, QUIZ, RESULTS }
+
+/** Stored value for the "all skill levels" difficulty selection, represented in code as null. */
+private const val MIXED_DIFFICULTY = "MIXED"
+
+private val difficultyOptions: List<Difficulty?> = listOf(null) + Difficulty.entries
+
+private val Difficulty?.selectionLabel: String
+    get() = this?.label ?: "Mixed"
+
+private val Difficulty?.selectionDescription: String
+    get() = this?.description ?: "All skill levels, from beginner basics to specialist terms"
 
 @Composable
 private fun QuizGame() {
@@ -136,9 +168,20 @@ private fun QuizGame() {
     var selectedCategory by remember { mutableStateOf<QuizCategory?>(null) }
     var selectedDifficulty by remember {
         mutableStateOf(
-            runCatching { Difficulty.valueOf(preferences.getString("difficulty", Difficulty.EASY.name)!!) }
-                .getOrDefault(Difficulty.EASY)
+            when (val stored = preferences.getString("difficulty", Difficulty.EASY.name)) {
+                MIXED_DIFFICULTY -> null
+                else -> runCatching { Difficulty.valueOf(stored!!) }.getOrDefault(Difficulty.EASY)
+            }
         )
+    }
+    var selectedOrder by remember {
+        mutableStateOf(
+            runCatching { QuestionOrder.valueOf(preferences.getString("question_order", QuestionOrder.MIXED.name)!!) }
+                .getOrDefault(QuestionOrder.MIXED)
+        )
+    }
+    var selectedQuestionCount by remember {
+        mutableIntStateOf(preferences.getInt("question_count", 10).coerceIn(5, 100))
     }
     var selectedVariant by remember {
         mutableStateOf(
@@ -158,43 +201,52 @@ private fun QuizGame() {
     var exampleStates by remember { mutableStateOf(emptyMap<Int, ExampleDiscoveryState>()) }
     var exampleSources by remember { mutableStateOf(emptyMap<Int, ExampleSource>()) }
     var startError by remember { mutableStateOf<String?>(null) }
+    var tripQuestions by remember { mutableStateOf<List<QuizItem>?>(null) }
+    var regeneratingTripQuiz by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
 
     fun start(variant: LanguageVariant, category: QuizCategory?) {
+        tripQuestions = null
         selectedVariant = variant
         val language = variant.language
         selectedCategory = category
-        val exactPool = QuizData.items.filter {
+        val matching = QuizData.items.filter {
             it.language == language &&
                 it.appliesTo(variant) &&
-                it.difficulty == selectedDifficulty &&
-                (category == null || it.category == category)
+                (category == null || it.category == category) &&
+                (allowExplicitContent || !it.explicit)
         }
-        val supplementalPool = QuizData.items.filter {
-            it.language == language &&
-                it.appliesTo(variant) &&
-                it.difficulty != selectedDifficulty &&
-                (category == null || it.category == category)
-        }.sortedBy { kotlin.math.abs(it.difficulty.ordinal - selectedDifficulty.ordinal) }
-        val pool = if (exactPool.size >= 10) {
-            exactPool
+        val difficulty = selectedDifficulty
+        val pool = if (selectedOrder == QuestionOrder.NEWEST || difficulty == null) {
+            matching
         } else {
-            exactPool + supplementalPool.take(10 - exactPool.size)
+            val exactPool = matching.filter { it.difficulty == difficulty }
+            if (exactPool.size >= selectedQuestionCount) {
+                exactPool
+            } else {
+                val supplementalPool = matching
+                    .filter { it.difficulty != difficulty }
+                    .sortedBy { kotlin.math.abs(it.difficulty.ordinal - difficulty.ordinal) }
+                exactPool + supplementalPool.take(selectedQuestionCount - exactPool.size)
+            }
+        }
+        if (pool.size < selectedQuestionCount) {
+            val label = category?.label?.lowercase() ?: "mixed"
+            startError =
+                "Only ${pool.size} $label questions are available for ${variant.label}; choose ${pool.size.coerceAtLeast(5)} or fewer."
+            return
         }
         val recentKeySet = recentQuestionKeys.toSet()
-        val notRecentlySeen = pool.filter { it.historyKey() !in recentKeySet }.shuffled()
-        val recentlySeen = pool
-            .filter { it.historyKey() in recentKeySet }
-            .shuffled()
-            .sortedBy { recentQuestionKeys.lastIndexOf(it.historyKey()) }
-        questions = (notRecentlySeen + recentlySeen).take(10)
+        questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet, selectedOrder)
+            .take(selectedQuestionCount)
         if (questions.isEmpty()) {
             val label = category?.label?.lowercase() ?: "mixed"
-            startError = "No $label questions for ${variant.label} · ${selectedDifficulty.label}."
+            startError = "No $label questions for ${variant.label} · ${selectedDifficulty.selectionLabel}."
             return
         }
         startError = null
-        recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() }).takeLast(30)
+        recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() })
+            .takeLast(maxOf(30, selectedQuestionCount * 3))
         index = 0; score = 0; streak = 0; bestStreak = 0
         answeredChoices = emptyMap()
         revealedHintCounts = emptyMap()
@@ -207,6 +259,7 @@ private fun QuizGame() {
         when (screen) {
             Screen.HOME -> Unit
             Screen.SETTINGS -> screen = Screen.HOME
+            Screen.TRIP_QUIZ -> screen = Screen.HOME
             Screen.QUIZ -> {
                 if (index > 0) index-- else screen = Screen.HOME
             }
@@ -228,19 +281,54 @@ private fun QuizGame() {
                 difficulty = selectedDifficulty,
                 onDifficultyChange = { difficulty ->
                     selectedDifficulty = difficulty
-                    preferences.edit().putString("difficulty", difficulty.name).apply()
+                    preferences.edit()
+                        .putString("difficulty", difficulty?.name ?: MIXED_DIFFICULTY)
+                        .apply()
+                },
+                order = selectedOrder,
+                onOrderChange = { order ->
+                    selectedOrder = order
+                    preferences.edit().putString("question_order", order.name).apply()
+                },
+                questionCount = selectedQuestionCount,
+                onQuestionCountChange = { count ->
+                    selectedQuestionCount = count
+                    preferences.edit().putInt("question_count", count).apply()
                 },
                 onStart = ::start,
+                onTripQuiz = { screen = Screen.TRIP_QUIZ },
                 onSettings = { screen = Screen.SETTINGS },
                 startError = startError
             )
             Screen.SETTINGS -> SettingsScreen(
                 allowExplicitContent = allowExplicitContent,
-                onAllowExplicitContentChange = { allowed ->
+                onSave = { allowed ->
                     allowExplicitContent = allowed
                     preferences.edit().putBoolean("allow_explicit_content", allowed).apply()
+                    screen = Screen.HOME
                 },
                 onBack = { screen = Screen.HOME }
+            )
+            Screen.TRIP_QUIZ -> TripQuizScreen(
+                variant = selectedVariant,
+                questionCount = selectedQuestionCount,
+                allowExplicitContent = allowExplicitContent,
+                onBack = { screen = Screen.HOME },
+                onStart = { generated ->
+                    tripQuestions = generated.questions
+                    selectedCategory = QuizCategory.VOCABULARY
+                    questions = generated.questions
+                    index = 0
+                    score = 0
+                    streak = 0
+                    bestStreak = 0
+                    answeredChoices = emptyMap()
+                    revealedHintCounts = emptyMap()
+                    exampleStates = emptyMap()
+                    exampleSources = emptyMap()
+                    startError = null
+                    screen = Screen.QUIZ
+                }
             )
             Screen.QUIZ -> {
                 val item = questions.getOrNull(index)
@@ -248,6 +336,7 @@ private fun QuizGame() {
                     QuizScreen(
                         item = item, number = index + 1, total = questions.size,
                         variant = selectedVariant,
+                        allowExplicitContent = allowExplicitContent,
                         score = score, streak = streak,
                         chosen = answeredChoices[index],
                         onChoose = { answer -> answeredChoices = answeredChoices + (index to answer) },
@@ -296,10 +385,74 @@ private fun QuizGame() {
             Screen.RESULTS -> ResultsScreen(
                 score = score, total = questions.size, bestStreak = bestStreak,
                 language = selectedVariant.language,
-                onAgain = { start(selectedVariant, selectedCategory) }, onHome = { screen = Screen.HOME }
+                regenerating = regeneratingTripQuiz,
+                onAgain = {
+                    val generated = tripQuestions
+                    if (generated == null) {
+                        start(selectedVariant, selectedCategory)
+                    } else {
+                        val savedSource = preferences.getString("trip_quiz_source", "").orEmpty()
+                        regeneratingTripQuiz = true
+                        coroutineScope.launch {
+                            val fresh = if (savedSource.isBlank()) {
+                                null
+                            } else {
+                                TripQuizGenerator.generate(
+                                    source = savedSource,
+                                    variant = selectedVariant,
+                                    questionCount = selectedQuestionCount,
+                                    allowExplicit = allowExplicitContent
+                                ).getOrNull()
+                            }
+                            // Fresh AI questions when possible; otherwise reshuffle the old set.
+                            val nextQuestions = fresh?.questions ?: generated.shuffled()
+                            if (fresh != null) tripQuestions = fresh.questions
+                            questions = nextQuestions
+                            index = 0
+                            score = 0
+                            streak = 0
+                            bestStreak = 0
+                            answeredChoices = emptyMap()
+                            revealedHintCounts = emptyMap()
+                            exampleStates = emptyMap()
+                            exampleSources = emptyMap()
+                            regeneratingTripQuiz = false
+                            screen = Screen.QUIZ
+                        }
+                    }
+                },
+                onHome = { screen = Screen.HOME }
             )
         }
     }
+}
+
+private fun orderedQuestions(
+    pool: List<QuizItem>,
+    recentQuestionKeys: List<String>,
+    recentKeySet: Set<String>,
+    order: QuestionOrder
+): List<QuizItem> {
+    if (order == QuestionOrder.NEWEST) {
+        return pool
+            .groupBy { it.dateAdded.orEmpty() }
+            .toList()
+            .sortedByDescending { it.first }
+            .flatMap { (_, items) ->
+                val notRecentlySeen = items.filter { it.historyKey() !in recentKeySet }.shuffled()
+                val recentlySeen = items
+                    .filter { it.historyKey() in recentKeySet }
+                    .shuffled()
+                    .sortedBy { recentQuestionKeys.lastIndexOf(it.historyKey()) }
+                notRecentlySeen + recentlySeen
+            }
+    }
+    val notRecentlySeen = pool.filter { it.historyKey() !in recentKeySet }.shuffled()
+    val recentlySeen = pool
+        .filter { it.historyKey() in recentKeySet }
+        .shuffled()
+        .sortedBy { recentQuestionKeys.lastIndexOf(it.historyKey()) }
+    return notRecentlySeen + recentlySeen
 }
 
 private fun QuizItem.historyKey(): String = "${language.name}|${category.name}|$prompt"
@@ -308,24 +461,41 @@ private fun QuizItem.historyKey(): String = "${language.name}|${category.name}|$
 private fun HomeScreen(
     variant: LanguageVariant,
     onVariantChange: (LanguageVariant) -> Unit,
-    difficulty: Difficulty,
-    onDifficultyChange: (Difficulty) -> Unit,
+    difficulty: Difficulty?,
+    onDifficultyChange: (Difficulty?) -> Unit,
+    order: QuestionOrder,
+    onOrderChange: (QuestionOrder) -> Unit,
+    questionCount: Int,
+    onQuestionCountChange: (Int) -> Unit,
     onStart: (LanguageVariant, QuizCategory?) -> Unit,
+    onTripQuiz: () -> Unit,
     onSettings: () -> Unit,
     startError: String? = null
 ) {
     var languageMenuExpanded by remember { mutableStateOf(false) }
     var difficultyMenuExpanded by remember { mutableStateOf(false) }
+    var orderMenuExpanded by remember { mutableStateOf(false) }
     Column(
         Modifier.fillMaxSize().padding(32.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Column(Modifier.widthIn(max = 860.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        AppLogo(size = 132.dp)
+        Spacer(Modifier.height(16.dp))
         Text("LANGUAGE LEARNING", color = Green, fontWeight = FontWeight.Black, letterSpacing = 2.sp)
         Spacer(Modifier.height(12.dp))
         Text("Train your ${variant.language.label}", fontSize = 42.sp, fontWeight = FontWeight.Bold, color = Ink, textAlign = TextAlign.Center)
-        Text("Ten questions. Instant feedback. A fresh mix every time.", fontSize = 18.sp, color = Ink.copy(alpha = .7f), textAlign = TextAlign.Center)
+        Text(
+            if (order == QuestionOrder.NEWEST) {
+                "$questionCount questions. Instant feedback. Newest words first."
+            } else {
+                "$questionCount questions. Instant feedback. A fresh mix every time."
+            },
+            fontSize = 18.sp,
+            color = Ink.copy(alpha = .7f),
+            textAlign = TextAlign.Center
+        )
         Spacer(Modifier.height(14.dp))
         FocusActionButton(
             label = "⚙ Settings",
@@ -366,7 +536,7 @@ private fun HomeScreen(
         Spacer(Modifier.height(14.dp))
         Box(Modifier.fillMaxWidth()) {
             FocusActionButton(
-                label = "Difficulty: ${difficulty.label}  ▾",
+                label = "Difficulty: ${difficulty.selectionLabel}  ▾",
                 onClick = { difficultyMenuExpanded = true },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 60.dp),
                 primary = false
@@ -376,16 +546,16 @@ private fun HomeScreen(
                 onDismissRequest = { difficultyMenuExpanded = false },
                 modifier = Modifier.widthIn(min = 320.dp, max = 620.dp)
             ) {
-                Difficulty.entries.forEach { option ->
+                difficultyOptions.forEach { option ->
                     DropdownMenuItem(
                         text = {
                             Column {
                                 Text(
-                                    "${option.label}${if (option == difficulty) "  ✓" else ""}",
+                                    "${option.selectionLabel}${if (option == difficulty) "  ✓" else ""}",
                                     fontSize = 17.sp,
                                     fontWeight = if (option == difficulty) FontWeight.Black else FontWeight.Bold
                                 )
-                                Text(option.description, fontSize = 13.sp, color = Ink.copy(alpha = .66f))
+                                Text(option.selectionDescription, fontSize = 13.sp, color = Ink.copy(alpha = .66f))
                             }
                         },
                         onClick = {
@@ -394,6 +564,72 @@ private fun HomeScreen(
                         }
                     )
                 }
+            }
+        }
+        Spacer(Modifier.height(14.dp))
+        Box(Modifier.fillMaxWidth()) {
+            FocusActionButton(
+                label = "Order: ${order.label}  ▾",
+                onClick = { orderMenuExpanded = true },
+                modifier = Modifier.fillMaxWidth().heightIn(min = 60.dp),
+                primary = false
+            )
+            DropdownMenu(
+                expanded = orderMenuExpanded,
+                onDismissRequest = { orderMenuExpanded = false },
+                modifier = Modifier.widthIn(min = 320.dp, max = 620.dp)
+            ) {
+                QuestionOrder.entries.forEach { option ->
+                    DropdownMenuItem(
+                        text = {
+                            Column {
+                                Text(
+                                    "${option.label}${if (option == order) "  ✓" else ""}",
+                                    fontSize = 17.sp,
+                                    fontWeight = if (option == order) FontWeight.Black else FontWeight.Bold
+                                )
+                                Text(option.description, fontSize = 13.sp, color = Ink.copy(alpha = .66f))
+                            }
+                        },
+                        onClick = {
+                            onOrderChange(option)
+                            orderMenuExpanded = false
+                        }
+                    )
+                }
+            }
+        }
+        Spacer(Modifier.height(18.dp))
+        Text(
+            "Questions per quiz: $questionCount",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Ink
+        )
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            OutlinedButton(
+                onClick = { onQuestionCountChange((questionCount - 1).coerceAtLeast(5)) },
+                enabled = questionCount > 5
+            ) {
+                Text("−", fontSize = 24.sp)
+            }
+            Slider(
+                value = questionCount.toFloat(),
+                onValueChange = {
+                    onQuestionCountChange(it.roundToInt().coerceIn(5, 100))
+                },
+                valueRange = 5f..100f,
+                steps = 94,
+                modifier = Modifier.weight(1f).padding(horizontal = 12.dp)
+            )
+            OutlinedButton(
+                onClick = { onQuestionCountChange((questionCount + 1).coerceAtMost(100)) },
+                enabled = questionCount < 100
+            ) {
+                Text("+", fontSize = 24.sp)
             }
         }
         Spacer(Modifier.height(28.dp))
@@ -410,6 +646,138 @@ private fun HomeScreen(
         CategoryButton("Vocabulary", "Words, expressions, and verbs", Green) { onStart(variant, QuizCategory.VOCABULARY) }
         CategoryButton("Articles", "Practice noun gender and articles", Color(0xFF4A67A1)) { onStart(variant, QuizCategory.ARTICLES) }
         CategoryButton("Grammar", "Pronouns, verbs, cases, and patterns", Color(0xFF8A5A9C)) { onStart(variant, QuizCategory.GRAMMAR) }
+        CategoryButton(
+            "Prepare me for my trip",
+            "Paste an itinerary or public link to generate a custom quiz",
+            Color(0xFFB45F45),
+            onTripQuiz
+        )
+        }
+    }
+}
+
+@Composable
+private fun TripQuizScreen(
+    variant: LanguageVariant,
+    questionCount: Int,
+    allowExplicitContent: Boolean,
+    onBack: () -> Unit,
+    onStart: (GeneratedTripQuiz) -> Unit
+) {
+    val context = LocalContext.current
+    val preferences = remember { context.getSharedPreferences("language_learning_settings", 0) }
+    var source by remember { mutableStateOf(preferences.getString("trip_quiz_source", "").orEmpty()) }
+    var loading by remember { mutableStateOf(false) }
+    var error by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .padding(32.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Column(Modifier.widthIn(max = 760.dp)) {
+            TextButton(onClick = onBack, enabled = !loading) { Text("← Back") }
+            Spacer(Modifier.height(12.dp))
+            Text(
+                "Prepare me for my trip",
+                fontSize = 38.sp,
+                fontWeight = FontWeight.Black,
+                color = Ink
+            )
+            Spacer(Modifier.height(12.dp))
+            Text(
+                "Paste itinerary text or a public Google Doc or website link. AI will create $questionCount practical ${variant.language.label} questions for ${variant.speechRegion}.",
+                fontSize = 19.sp,
+                lineHeight = 27.sp,
+                color = Ink.copy(alpha = .78f)
+            )
+            Spacer(Modifier.height(20.dp))
+            OutlinedTextField(
+                value = source,
+                onValueChange = {
+                    source = it
+                    error = null
+                    preferences.edit().putString("trip_quiz_source", it).apply()
+                },
+                label = { Text("Itinerary text or public link") },
+                placeholder = {
+                    Text("Flight, hotel, cities, activities…\nor https://docs.google.com/document/d/…")
+                },
+                minLines = 8,
+                maxLines = 16,
+                enabled = !loading,
+                isError = error != null,
+                modifier = Modifier.fillMaxWidth()
+            )
+            if (source.isNotEmpty() && !loading) {
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    TextButton(
+                        onClick = {
+                            source = ""
+                            error = null
+                            preferences.edit().remove("trip_quiz_source").apply()
+                        }
+                    ) { Text("Clear") }
+                }
+            }
+            if (error != null) {
+                Text(
+                    error.orEmpty(),
+                    color = Red,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp)
+                )
+            }
+            Spacer(Modifier.height(18.dp))
+            if (loading) {
+                Row(
+                    Modifier.fillMaxWidth().padding(vertical = 14.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CircularProgressIndicator(Modifier.size(28.dp))
+                    Spacer(Modifier.width(12.dp))
+                    Text("Building your trip quiz…", fontWeight = FontWeight.Bold)
+                }
+            } else {
+                FocusActionButton(
+                    label = "Generate $questionCount questions",
+                    onClick = {
+                        if (source.isBlank()) {
+                            error = "Paste itinerary text or a public link first."
+                        } else {
+                            loading = true
+                            error = null
+                            scope.launch {
+                                TripQuizGenerator.generate(
+                                    source = source,
+                                    variant = variant,
+                                    questionCount = questionCount,
+                                    allowExplicit = allowExplicitContent
+                                ).fold(
+                                    onSuccess = onStart,
+                                    onFailure = {
+                                        error = it.message ?: "Could not generate the trip quiz."
+                                        loading = false
+                                    }
+                                )
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 62.dp),
+                    primary = true
+                )
+            }
+            Spacer(Modifier.height(14.dp))
+            Text(
+                "Only public HTTP or HTTPS pages are supported. Private-network links and pages larger than 1 MB are rejected.",
+                fontSize = 13.sp,
+                color = Ink.copy(alpha = .62f)
+            )
         }
     }
 }
@@ -417,9 +785,17 @@ private fun HomeScreen(
 @Composable
 private fun SettingsScreen(
     allowExplicitContent: Boolean,
-    onAllowExplicitContentChange: (Boolean) -> Unit,
+    onSave: (Boolean) -> Unit,
     onBack: () -> Unit
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    var draftAllowExplicitContent by remember(allowExplicitContent) {
+        mutableStateOf(allowExplicitContent)
+    }
+    var clearingCache by remember { mutableStateOf(false) }
+    var cacheMessage by remember { mutableStateOf<String?>(null) }
+    val hasUnsavedChanges = draftAllowExplicitContent != allowExplicitContent
     Column(
         Modifier
             .fillMaxSize()
@@ -434,7 +810,7 @@ private fun SettingsScreen(
             Text("Settings", fontSize = 40.sp, fontWeight = FontWeight.Black, color = Ink)
             Spacer(Modifier.height(20.dp))
             Text(
-                "This app searches the Internet for posts using the words you learn. Choose how explicit content should be handled.",
+                "This app can include sexually explicit or vulgar vocabulary, and it can search the Internet for posts using the words you learn. Blocking is the default.",
                 fontSize = 21.sp,
                 lineHeight = 29.sp,
                 color = Ink
@@ -442,17 +818,84 @@ private fun SettingsScreen(
             Spacer(Modifier.height(24.dp))
             SettingChoice(
                 title = "Block explicit content",
-                subtitle = "Recommended · This is the default",
-                selected = !allowExplicitContent,
-                onClick = { onAllowExplicitContentChange(false) }
+                subtitle = "Recommended · Hide explicit quiz words and skip NSFW examples",
+                selected = !draftAllowExplicitContent,
+                onClick = { draftAllowExplicitContent = false }
             )
             Spacer(Modifier.height(12.dp))
             SettingChoice(
                 title = "Allow explicit content",
-                subtitle = "NSFW posts may be suggested and will be clearly labelled",
-                selected = allowExplicitContent,
-                onClick = { onAllowExplicitContentChange(true) }
+                subtitle = "Vulgar or sexual vocabulary and NSFW posts may appear and will be labelled when possible",
+                selected = draftAllowExplicitContent,
+                onClick = { draftAllowExplicitContent = true }
             )
+            Spacer(Modifier.height(28.dp))
+            Text(
+                if (hasUnsavedChanges) "You have unsaved changes." else "All changes saved.",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                color = if (hasUnsavedChanges) Red else Ink.copy(alpha = .55f)
+            )
+            Spacer(Modifier.height(10.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                FocusActionButton(
+                    label = "Save",
+                    onClick = { onSave(draftAllowExplicitContent) },
+                    enabled = hasUnsavedChanges,
+                    modifier = Modifier.widthIn(max = 260.dp).weight(1f).heightIn(min = 58.dp),
+                    primary = true
+                )
+                Spacer(Modifier.width(14.dp))
+                FocusActionButton(
+                    label = "Discard",
+                    onClick = { draftAllowExplicitContent = allowExplicitContent },
+                    enabled = hasUnsavedChanges,
+                    modifier = Modifier.widthIn(max = 260.dp).weight(1f).heightIn(min = 58.dp),
+                    primary = false
+                )
+            }
+            Spacer(Modifier.height(36.dp))
+            Text("Local cache", fontSize = 24.sp, fontWeight = FontWeight.Black, color = Ink)
+            Spacer(Modifier.height(10.dp))
+            Text(
+                "Clears the saved word bank and downloaded pronunciations, then reloads from the companion server if it is reachable.",
+                fontSize = 16.sp,
+                lineHeight = 23.sp,
+                color = Ink.copy(alpha = .78f)
+            )
+            Spacer(Modifier.height(14.dp))
+            FocusActionButton(
+                label = if (clearingCache) "Clearing…" else "Clear cache",
+                onClick = {
+                    if (clearingCache) return@FocusActionButton
+                    clearingCache = true
+                    cacheMessage = null
+                    scope.launch {
+                        QuizData.clearLocalCaches(context)
+                        cacheMessage = QuizData.load(context).fold(
+                            onSuccess = {
+                                "Cache cleared. The word bank was reloaded from the server."
+                            },
+                            onFailure = { error ->
+                                "Cache files were deleted. The word bank could not be reloaded: ${error.message ?: "server unavailable"}"
+                            }
+                        )
+                        clearingCache = false
+                    }
+                },
+                enabled = !clearingCache,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 58.dp),
+                primary = false
+            )
+            if (cacheMessage != null) {
+                Spacer(Modifier.height(10.dp))
+                Text(
+                    cacheMessage!!,
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Ink
+                )
+            }
         }
     }
 }
@@ -519,6 +962,7 @@ private fun CategoryButton(title: String, subtitle: String, color: Color, onClic
 private fun QuizScreen(
     item: QuizItem, number: Int, total: Int, score: Int, streak: Int,
     variant: LanguageVariant,
+    allowExplicitContent: Boolean,
     chosen: String?, onChoose: (String) -> Unit,
     revealedHintCount: Int, onRevealHint: () -> Unit,
     exampleState: ExampleDiscoveryState,
@@ -544,7 +988,7 @@ private fun QuizScreen(
             isRecording = true
         }
     }
-    val categoryPool = answerChoicesFor(item)
+    val categoryPool = answerChoicesFor(item, allowExplicitContent)
     val options = remember(item) {
         (categoryPool.filter { it != item.answer }.shuffled().take(3) + item.answer).shuffled()
     }
@@ -917,8 +1361,9 @@ private fun ExampleSourcePicker(
     }
 }
 
-private fun answerChoicesFor(item: QuizItem): List<String> {
+private fun answerChoicesFor(item: QuizItem, allowExplicitContent: Boolean): List<String> {
     val answer = item.answer
+    if (item.distractors.isNotEmpty()) return item.distractors + answer
     return when {
         answer in listOf("nominative", "accusative", "dative", "genitive") ->
             listOf("nominative", "accusative", "dative", "genitive")
@@ -958,7 +1403,12 @@ private fun answerChoicesFor(item: QuizItem): List<String> {
             listOf("parle", "parlons", "prends", "allons", "J'aime", answer).distinct()
 
         else -> QuizData.items
-            .filter { it.language == item.language && it.category == item.category && (it.variant == null || it.variant == item.variant) }
+            .filter {
+                it.language == item.language &&
+                    it.category == item.category &&
+                    (it.variant == null || it.variant == item.variant) &&
+                    (allowExplicitContent || !it.explicit)
+            }
             .map { it.answer }
             .distinct()
     }
@@ -1013,80 +1463,23 @@ private fun AnswerOptionButton(
     }
 }
 
-private fun answerMarker(item: QuizItem, option: String): String = when (item.category) {
-    QuizCategory.VOCABULARY -> emojiForAnswer(option)
-    QuizCategory.ARTICLES -> ""
-    QuizCategory.GRAMMAR -> ""
-}
+private const val GENERIC_ANSWER_MARKER = "💬"
 
-private fun emojiForAnswer(answer: String): String = when (answer.lowercase()) {
-    "who" -> "👤"
-    "hello / good morning" -> "👋"
-    "goodbye" -> "👋"
-    "please" -> "🙏"
-    "thank you" -> "💛"
-    "in a good mood", "happy" -> "😊"
-    "neat / orderly / clean", "to clean" -> "🧹"
-    "important" -> "❗"
-    "almost" -> "⌛"
-    "mean" -> "😠"
-    "probably", "maybe" -> "🤔"
-    "safe / sure" -> "🛡️"
-    "dangerous" -> "⚠️"
-    "straight ahead" -> "⬆️"
-    "up ahead" -> "👆"
-    "closed" -> "🔒"
-    "over there" -> "👉"
-    "not at all", "never" -> "🚫"
-    "boring" -> "🥱"
-    "tired" -> "😴"
-    "far away" -> "🔭"
-    "empty" -> "🫙"
-    "no idea" -> "🤷"
-    "for the first time" -> "1️⃣"
-    "around the corner" -> "↪️"
-    "on time" -> "⏰"
-    "enough" -> "✅"
-    "hard / difficult / heavy", "difficult" -> "🏋️"
-    "easy" -> "👌"
-    "right now", "now" -> "⏱️"
-    "tomorrow" -> "➡️"
-    "yesterday" -> "⬅️"
-    "always" -> "♾️"
-    "less / fewer" -> "➖"
-    "cheap" -> "🏷️"
-    "nice / kind" -> "🙂"
-    "don't worry" -> "😌"
-    "finished" -> "🏁"
-    "again" -> "🔁"
-    "to take" -> "✋"
-    "to share / divide" -> "🤝"
-    "to pay" -> "💳"
-    "to disturb / bother" -> "🔔"
-    "to click" -> "🖱️"
-    "to visit" -> "🧳"
-    "to tour / sightsee" -> "🏛️"
-    "to go for a walk" -> "🚶"
-    "to fetch / go get", "to look for" -> "🔎"
-    "to find" -> "💡"
-    "to take along" -> "🎒"
-    "to count" -> "🔢"
-    "to hear", "to listen" -> "👂"
-    "to say", "to speak" -> "💬"
-    "to stand" -> "🧍"
-    "to stop" -> "🛑"
-    "to become" -> "🔄"
-    "snack" -> "🍿"
-    "mid-morning snack (swiss german)", "afternoon snack (swiss german)" -> "🍪"
-    "snack bar / takeaway stand" -> "🌭"
-    "pen" -> "🖊️"
-    "electric bicycle / e-bike" -> "🚲"
-    "hospital", "hospital (swiss german; krankenhaus in germany)" -> "🏥"
-    else -> "💬"
+private fun answerMarker(item: QuizItem, option: String): String {
+    if (item.category != QuizCategory.VOCABULARY) return ""
+    // Generated questions carry an emoji for the correct answer only, which would give it away.
+    if (item.distractors.isNotEmpty()) return ""
+    if (option == item.answer) return item.emoji ?: GENERIC_ANSWER_MARKER
+    return QuizData.items.firstOrNull {
+        it.language == item.language &&
+            it.category == QuizCategory.VOCABULARY &&
+            it.answer.equals(option, ignoreCase = true) &&
+            !it.emoji.isNullOrBlank()
+    }?.emoji ?: GENERIC_ANSWER_MARKER
 }
 
 @Composable
-private fun ResultsScreen(score: Int, total: Int, bestStreak: Int, language: Language, onAgain: () -> Unit, onHome: () -> Unit) {
+private fun ResultsScreen(score: Int, total: Int, bestStreak: Int, language: Language, regenerating: Boolean = false, onAgain: () -> Unit, onHome: () -> Unit) {
     val percent = score * 100 / total
     val playAgainFocusRequester = remember { FocusRequester() }
 
@@ -1114,6 +1507,17 @@ private fun ResultsScreen(score: Int, total: Int, bestStreak: Int, language: Lan
         Text("$score / $total", fontSize = 72.sp, fontWeight = FontWeight.Black, color = Green)
         Text("$percent% correct  •  Best streak: $bestStreak", fontSize = 18.sp)
         Spacer(Modifier.height(32.dp))
+        if (regenerating) {
+            Row(
+                Modifier.fillMaxWidth().padding(vertical = 14.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CircularProgressIndicator(Modifier.size(28.dp))
+                Spacer(Modifier.width(12.dp))
+                Text("Generating fresh questions…", fontWeight = FontWeight.Bold)
+            }
+        } else {
         FocusActionButton(
             label = "Play again",
             onClick = onAgain,
@@ -1130,6 +1534,7 @@ private fun ResultsScreen(score: Int, total: Int, bestStreak: Int, language: Lan
             modifier = Modifier.fillMaxWidth().heightIn(min = 58.dp),
             primary = false
         )
+        }
     }
 }
 

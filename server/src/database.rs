@@ -23,6 +23,9 @@ pub async fn connect(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
             difficulty TEXT NOT NULL DEFAULT 'UNRANKED',
             variant TEXT,
             spoken_language TEXT,
+            date_added TEXT,
+            explicit INTEGER NOT NULL DEFAULT 0,
+            emoji TEXT,
             UNIQUE(language, term, translation)
         )",
     )
@@ -37,6 +40,15 @@ pub async fn connect(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
     .await?;
     ensure_column(&pool, "vocabulary", "variant", "TEXT").await?;
     ensure_column(&pool, "vocabulary", "spoken_language", "TEXT").await?;
+    ensure_column(&pool, "vocabulary", "date_added", "TEXT").await?;
+    ensure_column(
+        &pool,
+        "vocabulary",
+        "explicit",
+        "INTEGER NOT NULL DEFAULT 0",
+    )
+    .await?;
+    ensure_column(&pool, "vocabulary", "emoji", "TEXT").await?;
     sqlx::query(
         "CREATE TABLE IF NOT EXISTS questions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -119,6 +131,27 @@ async fn rank_unranked_content(pool: &SqlitePool) -> Result<(), sqlx::Error> {
             .await?;
     }
     Ok(())
+}
+
+fn seed_explicit(entry: &Value) -> i64 {
+    if entry
+        .get("explicit")
+        .and_then(Value::as_bool)
+        .unwrap_or(false)
+    {
+        1
+    } else {
+        0
+    }
+}
+
+fn seed_emoji<'a>(root: &'a Value, entry: &'a Value) -> Option<&'a str> {
+    entry.get("emoji").and_then(Value::as_str).or_else(|| {
+        let translation = entry.get("translation").and_then(Value::as_str)?;
+        root.get("emojiByTranslation")
+            .and_then(|map| map.get(translation))
+            .and_then(Value::as_str)
+    })
 }
 
 fn rank_question(prompt: &str, answer: &str) -> &'static str {
@@ -282,7 +315,7 @@ pub async fn seed_if_empty(
             .get("difficulty")
             .and_then(Value::as_str)
             .unwrap_or_else(|| rank_vocabulary(language, term, translation));
-        sqlx::query("INSERT OR IGNORE INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language) VALUES(?,?,?,?,?,?,?,?)")
+        sqlx::query("INSERT OR IGNORE INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji) VALUES(?,?,?,?,?,?,?,?,?,?,?)")
             .bind(language)
             .bind(term)
             .bind(translation)
@@ -291,6 +324,9 @@ pub async fn seed_if_empty(
             .bind(difficulty)
             .bind(entry.get("variant").and_then(Value::as_str))
             .bind(entry.get("spokenLanguage").and_then(Value::as_str))
+            .bind(entry.get("dateAdded").and_then(Value::as_str))
+            .bind(seed_explicit(entry))
+            .bind(seed_emoji(&root, entry))
             .execute(&mut *tx).await?;
     }
     for entry in root["questions"].as_array().into_iter().flatten() {
@@ -320,9 +356,6 @@ pub async fn sync_core_vocabulary(
     for entry in root["vocabulary"].as_array().into_iter().flatten() {
         let should_sync = entry.get("core").and_then(Value::as_bool).unwrap_or(false)
             || entry.get("sync").and_then(Value::as_bool).unwrap_or(false);
-        if !should_sync {
-            continue;
-        }
         let language = entry
             .get("language")
             .and_then(Value::as_str)
@@ -334,9 +367,18 @@ pub async fn sync_core_vocabulary(
         let difficulty = entry
             .get("difficulty")
             .and_then(Value::as_str)
-            .unwrap_or("EASY");
+            .unwrap_or_else(|| {
+                if should_sync {
+                    "EASY"
+                } else {
+                    rank_vocabulary(language, term, translation)
+                }
+            });
         let variant = entry.get("variant").and_then(Value::as_str);
         let spoken_language = entry.get("spokenLanguage").and_then(Value::as_str);
+        let date_added = entry.get("dateAdded").and_then(Value::as_str);
+        let explicit = seed_explicit(entry);
+        let emoji = seed_emoji(&root, entry);
         let existing_id: Option<i64> = sqlx::query_scalar(
             "SELECT id FROM vocabulary WHERE language=? AND term=? ORDER BY (translation=?) DESC,id LIMIT 1",
         )
@@ -346,12 +388,20 @@ pub async fn sync_core_vocabulary(
         .fetch_optional(pool)
         .await?;
         if let Some(id) = existing_id {
-            sqlx::query("UPDATE vocabulary SET translation=?,article=?,noun=?,difficulty=?,variant=?,spoken_language=? WHERE id=?")
-                .bind(translation).bind(article).bind(noun).bind(difficulty).bind(variant).bind(spoken_language).bind(id)
-                .execute(pool).await?;
+            sqlx::query("UPDATE vocabulary SET explicit=?,emoji=COALESCE(emoji,?) WHERE id=?")
+                .bind(explicit)
+                .bind(emoji)
+                .bind(id)
+                .execute(pool)
+                .await?;
+            if should_sync {
+                sqlx::query("UPDATE vocabulary SET translation=?,article=?,noun=?,difficulty=?,variant=?,spoken_language=?,date_added=COALESCE(?,date_added) WHERE id=?")
+                    .bind(translation).bind(article).bind(noun).bind(difficulty).bind(variant).bind(spoken_language).bind(date_added).bind(id)
+                    .execute(pool).await?;
+            }
         } else {
-            sqlx::query("INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language) VALUES(?,?,?,?,?,?,?,?)")
-                .bind(language).bind(term).bind(translation).bind(article).bind(noun).bind(difficulty).bind(variant).bind(spoken_language)
+            sqlx::query("INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji) VALUES(?,?,?,?,?,?,?,?,?,?,?)")
+                .bind(language).bind(term).bind(translation).bind(article).bind(noun).bind(difficulty).bind(variant).bind(spoken_language).bind(date_added).bind(explicit).bind(emoji)
                 .execute(pool).await?;
         }
     }
@@ -360,7 +410,7 @@ pub async fn sync_core_vocabulary(
 
 pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
     let vocab_rows = sqlx::query(
-        "SELECT id,language,term,translation,article,noun,difficulty,variant,spoken_language FROM vocabulary ORDER BY language,term",
+        "SELECT id,language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji FROM vocabulary ORDER BY language,term",
     )
     .fetch_all(pool)
     .await?;
@@ -370,7 +420,10 @@ pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
         "term": row.get::<String,_>("term"), "translation": row.get::<String,_>("translation"),
         "article": row.get::<Option<String>,_>("article"), "noun": row.get::<Option<String>,_>("noun"),
         "difficulty": row.get::<String,_>("difficulty"), "variant": row.get::<Option<String>,_>("variant"),
-        "spokenLanguage": row.get::<Option<String>,_>("spoken_language")
+        "spokenLanguage": row.get::<Option<String>,_>("spoken_language"),
+        "dateAdded": row.get::<Option<String>,_>("date_added"),
+        "explicit": row.get::<i64,_>("explicit") != 0,
+        "emoji": row.get::<Option<String>,_>("emoji")
     })).collect::<Vec<_>>();
     let questions = question_rows.into_iter().map(|row| {
         let hints: Value = serde_json::from_str(&row.get::<String,_>("hints_json")).unwrap_or(json!([]));

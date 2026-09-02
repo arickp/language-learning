@@ -111,7 +111,7 @@ For hosting outside your home network, put the helper behind HTTPS and do not ex
 The computer and Android tablet or TV must be on the same local network.
 
 1. Find the computer's local IP address in macOS under **System Settings → Wi-Fi → Details → TCP/IP**.
-2. In the main `LanguageLearning/local.properties` file, add a line like:
+2. Copy `local.properties.example` to `local.properties` in the project root (if you do not already have that file) and set a line like:
 
 ```text
 SERVER_URL=http://192.168.1.50:41082
@@ -123,6 +123,8 @@ Replace `192.168.1.50` with the computer's actual local IP address. Do not use `
 
 The Android app uses this one server address for public-example searches, pronunciation audio, and speaking practice.
 
+It also uses `POST /trip/quiz` to turn pasted itinerary text or a public Google Doc/website into a 5–100 question travel quiz. Linked content must be public text or HTML. The importer blocks private-network destinations, validates redirects, caps downloads at 1 MB, and treats fetched page content as untrusted input.
+
 ## Configuration and cost controls
 
 The `.env` file supports:
@@ -133,12 +135,14 @@ OPENAI_MODEL=gpt-5.6-luna
 OPENAI_TTS_MODEL=gpt-4o-mini-tts
 PORT=41082
 MAX_UNCACHED_REQUESTS=25
+MAX_TRIP_GENERATIONS=10
 MAX_UNCACHED_SPEECH_REQUESTS=100
 ```
 
 Why port `41082`? “Four, hex for L, two—get it?” It is a tiny language-learning joke disguised as infrastructure. No one was going to get it without this note.
 
 - `MAX_UNCACHED_REQUESTS` caps public-example search requests until the server restarts.
+- `MAX_TRIP_GENERATIONS` separately caps itinerary quiz generations until the server restarts.
 - `MAX_UNCACHED_SPEECH_REQUESTS` caps newly generated pronunciations until the server restarts.
 - Repeated results are cached while the server is running. Pronunciations are also cached on the Android device.
 - Set an enforced monthly spend limit on the OpenAI API project for an additional account-level safeguard.
@@ -149,4 +153,5 @@ Why port `41082`? “Four, hex for L, two—get it?” It is a tiny language-lea
 - **Permission error from OpenAI:** Confirm the key has **Responses: Write** and/or **Audio/Speech: Write**, depending on the feature.
 - **Connection refused:** Check the address and port, and allow incoming connections if the macOS firewall prompts you.
 - **Lookup limit reached:** Restart the server to reset its in-memory counters, or deliberately raise the corresponding limit in `.env`.
+- **Word bank still has old or admin-edited entries:** Restarting does not rebuild SQLite from `seed/quiz_data.json`. Stop the helper, delete `data/language-learning.db` (and `-wal` / `-shm` if present), then start again. With Docker Compose, remove the `language-learning-data` volume. See the root README section **Reset the word bank to the seed file**.
 - **A cached pronunciation still plays after the server stops:** This is expected; previously generated audio is cached locally on the Android device.
