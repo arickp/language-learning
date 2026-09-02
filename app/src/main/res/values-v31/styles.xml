@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.LanguageLearning" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#FFF9F2</item>
+        <item name="android:navigationBarColor">#FFF9F2</item>
+        <!-- The system splash icon is a fixed, small size; matching its background to the app
+             lets it hand off to the full-size logo on the loading screen without a colour flash. -->
+        <item name="android:windowSplashScreenBackground">#FFF9F2</item>
+    </style>
+</resources>

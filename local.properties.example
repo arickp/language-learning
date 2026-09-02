@@ -1,0 +1,8 @@
+## Copy this file to local.properties in the same folder (gitignored).
+## Android Studio usually adds sdk.dir on first sync; keep that line if it appears.
+
+# sdk.dir=/Users/YOU/Library/Android/sdk
+
+# Companion server used by the Android app.
+# Use your computer's local network address, not localhost.
+SERVER_URL=http://192.168.1.50:41082

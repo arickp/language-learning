@@ -6,6 +6,7 @@ local.properties
 server/target/
 server/data/
 *.swp
+.hermes/*
 
 # VS Code: ignore personal workspace state, but allow useful shared project config
 .vscode/*
