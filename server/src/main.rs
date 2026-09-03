@@ -1,12 +1,12 @@
 mod database;
 
 use axum::{
-    Json, Router,
+    Form, Json, Router,
     body::Body,
     extract::{ConnectInfo, Path as AxumPath, Request, State},
     http::{HeaderMap, StatusCode, header},
     middleware::{self, Next},
-    response::{Html, Response},
+    response::{Html, IntoResponse, Response},
     routing::{get, post},
 };
 use chrono::Utc;
@@ -27,6 +27,11 @@ use std::{
 };
 use tokio::sync::RwLock;
 use url::Url;
+use uuid::Uuid;
+
+const MAX_ITINERARY_CHARS: usize = 20_000;
+const ITINERARY_SESSION_TTL: Duration = Duration::from_secs(15 * 60);
+const MAX_ITINERARY_SESSIONS: usize = 100;
 
 #[derive(Clone)]
 struct RequestLogContext {
@@ -60,6 +65,85 @@ struct AppState {
     max_practice_evaluations: usize,
     database: SqlitePool,
     admin_token: String,
+    itinerary_sessions: ItinerarySessionStore,
+}
+
+#[derive(Clone)]
+struct ItinerarySessionStore {
+    sessions: Arc<RwLock<HashMap<String, ItinerarySession>>>,
+    ttl: Duration,
+}
+
+struct ItinerarySession {
+    created_at: Instant,
+    itinerary: Option<String>,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+enum SessionError {
+    NotFound,
+    Blank,
+    TooLong,
+}
+
+impl ItinerarySessionStore {
+    fn new(ttl: Duration) -> Self {
+        Self {
+            sessions: Arc::new(RwLock::new(HashMap::new())),
+            ttl,
+        }
+    }
+
+    async fn create(&self) -> String {
+        let mut sessions = self.sessions.write().await;
+        self.remove_expired(&mut sessions);
+        if sessions.len() >= MAX_ITINERARY_SESSIONS {
+            if let Some(oldest) = sessions
+                .iter()
+                .min_by_key(|(_, session)| session.created_at)
+                .map(|(token, _)| token.clone())
+            {
+                sessions.remove(&oldest);
+            }
+        }
+        let token = Uuid::new_v4().simple().to_string();
+        sessions.insert(
+            token.clone(),
+            ItinerarySession {
+                created_at: Instant::now(),
+                itinerary: None,
+            },
+        );
+        token
+    }
+
+    async fn itinerary(&self, token: &str) -> Result<Option<String>, SessionError> {
+        let mut sessions = self.sessions.write().await;
+        self.remove_expired(&mut sessions);
+        sessions
+            .get(token)
+            .map(|session| session.itinerary.clone())
+            .ok_or(SessionError::NotFound)
+    }
+
+    async fn submit(&self, token: &str, itinerary: String) -> Result<(), SessionError> {
+        let itinerary = itinerary.trim();
+        if itinerary.is_empty() {
+            return Err(SessionError::Blank);
+        }
+        if itinerary.chars().count() > MAX_ITINERARY_CHARS {
+            return Err(SessionError::TooLong);
+        }
+        let mut sessions = self.sessions.write().await;
+        self.remove_expired(&mut sessions);
+        let session = sessions.get_mut(token).ok_or(SessionError::NotFound)?;
+        session.itinerary = Some(itinerary.to_string());
+        Ok(())
+    }
+
+    fn remove_expired(&self, sessions: &mut HashMap<String, ItinerarySession>) {
+        sessions.retain(|_, session| session.created_at.elapsed() < self.ttl);
+    }
 }
 
 #[derive(Deserialize)]
@@ -143,6 +227,24 @@ struct TripQuizRequest {
     question_count: usize,
     #[serde(default)]
     allow_explicit: bool,
+}
+
+#[derive(Serialize)]
+struct ItinerarySessionCreated {
+    token: String,
+    expires_in_seconds: u64,
+}
+
+#[derive(Serialize)]
+struct ItinerarySessionStatus {
+    status: &'static str,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    itinerary: Option<String>,
+}
+
+#[derive(Deserialize)]
+struct ItineraryForm {
+    itinerary: String,
 }
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -238,6 +340,7 @@ async fn main() {
         max_practice_evaluations,
         database,
         admin_token,
+        itinerary_sessions: ItinerarySessionStore::new(ITINERARY_SESSION_TTL),
     };
     let app = Router::new()
         .route("/", get(home_page))
@@ -263,6 +366,15 @@ async fn main() {
         .route("/practice/sentence", post(practice_sentence))
         .route("/practice/evaluate", post(practice_evaluate))
         .route("/trip/quiz", post(generate_trip_quiz))
+        .route("/trip/itinerary-sessions", post(create_itinerary_session))
+        .route(
+            "/trip/itinerary-sessions/{token}",
+            get(itinerary_session_status),
+        )
+        .route(
+            "/trip/itinerary/{token}",
+            get(itinerary_form).post(submit_itinerary_form),
+        )
         .layer(middleware::from_fn(log_requests))
         .with_state(state);
     let address = SocketAddr::from(([0, 0, 0, 0], port));
@@ -819,6 +931,115 @@ async fn admin_page() -> Html<&'static str> {
 
 async fn home_page() -> Html<&'static str> {
     Html(include_str!("home.html"))
+}
+
+async fn create_itinerary_session(State(state): State<AppState>) -> Json<ItinerarySessionCreated> {
+    Json(ItinerarySessionCreated {
+        token: state.itinerary_sessions.create().await,
+        expires_in_seconds: ITINERARY_SESSION_TTL.as_secs(),
+    })
+}
+
+async fn itinerary_session_status(
+    State(state): State<AppState>,
+    AxumPath(token): AxumPath<String>,
+) -> Result<Json<ItinerarySessionStatus>, StatusCode> {
+    let itinerary = state
+        .itinerary_sessions
+        .itinerary(&token)
+        .await
+        .map_err(|_| StatusCode::NOT_FOUND)?;
+    Ok(Json(ItinerarySessionStatus {
+        status: if itinerary.is_some() {
+            "submitted"
+        } else {
+            "pending"
+        },
+        itinerary,
+    }))
+}
+
+async fn itinerary_form(
+    State(state): State<AppState>,
+    AxumPath(token): AxumPath<String>,
+) -> Response {
+    match state.itinerary_sessions.itinerary(&token).await {
+        Ok(Some(_)) => itinerary_success_page().into_response(),
+        Ok(None) => Html(itinerary_form_page(&token)).into_response(),
+        Err(_) => (
+            StatusCode::NOT_FOUND,
+            Html(itinerary_error_page(
+                "This itinerary link has expired. Start a new QR session on the TV.",
+            )),
+        )
+            .into_response(),
+    }
+}
+
+async fn submit_itinerary_form(
+    State(state): State<AppState>,
+    AxumPath(token): AxumPath<String>,
+    Form(form): Form<ItineraryForm>,
+) -> Response {
+    match state
+        .itinerary_sessions
+        .submit(&token, form.itinerary)
+        .await
+    {
+        Ok(()) => itinerary_success_page().into_response(),
+        Err(SessionError::Blank) => (
+            StatusCode::BAD_REQUEST,
+            Html(itinerary_error_page(
+                "Enter your itinerary before submitting.",
+            )),
+        )
+            .into_response(),
+        Err(SessionError::TooLong) => (
+            StatusCode::PAYLOAD_TOO_LARGE,
+            Html(itinerary_error_page("The itinerary is too long.")),
+        )
+            .into_response(),
+        Err(SessionError::NotFound) => (
+            StatusCode::NOT_FOUND,
+            Html(itinerary_error_page(
+                "This itinerary link has expired. Start a new QR session on the TV.",
+            )),
+        )
+            .into_response(),
+    }
+}
+
+fn itinerary_form_page(token: &str) -> String {
+    format!(
+        r#"<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Send itinerary to TV</title><style>
+body{{font-family:system-ui,sans-serif;max-width:42rem;margin:0 auto;padding:2rem 1rem;color:#172033;background:#f6f8fc}}
+main{{background:white;border-radius:1rem;padding:1.5rem;box-shadow:0 8px 30px #20305018}}
+textarea{{box-sizing:border-box;width:100%;min-height:16rem;padding:1rem;border:1px solid #aab4c6;border-radius:.75rem;font:inherit;resize:vertical}}
+button{{width:100%;margin-top:1rem;padding:.9rem;border:0;border-radius:.75rem;background:#3157d5;color:white;font:inherit;font-weight:700}}
+p{{line-height:1.5;color:#4f5d73}}
+</style></head><body><main><h1>Travel itinerary</h1><p>Paste or type the places, dates, reservations, and plans you want used for your TV quiz.</p>
+<form method="post" action="/trip/itinerary/{token}"><textarea name="itinerary" maxlength="{MAX_ITINERARY_CHARS}" required autofocus placeholder="Example: Paris, September 10–12. Train to Lyon on September 12..."></textarea><button type="submit">Send to TV</button></form>
+</main></body></html>"#
+    )
+}
+
+fn itinerary_success_page() -> Html<String> {
+    Html(itinerary_message_page(
+        "Itinerary sent",
+        "You can return to the TV. This page may be closed.",
+    ))
+}
+
+fn itinerary_error_page(message: &str) -> String {
+    itinerary_message_page("Unable to send itinerary", message)
+}
+
+fn itinerary_message_page(title: &str, message: &str) -> String {
+    format!(
+        r#"<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{title}</title><style>body{{font-family:system-ui,sans-serif;max-width:38rem;margin:0 auto;padding:3rem 1rem;color:#172033;background:#f6f8fc}}main{{background:white;border-radius:1rem;padding:2rem;box-shadow:0 8px 30px #20305018}}p{{line-height:1.5;color:#4f5d73}}</style></head><body><main><h1>{title}</h1><p>{message}</p></main></body></html>"#
+    )
 }
 
 async fn privacy_page() -> Html<&'static str> {
@@ -1598,6 +1819,52 @@ mod tests {
         assert_eq!(
             html_to_text("<h1>Paris &amp; Lyon</h1><p>Train at 9:00.</p>"),
             "Paris & Lyon Train at 9:00."
+        );
+    }
+
+    #[tokio::test]
+    async fn itinerary_session_accepts_a_phone_submission() {
+        let sessions = ItinerarySessionStore::new(Duration::from_secs(60));
+        let token = sessions.create().await;
+
+        assert_eq!(sessions.itinerary(&token).await.unwrap(), None);
+        sessions
+            .submit(&token, "Paris for two nights, then Lyon".into())
+            .await
+            .unwrap();
+
+        assert_eq!(
+            sessions.itinerary(&token).await.unwrap().as_deref(),
+            Some("Paris for two nights, then Lyon")
+        );
+    }
+
+    #[tokio::test]
+    async fn itinerary_session_rejects_blank_and_oversized_submissions() {
+        let sessions = ItinerarySessionStore::new(Duration::from_secs(60));
+        let token = sessions.create().await;
+
+        assert_eq!(
+            sessions.submit(&token, "   ".into()).await,
+            Err(SessionError::Blank)
+        );
+        assert_eq!(
+            sessions
+                .submit(&token, "x".repeat(MAX_ITINERARY_CHARS + 1))
+                .await,
+            Err(SessionError::TooLong)
+        );
+    }
+
+    #[tokio::test]
+    async fn itinerary_session_expires() {
+        let sessions = ItinerarySessionStore::new(Duration::from_millis(1));
+        let token = sessions.create().await;
+        std::thread::sleep(Duration::from_millis(5));
+
+        assert_eq!(
+            sessions.itinerary(&token).await,
+            Err(SessionError::NotFound)
         );
     }
 }

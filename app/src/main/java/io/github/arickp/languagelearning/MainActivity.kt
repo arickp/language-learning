@@ -1,6 +1,7 @@
 package io.github.arickp.languagelearning
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -17,8 +18,11 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -26,12 +30,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
@@ -47,6 +53,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 import kotlin.math.roundToInt
 
 private val Cream = Color(0xFFFFF9F2)
@@ -666,10 +673,66 @@ private fun TripQuizScreen(
 ) {
     val context = LocalContext.current
     val preferences = remember { context.getSharedPreferences("language_learning_settings", 0) }
+    val isTv = (LocalConfiguration.current.uiMode and Configuration.UI_MODE_TYPE_MASK) ==
+        Configuration.UI_MODE_TYPE_TELEVISION
     var source by remember { mutableStateOf(preferences.getString("trip_quiz_source", "").orEmpty()) }
     var loading by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
+    var pairingSession by remember { mutableStateOf<ItineraryPairingSession?>(null) }
+    var pairingBusy by remember { mutableStateOf(false) }
+    var pairingMessage by remember { mutableStateOf<String?>(null) }
+    var pairingAttempt by remember { mutableIntStateOf(0) }
+    var showRemoteInput by remember(isTv) {
+        mutableStateOf(showRemoteItineraryInputByDefault(isTv))
+    }
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(isTv, pairingAttempt) {
+        if (!isTv || pairingSession != null) return@LaunchedEffect
+        pairingBusy = true
+        pairingMessage = null
+        error = null
+        runCatching { TripItineraryPairing.createSession() }
+            .onSuccess { pairingSession = it }
+            .onFailure { error = it.message ?: "Could not create an itinerary QR session." }
+        pairingBusy = false
+    }
+
+    LaunchedEffect(pairingSession?.token) {
+        val session = pairingSession ?: return@LaunchedEffect
+        while (pairingSession?.token == session.token) {
+            delay(2_000)
+            val result = runCatching { TripItineraryPairing.pollItinerary(session.token) }
+            val failure = result.exceptionOrNull()
+            if (failure != null) {
+                pairingSession = null
+                error = failure.message ?: "Could not receive the itinerary."
+                break
+            }
+            val itinerary = result.getOrNull()
+            if (shouldAutoStartTripQuiz(itinerary)) {
+                val receivedItinerary = itinerary.orEmpty()
+                source = receivedItinerary
+                preferences.edit().putString("trip_quiz_source", receivedItinerary).apply()
+                pairingMessage = "Itinerary received. Building your trip quiz…"
+                error = null
+                loading = true
+                TripQuizGenerator.generate(
+                    source = receivedItinerary,
+                    variant = variant,
+                    questionCount = questionCount,
+                    allowExplicit = allowExplicitContent
+                ).fold(
+                    onSuccess = onStart,
+                    onFailure = {
+                        error = it.message ?: "Could not generate the trip quiz."
+                        loading = false
+                    }
+                )
+                break
+            }
+        }
+    }
 
     Column(
         Modifier
@@ -696,32 +759,105 @@ private fun TripQuizScreen(
                 color = Ink.copy(alpha = .78f)
             )
             Spacer(Modifier.height(20.dp))
-            OutlinedTextField(
-                value = source,
-                onValueChange = {
-                    source = it
-                    error = null
-                    preferences.edit().putString("trip_quiz_source", it).apply()
-                },
-                label = { Text("Itinerary text or public link") },
-                placeholder = {
-                    Text("Flight, hotel, cities, activities…\nor https://docs.google.com/document/d/…")
-                },
-                minLines = 8,
-                maxLines = 16,
-                enabled = !loading,
-                isError = error != null,
-                modifier = Modifier.fillMaxWidth()
-            )
-            if (source.isNotEmpty() && !loading) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                    TextButton(
-                        onClick = {
-                            source = ""
-                            error = null
-                            preferences.edit().remove("trip_quiz_source").apply()
+            if (isTv) {
+                val session = pairingSession
+                if (session == null) {
+                    Row(
+                        Modifier.fillMaxWidth().padding(vertical = 24.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        if (pairingBusy) {
+                            CircularProgressIndicator(Modifier.size(26.dp))
+                            Spacer(Modifier.width(10.dp))
+                            Text("Creating QR code…", fontWeight = FontWeight.Bold)
+                        } else {
+                            TextButton(onClick = { pairingAttempt++ }) { Text("Retry QR code") }
                         }
-                    ) { Text("Clear") }
+                    }
+                } else {
+                    val formUrl = remember(session.token) {
+                        TripItineraryPairing.formUrl(BuildConfig.SERVER_URL, session.token)
+                    }
+                    val qrCode = remember(formUrl) {
+                        TripItineraryPairing.qrBitmap(formUrl).asImageBitmap()
+                    }
+                    Column(
+                        Modifier
+                            .fillMaxWidth()
+                            .background(Color.White, RoundedCornerShape(18.dp))
+                            .padding(18.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            "Scan with your phone",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Ink
+                        )
+                        Spacer(Modifier.height(10.dp))
+                        Image(
+                            bitmap = qrCode,
+                            contentDescription = "QR code for entering the travel itinerary",
+                            modifier = Modifier.size(250.dp),
+                            contentScale = ContentScale.Fit
+                        )
+                        Spacer(Modifier.height(8.dp))
+                        Text(
+                            "The link expires in ${session.expiresInSeconds / 60} minutes. This screen updates after you submit.",
+                            textAlign = TextAlign.Center,
+                            color = Ink.copy(alpha = .72f)
+                        )
+                    }
+                }
+                pairingMessage?.let {
+                    Text(
+                        it,
+                        color = Green,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 10.dp)
+                    )
+                }
+                TextButton(
+                    onClick = { showRemoteInput = !showRemoteInput },
+                    enabled = !loading,
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(
+                        if (showRemoteInput) "Hide TV remote entry" else "Or enter using my TV remote…",
+                        fontSize = 13.sp
+                    )
+                }
+                Spacer(Modifier.height(8.dp))
+            }
+            if (showRemoteInput) {
+                OutlinedTextField(
+                    value = source,
+                    onValueChange = {
+                        source = it
+                        error = null
+                        preferences.edit().putString("trip_quiz_source", it).apply()
+                    },
+                    label = { Text("Itinerary text or public link") },
+                    placeholder = {
+                        Text("Flight, hotel, cities, activities…\nor https://docs.google.com/document/d/…")
+                    },
+                    minLines = 8,
+                    maxLines = 16,
+                    enabled = !loading,
+                    isError = error != null,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                if (source.isNotEmpty() && !loading) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                        TextButton(
+                            onClick = {
+                                source = ""
+                                error = null
+                                preferences.edit().remove("trip_quiz_source").apply()
+                            }
+                        ) { Text("Clear") }
+                    }
                 }
             }
             if (error != null) {
@@ -973,6 +1109,9 @@ private fun QuizScreen(
 ) {
     var autoAdvanceThisAnswer by remember(item) { mutableStateOf(false) }
     val autoAdvanceProgress = remember(item) { Animatable(1f) }
+    val firstAnswerFocusRequester = remember(item) { FocusRequester() }
+    val nextButtonFocusRequester = remember(item) { FocusRequester() }
+    val feedbackBringIntoViewRequester = remember(item) { BringIntoViewRequester() }
     val questionScrollState = rememberScrollState()
     val context = LocalContext.current
     val pronunciationScope = rememberCoroutineScope()
@@ -992,9 +1131,26 @@ private fun QuizScreen(
     val options = remember(item) {
         (categoryPool.filter { it != item.answer }.shuffled().take(3) + item.answer).shuffled()
     }
+    // Compact layout on Android TV: shrink chrome so all answer options fit without scrolling.
+    val isTv = (LocalConfiguration.current.uiMode and Configuration.UI_MODE_TYPE_MASK) ==
+        Configuration.UI_MODE_TYPE_TELEVISION
 
     LaunchedEffect(item) {
         questionScrollState.scrollTo(0)
+        if (initialQuizAnswerIndex(isTv, options.size) != null) {
+            runCatching { firstAnswerFocusRequester.requestFocus() }
+        }
+    }
+
+    LaunchedEffect(chosen) {
+        if (chosen != null) {
+            if (shouldAutoRevealQuizFeedback(isTv, hasAnswer = true)) {
+                delay(250)
+                feedbackBringIntoViewRequester.bringIntoView()
+            }
+            // Move D-pad/remote focus to "Next question" so a single OK press advances (Android TV).
+            runCatching { nextButtonFocusRequester.requestFocus() }
+        }
     }
 
     LaunchedEffect(chosen, autoAdvanceThisAnswer) {
@@ -1010,35 +1166,244 @@ private fun QuizScreen(
         }
     }
 
+    if (quizPaneCount(isTv) == 2) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom))
+                .padding(12.dp)
+                .widthIn(max = 1100.dp)
+        ) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onQuit) { Text("← Quit") }
+                LinearProgressIndicator(
+                    progress = { number.toFloat() / total },
+                    modifier = Modifier.weight(1f).height(6.dp),
+                    color = Gold,
+                    trackColor = Ink.copy(alpha = .1f)
+                )
+                Spacer(Modifier.width(12.dp))
+                Text("$number / $total", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Spacer(Modifier.width(16.dp))
+                Text(
+                    "${item.category.label.uppercase()} · ${item.difficulty.label.uppercase()}",
+                    color = Green,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.sp,
+                    fontSize = 12.sp
+                )
+                Spacer(Modifier.width(16.dp))
+                Text("Score $score   🔥 $streak", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            }
+            Spacer(Modifier.height(8.dp))
+            Row(
+                Modifier.fillMaxWidth().weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Card(
+                    modifier = Modifier.weight(1.8f).fillMaxHeight(),
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                ) {
+                    Column(
+                        Modifier.fillMaxSize().padding(14.dp).verticalScroll(questionScrollState),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            item.prompt,
+                            fontSize = 24.sp,
+                            lineHeight = 30.sp,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.focusable()
+                        )
+                        item.translation?.let { translation ->
+                            Spacer(Modifier.height(6.dp))
+                            Text(
+                                translation,
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = Ink.copy(alpha = .68f),
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                        AnimatedVisibility(revealedHintCount > 0) {
+                            Column(
+                                Modifier.fillMaxWidth().padding(top = 8.dp)
+                                    .background(Gold.copy(alpha = .13f), RoundedCornerShape(12.dp))
+                                    .padding(10.dp)
+                            ) {
+                                item.hints.take(revealedHintCount).forEachIndexed { hintIndex, hint ->
+                                    Text(
+                                        "Hint ${hintIndex + 1}: $hint",
+                                        fontSize = 15.sp,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
+                            }
+                        }
+                        Spacer(Modifier.height(10.dp))
+                        options.forEachIndexed { index, option ->
+                            AnswerOptionButton(
+                                option = option,
+                                correctAnswer = item.answer,
+                                chosen = chosen,
+                                answerMarker = answerMarker(item, option),
+                                modifier = if (index == initialQuizAnswerIndex(isTv, options.size)) {
+                                    Modifier.focusRequester(firstAnswerFocusRequester)
+                                } else {
+                                    Modifier
+                                },
+                                onClick = {
+                                    if (chosen == null) {
+                                        onChoose(option)
+                                        autoAdvanceThisAnswer = true
+                                        onAnswer(option == item.answer)
+                                    }
+                                }
+                            )
+                        }
+                    }
+                }
+                Card(
+                    modifier = Modifier.weight(1f).fillMaxHeight(),
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                ) {
+                    Column(Modifier.fillMaxSize().padding(16.dp)) {
+                        Column(
+                            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            if (chosen == null) {
+                                Text(
+                                    "Choose an answer",
+                                    color = Ink.copy(alpha = .58f),
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.SemiBold,
+                                    textAlign = TextAlign.Center
+                                )
+                            } else {
+                                val success = if (item.language == Language.GERMAN) {
+                                    "Richtig! · Right ✓"
+                                } else {
+                                    "Correct! ✓"
+                                }
+                                Text(
+                                    if (chosen == item.answer) success else "Not quite",
+                                    color = if (chosen == item.answer) Green else Red,
+                                    fontSize = 26.sp,
+                                    lineHeight = 32.sp,
+                                    fontWeight = FontWeight.Black,
+                                    textAlign = TextAlign.Center
+                                )
+                                Spacer(Modifier.height(10.dp))
+                                Text(item.explanation, fontSize = 16.sp, textAlign = TextAlign.Center)
+                                if (autoAdvanceThisAnswer) {
+                                    Spacer(Modifier.height(14.dp))
+                                    LinearProgressIndicator(
+                                        progress = { autoAdvanceProgress.value },
+                                        modifier = Modifier.fillMaxWidth().height(8.dp),
+                                        color = Gold,
+                                        trackColor = Ink.copy(alpha = .10f)
+                                    )
+                                }
+                            }
+                        }
+                        Spacer(Modifier.height(10.dp))
+                        if (chosen == null) {
+                            if (item.hints.isNotEmpty()) {
+                                FocusActionButton(
+                                    label = if (revealedHintCount < item.hints.size) "Give me a hint" else "All hints shown",
+                                    onClick = onRevealHint,
+                                    enabled = revealedHintCount < item.hints.size,
+                                    modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                                    primary = false
+                                )
+                                Spacer(Modifier.height(8.dp))
+                            }
+                            FocusActionButton(
+                                label = if (number == total) "Skip & finish" else "Skip",
+                                onClick = onNext,
+                                modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp),
+                                primary = false
+                            )
+                        } else {
+                            FocusActionButton(
+                                label = if (number == total) "See results" else "Next question →",
+                                onClick = onNext,
+                                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
+                                    .focusRequester(nextButtonFocusRequester),
+                                primary = true
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        return
+    }
+
     Column(
         Modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom))
-            .padding(24.dp)
+            .padding(if (isTv) 12.dp else 24.dp)
             .widthIn(max = 1100.dp)
     ) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            TextButton(onClick = onQuit) { Text("← Quit") }
-            LinearProgressIndicator(
-                progress = { number.toFloat() / total },
-                modifier = Modifier.weight(1f).height(8.dp), color = Gold, trackColor = Ink.copy(alpha = .1f)
-            )
-            Spacer(Modifier.width(16.dp))
-            Text("$number / $total", fontWeight = FontWeight.Bold)
-        }
-        Row(Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text("${item.category.label.uppercase()} · ${item.difficulty.label.uppercase()}", color = Green, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
-            Text("Score $score   🔥 $streak", fontWeight = FontWeight.Bold)
+        if (isTv) {
+            // Single compact header row on TV: quit, progress, count, category, score.
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onQuit) { Text("← Quit") }
+                LinearProgressIndicator(
+                    progress = { number.toFloat() / total },
+                    modifier = Modifier.weight(1f).height(6.dp), color = Gold, trackColor = Ink.copy(alpha = .1f)
+                )
+                Spacer(Modifier.width(12.dp))
+                Text("$number / $total", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+                Spacer(Modifier.width(16.dp))
+                Text(
+                    "${item.category.label.uppercase()} · ${item.difficulty.label.uppercase()}",
+                    color = Green, fontWeight = FontWeight.Bold, letterSpacing = 1.sp, fontSize = 12.sp
+                )
+                Spacer(Modifier.width(16.dp))
+                Text("Score $score   🔥 $streak", fontWeight = FontWeight.Bold, fontSize = 14.sp)
+            }
+        } else {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                TextButton(onClick = onQuit) { Text("← Quit") }
+                LinearProgressIndicator(
+                    progress = { number.toFloat() / total },
+                    modifier = Modifier.weight(1f).height(8.dp), color = Gold, trackColor = Ink.copy(alpha = .1f)
+                )
+                Spacer(Modifier.width(16.dp))
+                Text("$number / $total", fontWeight = FontWeight.Bold)
+            }
+            Row(Modifier.fillMaxWidth().padding(vertical = 16.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("${item.category.label.uppercase()} · ${item.difficulty.label.uppercase()}", color = Green, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                Text("Score $score   🔥 $streak", fontWeight = FontWeight.Bold)
+            }
         }
         Card(
-            Modifier.fillMaxWidth().weight(1f), shape = RoundedCornerShape(28.dp),
+            Modifier.fillMaxWidth().weight(1f), shape = RoundedCornerShape(if (isTv) 20.dp else 28.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
             Column(
-                Modifier.fillMaxSize().padding(28.dp).verticalScroll(questionScrollState),
+                Modifier.fillMaxSize().padding(if (isTv) 14.dp else 28.dp).verticalScroll(questionScrollState),
                 horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
             ) {
-                Text(item.prompt, fontSize = 30.sp, lineHeight = 38.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+                Text(
+                    item.prompt,
+                    fontSize = if (isTv) 24.sp else 30.sp,
+                    lineHeight = if (isTv) 30.sp else 38.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    // A focus target above the answers lets TV remotes navigate back up and
+                    // causes the scroll container to bring the question into view again.
+                    modifier = Modifier.focusable(enabled = isTv)
+                )
                 item.translation?.let { translation ->
                     Spacer(Modifier.height(8.dp))
                     Text(
@@ -1086,7 +1451,12 @@ private fun QuizScreen(
                     )
                 }
                 AnimatedVisibility(chosen != null) {
-                    Column(Modifier.padding(top = 18.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        Modifier
+                            .bringIntoViewRequester(feedbackBringIntoViewRequester)
+                            .padding(top = 18.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
                         val success = if (item.language == Language.GERMAN) {
                             "Richtig! · Correct! ✓"
                         } else {
@@ -1316,7 +1686,10 @@ private fun QuizScreen(
                 label = if (number == total) "See results" else "Next question →",
                 onClick = onNext,
                 enabled = chosen != null,
-                modifier = Modifier.weight(1f).heightIn(min = 60.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .heightIn(min = 60.dp)
+                    .focusRequester(nextButtonFocusRequester),
                 primary = true
             )
         }
@@ -1380,6 +1753,10 @@ private fun answerChoicesFor(item: QuizItem, allowExplicitContent: Boolean): Lis
         answer in listOf("beim", "vom", "zum", "zur") ->
             listOf("beim", "vom", "zum", "zur")
 
+        // "Choose the article" is about noun gender — keep it to the three nominative articles.
+        item.language == Language.GERMAN && item.category == QuizCategory.ARTICLES &&
+            answer in listOf("der", "die", "das") -> listOf("der", "die", "das")
+
         item.language == Language.GERMAN && answer in
             listOf("den", "dem", "die", "der", "das", "dein", "einen", "deinem") ->
             listOf("der", "die", "das", "den", "dem", "einen", "dein", "deinem")
@@ -1420,6 +1797,7 @@ private fun AnswerOptionButton(
     correctAnswer: String,
     chosen: String?,
     answerMarker: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     var focused by remember { mutableStateOf(false) }
@@ -1441,7 +1819,7 @@ private fun AnswerOptionButton(
 
     OutlinedButton(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 6.dp)
             .heightIn(min = 58.dp)
@@ -1466,6 +1844,15 @@ private fun AnswerOptionButton(
 private const val GENERIC_ANSWER_MARKER = "💬"
 
 private fun answerMarker(item: QuizItem, option: String): String {
+    // German gender colors: blue = masculine (der), red = feminine (die), green = neuter (das).
+    if (item.language == Language.GERMAN && item.category == QuizCategory.ARTICLES) {
+        return when (option) {
+            "der" -> "🔵"
+            "die" -> "🔴"
+            "das" -> "🟢"
+            else -> ""
+        }
+    }
     if (item.category != QuizCategory.VOCABULARY) return ""
     // Generated questions carry an emoji for the correct answer only, which would give it away.
     if (item.distractors.isNotEmpty()) return ""
