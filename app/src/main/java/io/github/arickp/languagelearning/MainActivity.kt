@@ -1753,6 +1753,24 @@ private fun answerChoicesFor(item: QuizItem, allowExplicitContent: Boolean): Lis
         answer in listOf("beim", "vom", "zum", "zur") ->
             listOf("beim", "vom", "zum", "zur")
 
+        answer in listOf("nach", "zu", "in", "an", "um") ->
+            listOf("nach", "zu", "in", "an", "um")
+
+        answer in listOf("dieser", "diese", "dieses") ->
+            listOf("dieser", "diese", "dieses")
+
+        answer == "DOGFU" ->
+            listOf("DOGFU", "WAGEN", "SDOP", "CANS")
+
+        answer in listOf("in order to", "because", "instead of", "without") ->
+            listOf("in order to", "because", "instead of", "without")
+
+        answer in listOf("um … zu", "zu … um", "für zu", "damit") ->
+            listOf("um … zu", "zu … um", "für zu", "damit")
+
+        answer in listOf("anzurufen", "zu anrufen", "anrufen zu", "um anrufen") ->
+            listOf("anzurufen", "zu anrufen", "anrufen zu", "um anrufen")
+
         // "Choose the article" is about noun gender — keep it to the three nominative articles.
         item.language == Language.GERMAN && item.category == QuizCategory.ARTICLES &&
             answer in listOf("der", "die", "das") -> listOf("der", "die", "das")
