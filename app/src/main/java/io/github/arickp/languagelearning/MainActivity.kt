@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
+import java.time.LocalDate
 import kotlin.math.roundToInt
 
 private val Cream = Color(0xFFFFF9F2)
@@ -181,11 +182,8 @@ private fun QuizGame() {
             }
         )
     }
-    var selectedOrder by remember {
-        mutableStateOf(
-            runCatching { QuestionOrder.valueOf(preferences.getString("question_order", QuestionOrder.MIXED.name)!!) }
-                .getOrDefault(QuestionOrder.MIXED)
-        )
+    var quizSinceDate by remember {
+        mutableStateOf(parseAddedOn(preferences.getString("quiz_since_date", null)))
     }
     var selectedQuestionCount by remember {
         mutableIntStateOf(preferences.getInt("question_count", 10).coerceIn(5, 100))
@@ -221,10 +219,11 @@ private fun QuizGame() {
             it.language == language &&
                 it.appliesTo(variant) &&
                 (category == null || it.category == category) &&
-                (allowExplicitContent || !it.explicit)
+                (allowExplicitContent || !it.explicit) &&
+                (quizSinceDate == null || addedOnOrAfter(it, quizSinceDate!!))
         }
         val difficulty = selectedDifficulty
-        val pool = if (selectedOrder == QuestionOrder.NEWEST || difficulty == null) {
+        val pool = if (difficulty == null) {
             matching
         } else {
             val exactPool = matching.filter { it.difficulty == difficulty }
@@ -239,12 +238,13 @@ private fun QuizGame() {
         }
         if (pool.size < selectedQuestionCount) {
             val label = category?.label?.lowercase() ?: "mixed"
+            val sinceNote = quizSinceDate?.let { " added since ${formatAddedSinceLabel(it)}" }.orEmpty()
             startError =
-                "Only ${pool.size} $label questions are available for ${variant.label}; choose ${pool.size.coerceAtLeast(5)} or fewer."
+                "Only ${pool.size} $label questions$sinceNote are available for ${variant.label}; choose ${pool.size.coerceAtLeast(5)} or fewer, or pick an earlier date."
             return
         }
         val recentKeySet = recentQuestionKeys.toSet()
-        questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet, selectedOrder)
+        questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet)
             .take(selectedQuestionCount)
         if (questions.isEmpty()) {
             val label = category?.label?.lowercase() ?: "mixed"
@@ -292,10 +292,19 @@ private fun QuizGame() {
                         .putString("difficulty", difficulty?.name ?: MIXED_DIFFICULTY)
                         .apply()
                 },
-                order = selectedOrder,
-                onOrderChange = { order ->
-                    selectedOrder = order
-                    preferences.edit().putString("question_order", order.name).apply()
+                sinceDate = quizSinceDate,
+                newestAddedOn = newestAddedOn(
+                    QuizData.items.filter {
+                        it.language == selectedVariant.language &&
+                            it.appliesTo(selectedVariant) &&
+                            (allowExplicitContent || !it.explicit)
+                    }
+                ),
+                onSinceDateChange = { date ->
+                    quizSinceDate = date
+                    preferences.edit()
+                        .putString("quiz_since_date", date?.toString().orEmpty())
+                        .apply()
                 },
                 questionCount = selectedQuestionCount,
                 onQuestionCountChange = { count ->
@@ -437,23 +446,8 @@ private fun QuizGame() {
 private fun orderedQuestions(
     pool: List<QuizItem>,
     recentQuestionKeys: List<String>,
-    recentKeySet: Set<String>,
-    order: QuestionOrder
+    recentKeySet: Set<String>
 ): List<QuizItem> {
-    if (order == QuestionOrder.NEWEST) {
-        return pool
-            .groupBy { it.dateAdded.orEmpty() }
-            .toList()
-            .sortedByDescending { it.first }
-            .flatMap { (_, items) ->
-                val notRecentlySeen = items.filter { it.historyKey() !in recentKeySet }.shuffled()
-                val recentlySeen = items
-                    .filter { it.historyKey() in recentKeySet }
-                    .shuffled()
-                    .sortedBy { recentQuestionKeys.lastIndexOf(it.historyKey()) }
-                notRecentlySeen + recentlySeen
-            }
-    }
     val notRecentlySeen = pool.filter { it.historyKey() !in recentKeySet }.shuffled()
     val recentlySeen = pool
         .filter { it.historyKey() in recentKeySet }
@@ -464,14 +458,53 @@ private fun orderedQuestions(
 
 private fun QuizItem.historyKey(): String = "${language.name}|${category.name}|$prompt"
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AddedSinceDatePickerDialog(
+    sinceDate: LocalDate?,
+    onDismiss: () -> Unit,
+    onConfirm: (LocalDate?) -> Unit
+) {
+    val pickerState = rememberDatePickerState(
+        initialSelectedDateMillis = sinceDate?.let { utcMillisFromLocalDate(it) }
+            ?: utcMillisFromLocalDate(LocalDate.now())
+    )
+    DatePickerDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    val selected = pickerState.selectedDateMillis?.let { localDateFromUtcMillis(it) }
+                    onConfirm(selected)
+                }
+            ) {
+                Text("OK")
+            }
+        },
+        dismissButton = {
+            Row {
+                TextButton(onClick = { onConfirm(null) }) {
+                    Text("Any date")
+                }
+                TextButton(onClick = onDismiss) {
+                    Text("Cancel")
+                }
+            }
+        }
+    ) {
+        DatePicker(state = pickerState)
+    }
+}
+
 @Composable
 private fun HomeScreen(
     variant: LanguageVariant,
     onVariantChange: (LanguageVariant) -> Unit,
     difficulty: Difficulty?,
     onDifficultyChange: (Difficulty?) -> Unit,
-    order: QuestionOrder,
-    onOrderChange: (QuestionOrder) -> Unit,
+    sinceDate: LocalDate?,
+    newestAddedOn: LocalDate?,
+    onSinceDateChange: (LocalDate?) -> Unit,
     questionCount: Int,
     onQuestionCountChange: (Int) -> Unit,
     onStart: (LanguageVariant, QuizCategory?) -> Unit,
@@ -481,7 +514,8 @@ private fun HomeScreen(
 ) {
     var languageMenuExpanded by remember { mutableStateOf(false) }
     var difficultyMenuExpanded by remember { mutableStateOf(false) }
-    var orderMenuExpanded by remember { mutableStateOf(false) }
+    var showSincePicker by remember { mutableStateOf(false) }
+    val newestAgo = relativeAddedAgo(newestAddedOn)
     Column(
         Modifier.fillMaxSize().padding(32.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -494,10 +528,9 @@ private fun HomeScreen(
         Spacer(Modifier.height(12.dp))
         Text("Train your ${variant.language.label}", fontSize = 42.sp, fontWeight = FontWeight.Bold, color = Ink, textAlign = TextAlign.Center)
         Text(
-            if (order == QuestionOrder.NEWEST) {
-                "$questionCount questions. Instant feedback. Newest words first."
-            } else {
-                "$questionCount questions. Instant feedback. A fresh mix every time."
+            buildString {
+                append("$questionCount questions. Instant feedback.")
+                newestAgo?.let { append(" Newest question added $it.") }
             },
             fontSize = 18.sp,
             color = Ink.copy(alpha = .7f),
@@ -574,37 +607,37 @@ private fun HomeScreen(
             }
         }
         Spacer(Modifier.height(14.dp))
-        Box(Modifier.fillMaxWidth()) {
-            FocusActionButton(
-                label = "Order: ${order.label}  ▾",
-                onClick = { orderMenuExpanded = true },
-                modifier = Modifier.fillMaxWidth().heightIn(min = 60.dp),
-                primary = false
+        Text(
+            "Only quiz me on questions added since…",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Ink
+        )
+        Spacer(Modifier.height(8.dp))
+        FocusActionButton(
+            label = "${formatAddedSinceLabel(sinceDate)}  ▾",
+            onClick = { showSincePicker = true },
+            modifier = Modifier.fillMaxWidth().heightIn(min = 60.dp),
+            primary = false
+        )
+        if (newestAgo != null) {
+            Spacer(Modifier.height(6.dp))
+            Text(
+                "Newest question: $newestAgo",
+                fontSize = 14.sp,
+                color = Ink.copy(alpha = .66f),
+                textAlign = TextAlign.Center
             )
-            DropdownMenu(
-                expanded = orderMenuExpanded,
-                onDismissRequest = { orderMenuExpanded = false },
-                modifier = Modifier.widthIn(min = 320.dp, max = 620.dp)
-            ) {
-                QuestionOrder.entries.forEach { option ->
-                    DropdownMenuItem(
-                        text = {
-                            Column {
-                                Text(
-                                    "${option.label}${if (option == order) "  ✓" else ""}",
-                                    fontSize = 17.sp,
-                                    fontWeight = if (option == order) FontWeight.Black else FontWeight.Bold
-                                )
-                                Text(option.description, fontSize = 13.sp, color = Ink.copy(alpha = .66f))
-                            }
-                        },
-                        onClick = {
-                            onOrderChange(option)
-                            orderMenuExpanded = false
-                        }
-                    )
+        }
+        if (showSincePicker) {
+            AddedSinceDatePickerDialog(
+                sinceDate = sinceDate,
+                onDismiss = { showSincePicker = false },
+                onConfirm = { date ->
+                    onSinceDateChange(date)
+                    showSincePicker = false
                 }
-            }
+            )
         }
         Spacer(Modifier.height(18.dp))
         Text(
@@ -1749,6 +1782,27 @@ private fun answerChoicesFor(item: QuizItem, allowExplicitContent: Boolean): Lis
 
         answer in listOf("mir", "dir", "ihm", "ihr", "ihnen", "Ihnen") ->
             listOf("mir", "dir", "ihm", "ihr", "uns", "euch", "ihnen")
+
+        answer in listOf("you all", "to her", "her / their", "your (formal)") ->
+            listOf("you all", "to her", "her / their", "your (formal)")
+
+        answer in listOf("mein", "dein", "sein", "ihr", "unser", "euer") ->
+            listOf("mein", "dein", "sein", "ihr", "unser", "euer")
+
+        answer in listOf("deinen", "deine", "deinem", "deiner", "dein") ->
+            listOf("dein", "deine", "deinen", "deinem", "deiner")
+
+        answer in listOf("meinen", "meine", "meinem", "meiner") ->
+            listOf("mein", "meine", "meinen", "meinem", "meiner")
+
+        answer in listOf("ihren", "ihre", "ihrem", "ihrer") ->
+            listOf("ihr", "ihre", "ihren", "ihrem", "ihrer")
+
+        answer in listOf("einen", "eine", "einem", "einer", "ein") ->
+            listOf("ein", "eine", "einen", "einem", "einer")
+
+        answer in listOf("wichtiger", "wichtige", "wichtiges") ->
+            listOf("wichtiger", "wichtige", "wichtiges")
 
         answer in listOf("beim", "vom", "zum", "zur") ->
             listOf("beim", "vom", "zum", "zur")
