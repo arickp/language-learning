@@ -236,21 +236,19 @@ private fun QuizGame() {
                 exactPool + supplementalPool.take(selectedQuestionCount - exactPool.size)
             }
         }
-        if (pool.size < selectedQuestionCount) {
+        if (pool.isEmpty() || pool.size < selectedQuestionCount) {
             val label = category?.label?.lowercase() ?: "mixed"
             val sinceNote = quizSinceDate?.let { " added since ${formatAddedSinceLabel(it)}" }.orEmpty()
-            startError =
-                "Only ${pool.size} $label questions$sinceNote are available for ${variant.label}; choose ${pool.size.coerceAtLeast(5)} or fewer, or pick an earlier date."
+            startError = if (pool.isEmpty()) {
+                "No $label questions$sinceNote for ${variant.label}. Pick an earlier date, or choose Any date."
+            } else {
+                "Only ${pool.size} $label questions$sinceNote are available for ${variant.label}. Choose ${pool.size} or fewer questions, or pick an earlier date."
+            }
             return
         }
         val recentKeySet = recentQuestionKeys.toSet()
         questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet)
             .take(selectedQuestionCount)
-        if (questions.isEmpty()) {
-            val label = category?.label?.lowercase() ?: "mixed"
-            startError = "No $label questions for ${variant.label} · ${selectedDifficulty.selectionLabel}."
-            return
-        }
         startError = null
         recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() })
             .takeLast(maxOf(30, selectedQuestionCount * 3))
@@ -457,6 +455,40 @@ private fun orderedQuestions(
 }
 
 private fun QuizItem.historyKey(): String = "${language.name}|${category.name}|$prompt"
+
+/** English gloss under the prompt; grammar uses translation for post-answer examples instead. */
+private fun QuizItem.promptTranslation(): String? =
+    translation.takeUnless { category == QuizCategory.GRAMMAR }
+
+private fun QuizItem.feedbackExamples(): String? =
+    translation.takeIf { category == QuizCategory.GRAMMAR && !it.isNullOrBlank() }
+
+@Composable
+private fun AnsweredExamples(examples: String, compact: Boolean) {
+    Spacer(Modifier.height(if (compact) 10.dp else 12.dp))
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(Gold.copy(alpha = .13f), RoundedCornerShape(if (compact) 12.dp else 16.dp))
+            .padding(if (compact) 10.dp else 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            "Example",
+            fontSize = if (compact) 12.sp else 13.sp,
+            fontWeight = FontWeight.Black,
+            color = Green,
+            letterSpacing = 1.sp
+        )
+        Spacer(Modifier.height(6.dp))
+        Text(
+            examples,
+            fontSize = if (compact) 16.sp else 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            textAlign = TextAlign.Center
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -1251,7 +1283,7 @@ private fun QuizScreen(
                             textAlign = TextAlign.Center,
                             modifier = Modifier.focusable()
                         )
-                        item.translation?.let { translation ->
+                        item.promptTranslation()?.let { translation ->
                             Spacer(Modifier.height(6.dp))
                             Text(
                                 translation,
@@ -1334,6 +1366,7 @@ private fun QuizScreen(
                                 )
                                 Spacer(Modifier.height(10.dp))
                                 Text(item.explanation, fontSize = 16.sp, textAlign = TextAlign.Center)
+                                item.feedbackExamples()?.let { AnsweredExamples(it, compact = true) }
                                 if (autoAdvanceThisAnswer) {
                                     Spacer(Modifier.height(14.dp))
                                     LinearProgressIndicator(
@@ -1437,7 +1470,7 @@ private fun QuizScreen(
                     // causes the scroll container to bring the question into view again.
                     modifier = Modifier.focusable(enabled = isTv)
                 )
-                item.translation?.let { translation ->
+                item.promptTranslation()?.let { translation ->
                     Spacer(Modifier.height(8.dp))
                     Text(
                         translation,
@@ -1497,6 +1530,7 @@ private fun QuizScreen(
                         }
                         Text(if (chosen == item.answer) success else "Not quite", color = if (chosen == item.answer) Green else Red, fontSize = 22.sp, fontWeight = FontWeight.Bold)
                         Text(item.explanation, modifier = Modifier.padding(8.dp), textAlign = TextAlign.Center)
+                        item.feedbackExamples()?.let { AnsweredExamples(it, compact = false) }
                         item.spokenText?.let { spokenText ->
                             Spacer(Modifier.height(6.dp))
                             FocusActionButton(
