@@ -210,6 +210,8 @@ struct QuestionInput {
     hints: Vec<String>,
     spoken_text: Option<String>,
     difficulty: String,
+    #[serde(default, alias = "dateAdded")]
+    date_added: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -1170,10 +1172,11 @@ async fn create_question(
     Json(input): Json<QuestionInput>,
 ) -> Result<Json<Value>, (StatusCode, String)> {
     authorize(&headers, &state)?;
-    let result = sqlx::query("INSERT INTO questions(language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty) VALUES(?,?,?,?,?,?,?,?,?)")
+    let result = sqlx::query("INSERT INTO questions(language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty,date_added) VALUES(?,?,?,?,?,?,?,?,?,?)")
         .bind(&input.language).bind(&input.category).bind(input.prompt.trim()).bind(input.answer.trim())
         .bind(input.explanation.trim()).bind(clean_optional(input.translation))
         .bind(serde_json::to_string(&input.hints).unwrap_or_else(|_| "[]".into())).bind(clean_optional(input.spoken_text)).bind(input.difficulty)
+        .bind(clean_optional(input.date_added))
         .execute(&state.database).await.map_err(internal_error)?;
     log_line(&format!(
         "admin created question id={} language={} category={} prompt=\"{}\"",
@@ -1192,10 +1195,11 @@ async fn update_question(
     Json(input): Json<QuestionInput>,
 ) -> Result<Json<Value>, (StatusCode, String)> {
     authorize(&headers, &state)?;
-    sqlx::query("UPDATE questions SET language=?,category=?,prompt=?,answer=?,explanation=?,translation=?,hints_json=?,spoken_text=?,difficulty=? WHERE id=?")
+    sqlx::query("UPDATE questions SET language=?,category=?,prompt=?,answer=?,explanation=?,translation=?,hints_json=?,spoken_text=?,difficulty=?,date_added=? WHERE id=?")
         .bind(&input.language).bind(&input.category).bind(input.prompt.trim()).bind(input.answer.trim())
         .bind(input.explanation.trim()).bind(clean_optional(input.translation))
-        .bind(serde_json::to_string(&input.hints).unwrap_or_else(|_| "[]".into())).bind(clean_optional(input.spoken_text)).bind(input.difficulty).bind(id)
+        .bind(serde_json::to_string(&input.hints).unwrap_or_else(|_| "[]".into())).bind(clean_optional(input.spoken_text)).bind(input.difficulty)
+        .bind(clean_optional(input.date_added)).bind(id)
         .execute(&state.database).await.map_err(internal_error)?;
     log_line(&format!(
         "admin updated question id={} language={} category={} prompt=\"{}\"",

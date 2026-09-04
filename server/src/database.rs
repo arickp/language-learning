@@ -73,6 +73,7 @@ pub async fn connect(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
         "TEXT NOT NULL DEFAULT 'UNRANKED'",
     )
     .await?;
+    ensure_column(&pool, "questions", "date_added", "TEXT").await?;
     rank_unranked_content(&pool).await?;
     Ok(pool)
 }
@@ -332,7 +333,7 @@ pub async fn seed_if_empty(
     for entry in root["questions"].as_array().into_iter().flatten() {
         let prompt = entry["prompt"].as_str().unwrap_or_default();
         let answer = entry["answer"].as_str().unwrap_or_default();
-        sqlx::query("INSERT OR IGNORE INTO questions(language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty) VALUES(?,?,?,?,?,?,?,?,?)")
+        sqlx::query("INSERT OR IGNORE INTO questions(language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty,date_added) VALUES(?,?,?,?,?,?,?,?,?,?)")
             .bind(entry.get("language").and_then(Value::as_str).unwrap_or("GERMAN"))
             .bind(entry["category"].as_str().unwrap_or("GRAMMAR"))
             .bind(prompt)
@@ -342,6 +343,7 @@ pub async fn seed_if_empty(
             .bind(entry.get("hints").map(Value::to_string).unwrap_or_else(|| "[]".into()))
             .bind(entry.get("spokenText").and_then(Value::as_str))
             .bind(entry.get("difficulty").and_then(Value::as_str).unwrap_or_else(|| rank_question(prompt, answer)))
+            .bind(entry.get("dateAdded").and_then(Value::as_str))
             .execute(&mut *tx).await?;
     }
     tx.commit().await?;
@@ -414,7 +416,7 @@ pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
     )
     .fetch_all(pool)
     .await?;
-    let question_rows = sqlx::query("SELECT id,language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty FROM questions ORDER BY language,category,prompt").fetch_all(pool).await?;
+    let question_rows = sqlx::query("SELECT id,language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty,date_added FROM questions ORDER BY language,category,prompt").fetch_all(pool).await?;
     let vocabulary = vocab_rows.into_iter().map(|row| json!({
         "id": row.get::<i64,_>("id"), "language": row.get::<String,_>("language"),
         "term": row.get::<String,_>("term"), "translation": row.get::<String,_>("translation"),
@@ -433,7 +435,8 @@ pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
             "answer": row.get::<String,_>("answer"), "explanation": row.get::<String,_>("explanation"),
             "translation": row.get::<Option<String>,_>("translation"), "hints": hints,
             "spokenText": row.get::<Option<String>,_>("spoken_text"),
-            "difficulty": row.get::<String,_>("difficulty")
+            "difficulty": row.get::<String,_>("difficulty"),
+            "dateAdded": row.get::<Option<String>,_>("date_added")
         })
     }).collect::<Vec<_>>();
     Ok(json!({"formatVersion":2,"vocabulary":vocabulary,"questions":questions}))

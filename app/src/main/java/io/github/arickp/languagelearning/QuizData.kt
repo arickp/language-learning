@@ -18,11 +18,6 @@ enum class Difficulty(val label: String, val description: String) {
     HARD("Hard", "Less common words, tricky forms, and specialist terms")
 }
 
-enum class QuestionOrder(val label: String, val description: String) {
-    MIXED("Mixed", "A fresh mix of matching questions"),
-    NEWEST("Newest first", "Prioritize recently added words")
-}
-
 enum class Language(val label: String, val greeting: String) {
     GERMAN("German", "Deutsch"), FRENCH("French", "Français")
 }
@@ -198,6 +193,7 @@ object QuizData {
                 translation = entry.optionalString("translation"),
                 hints = hints,
                 spokenText = entry.optionalString("spokenText"),
+                dateAdded = entry.optionalString("dateAdded"),
                 explicit = entry.optBoolean("explicit", false)
             )
         }
