@@ -1,4 +1,5 @@
 mod database;
+mod seed;
 
 use axum::{
     Form, Json, Router,
@@ -314,13 +315,18 @@ async fn main() {
         .expect("MAX_PRACTICE_EVALUATIONS must be a number");
     let database_url =
         env::var("DATABASE_URL").unwrap_or_else(|_| "sqlite://data/language-learning.db".into());
+    let seed_path =
+        env::var("SEED_MANIFEST_PATH").unwrap_or_else(|_| "seed/manifest.json".into());
+    let seed_json = seed::load(std::path::Path::new(&seed_path))
+        .unwrap_or_else(|error| panic!("could not load seed manifest {seed_path}: {error}"))
+        .to_string();
     let database = database::connect(&database_url)
         .await
         .expect("could not open SQLite database");
-    database::seed_if_empty(&database, include_str!("../seed/quiz_data.json"))
+    database::seed_if_empty(&database, &seed_json)
         .await
         .expect("could not import initial word bank");
-    database::sync_core_vocabulary(&database, include_str!("../seed/quiz_data.json"))
+    database::sync_core_vocabulary(&database, &seed_json)
         .await
         .expect("could not add core beginner vocabulary");
     let admin_token = env::var("ADMIN_TOKEN").unwrap_or_default();

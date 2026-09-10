@@ -1,5 +1,8 @@
 .env
 target/
+data/
+**/*.swp
+**/*.swo
 .git/
 .gitignore
 README.md

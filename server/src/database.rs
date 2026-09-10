@@ -388,7 +388,7 @@ pub async fn sync_core_vocabulary(
         let explicit = seed_explicit(entry);
         let emoji = seed_emoji(&root, entry);
         let existing_id: Option<i64> = sqlx::query_scalar(
-            "SELECT id FROM vocabulary WHERE language=? AND term=? ORDER BY (translation=?) DESC,id LIMIT 1",
+            "SELECT id FROM vocabulary WHERE language=? AND term=? AND translation=? LIMIT 1",
         )
         .bind(language)
         .bind(term)
@@ -478,6 +478,54 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    async fn legacy_rollout_keeps_removed_rows_and_examples_but_fills_missing_emojis() {
+        let pool = connect("sqlite::memory:").await.unwrap();
+        let old = json!({"vocabulary":[
+            {"language":"FRENCH","term":"le crayon","translation":"pencil"},
+            {"language":"FRENCH","term":"dire","translation":"to say","exampleSentence":"Old saved example"},
+            {"language":"FRENCH","term":"payer","translation":"to pay","emoji":"⭐"},
+            {"language":"FRENCH","term":"custom","translation":"user-added"}
+        ]}).to_string();
+        seed_if_empty(&pool, &old).await.unwrap();
+        let before = export(&pool).await.unwrap();
+        let seed = json!({"vocabulary":[
+            {"language":"FRENCH","term":"dire","translation":"to say"},
+            {"language":"FRENCH","term":"payer","translation":"to pay"}
+        ],"emojiByTranslation":{"to say":"💬","to pay":"💳"}})
+        .to_string();
+        for _ in 0..2 {
+            seed_if_empty(&pool, &seed).await.unwrap();
+            sync_core_vocabulary(&pool, &seed).await.unwrap();
+        }
+        let after = export(&pool).await.unwrap();
+        let rows = after["vocabulary"].as_array().unwrap();
+        assert_eq!(rows.len(), 4);
+        for prior in before["vocabulary"].as_array().unwrap() {
+            let row = rows.iter().find(|v| v["id"] == prior["id"]).unwrap();
+            if row["term"] == "dire" {
+                assert_eq!(row["emoji"], "💬");
+                assert_eq!(row["exampleSentence"], "Old saved example");
+            } else {
+                assert_eq!(row, prior);
+            }
+        }
+    }
+
+    #[tokio::test]
+    async fn sync_does_not_overwrite_another_meaning_of_the_same_term() {
+        let pool = connect("sqlite::memory:").await.unwrap();
+        sqlx::query("INSERT INTO vocabulary(language,term,translation,emoji,example_sentence) VALUES('FRENCH','test','admin meaning','⭐','Admin example')")
+            .execute(&pool).await.unwrap();
+        let before = export(&pool).await.unwrap()["vocabulary"][0].clone();
+        let seed = json!({"vocabulary":[{"language":"FRENCH","term":"test","translation":"seed meaning","core":true,"emoji":"💬"}]}).to_string();
+        sync_core_vocabulary(&pool, &seed).await.unwrap();
+        let bank = export(&pool).await.unwrap();
+        let rows = bank["vocabulary"].as_array().unwrap();
+        assert_eq!(rows.len(), 2);
+        assert!(rows.contains(&before));
+    }
+
+    #[tokio::test]
     async fn examples_migrate_sync_and_export_without_overwriting_admin_edits() {
         let file = std::env::temp_dir().join(format!("learning-{}.sqlite", uuid::Uuid::new_v4()));
         let url = format!("sqlite://{}", file.display());
@@ -498,7 +546,7 @@ mod tests {
         let pool = connect(&url).await.unwrap();
         let seed = json!({"vocabulary":[
             {"language":"FRENCH","term":"dire","translation":"to say","exampleSentence":"Vous pouvez le dire en anglais ?","exampleTranslation":"Can you say it in English?"},
-            {"language":"GERMAN","term":"weich","translation":"soft","exampleSentence":"Ich liebe deine weichen Lippen.","exampleTranslation":"I love your soft lips."}
+            {"language":"GERMAN","term":"weich","translation":"soft","exampleSentence":"Das Kissen ist weich.","exampleTranslation":"The pillow is soft."}
         ],"questions":[{"sync":true,"language":"FRENCH","category":"GRAMMAR","prompt":"Je veux ___.","answer":"parler"}]}).to_string();
         sync_core_vocabulary(&pool, &seed).await.unwrap();
         sync_core_vocabulary(&pool, &seed).await.unwrap();
@@ -511,7 +559,7 @@ mod tests {
         );
         assert_eq!(
             bank["vocabulary"][1]["exampleTranslation"],
-            "I love your soft lips."
+            "The pillow is soft."
         );
         sqlx::query("UPDATE vocabulary SET example_sentence='Edited example' WHERE term='dire'")
             .execute(&pool)
@@ -532,16 +580,28 @@ mod tests {
         let pool = connect(&format!("sqlite://{}", file.display()))
             .await
             .unwrap();
-        seed_if_empty(&pool, include_str!("../seed/quiz_data.json"))
-            .await
-            .unwrap();
+        seed_if_empty(
+            &pool,
+            &crate::seed::load(
+                &std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("seed/manifest.json"),
+            )
+            .unwrap()
+            .to_string(),
+        )
+        .await
+        .unwrap();
         let bank = export(&pool).await.unwrap();
         let rows = bank["vocabulary"].as_array().unwrap();
         assert!(rows.iter().any(|v| v["exampleSentence"].is_string()));
         assert!(rows.iter().any(|v| v["exampleSentence"].is_null()));
         assert!(
             rows.iter()
-                .any(|v| v["term"] == "geil" && v["explicit"] == true)
+                .any(|v| v["translation"] == "to say" && v["emoji"] == "💬")
+        );
+
+        assert!(
+            rows.iter()
+                .any(|v| v["term"] == "rauchen" && v["explicit"] == true)
         );
         pool.close().await;
         std::fs::remove_file(file).unwrap();

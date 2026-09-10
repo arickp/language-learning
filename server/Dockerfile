@@ -17,6 +17,7 @@ RUN useradd --create-home --uid 10001 appuser \
     && chown -R appuser:appuser /app
 WORKDIR /app
 COPY --from=builder /app/target/release/language-learning-helper /usr/local/bin/language-learning-helper
+COPY seed ./seed
 
 USER appuser
 EXPOSE 41082
