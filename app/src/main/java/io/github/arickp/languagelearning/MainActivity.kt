@@ -24,6 +24,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -169,6 +174,9 @@ private val Difficulty?.selectionDescription: String
 private fun QuizGame() {
     val context = LocalContext.current
     val preferences = remember { context.getSharedPreferences("language_learning_settings", 0) }
+    val progress = remember { context.getSharedPreferences("vocabulary_practice", 0) }
+    val isTv = (LocalConfiguration.current.uiMode and Configuration.UI_MODE_TYPE_MASK) ==
+        Configuration.UI_MODE_TYPE_TELEVISION
     var screen by remember { mutableStateOf(Screen.HOME) }
     var allowExplicitContent by remember {
         mutableStateOf(preferences.getBoolean("allow_explicit_content", false))
@@ -249,6 +257,7 @@ private fun QuizGame() {
         val recentKeySet = recentQuestionKeys.toSet()
         questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet)
             .take(selectedQuestionCount)
+            .map { it.forPractice(isTv, progress.getStringSet("seen", emptySet()).orEmpty()) }
         startError = null
         recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() })
             .takeLast(maxOf(30, selectedQuestionCount * 3))
@@ -353,7 +362,17 @@ private fun QuizGame() {
                         allowExplicitContent = allowExplicitContent,
                         score = score, streak = streak,
                         chosen = answeredChoices[index],
-                        onChoose = { answer -> answeredChoices = answeredChoices + (index to answer) },
+                        onChoose = { answer ->
+                            if (answeredChoices[index] == null) {
+                                answeredChoices = answeredChoices + (index to answer)
+                                if (item.category == QuizCategory.VOCABULARY && !item.spelling) {
+                                    item.vocabularyProgressKey()?.let { key ->
+                                        val seen = progress.getStringSet("seen", emptySet()).orEmpty().toSet() + key
+                                        progress.edit().putStringSet("seen", seen).apply()
+                                    }
+                                }
+                            }
+                        },
                         revealedHintCount = revealedHintCounts[index] ?: 0,
                         exampleState = exampleStates[index] ?: ExampleDiscoveryState.Idle,
                         exampleSource = exampleSources[index] ?: ExampleSource.REDDIT,
@@ -454,14 +473,20 @@ private fun orderedQuestions(
     return notRecentlySeen + recentlySeen
 }
 
-private fun QuizItem.historyKey(): String = "${language.name}|${category.name}|$prompt"
+private fun QuizItem.historyKey(): String = vocabularyProgressKey()?.let { "${category.name}|$it" }
+    ?: "${language.name}|${category.name}|$prompt"
 
 /** English gloss under the prompt; grammar uses translation for post-answer examples instead. */
 private fun QuizItem.promptTranslation(): String? =
     translation.takeUnless { category == QuizCategory.GRAMMAR }
 
 private fun QuizItem.feedbackExamples(): String? =
-    translation.takeIf { category == QuizCategory.GRAMMAR && !it.isNullOrBlank() }
+    listOfNotNull(
+        exampleSentence?.let { sentence ->
+            listOfNotNull(sentence, exampleTranslation).joinToString("\n")
+        },
+        translation.takeIf { category == QuizCategory.GRAMMAR && !it.isNullOrBlank() }
+    ).joinToString("\n\n").takeIf { it.isNotBlank() }
 
 @Composable
 private fun AnsweredExamples(examples: String, compact: Boolean) {
@@ -1200,6 +1225,19 @@ private fun QuizScreen(
     val isTv = (LocalConfiguration.current.uiMode and Configuration.UI_MODE_TYPE_MASK) ==
         Configuration.UI_MODE_TYPE_TELEVISION
 
+    val typedAnswer = item.requiresTypedAnswer(isTv)
+    var draftAnswer by remember(item, number) { mutableStateOf("") }
+    val keyboard = LocalSoftwareKeyboardController.current
+    fun submitTypedAnswer() {
+        if (chosen == null && draftAnswer.isNotBlank()) {
+            val correct = item.acceptsAnswer(draftAnswer)
+            onChoose(if (correct) item.answer else draftAnswer.trim())
+            keyboard?.hide()
+            autoAdvanceThisAnswer = false
+            onAnswer(correct)
+        }
+    }
+
     LaunchedEffect(item) {
         questionScrollState.scrollTo(0)
         if (initialQuizAnswerIndex(isTv, options.size) != null) {
@@ -1501,7 +1539,28 @@ private fun QuizScreen(
                     }
                 }
                 Spacer(Modifier.height(28.dp))
-                options.forEach { option ->
+                if (typedAnswer) {
+                    OutlinedTextField(
+                        value = draftAnswer,
+                        onValueChange = { draftAnswer = it },
+                        enabled = chosen == null,
+                        label = { Text(if (item.spelling) "Spell the word or phrase" else "Your answer") },
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(
+                            autoCorrectEnabled = false,
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(onDone = { submitTypedAnswer() }),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(Modifier.height(12.dp))
+                    Button(
+                        onClick = { submitTypedAnswer() },
+                        enabled = chosen == null && draftAnswer.isNotBlank(),
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text("Check answer") }
+                } else options.forEach { option ->
                     AnswerOptionButton(
                         option = option,
                         correctAnswer = item.answer,
@@ -1529,6 +1588,7 @@ private fun QuizScreen(
                             "Correct ! ✓"
                         }
                         Text(if (chosen == item.answer) success else "Not quite", color = if (chosen == item.answer) Green else Red, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                        if (typedAnswer) Text("Correct answer: ${item.answer}", fontWeight = FontWeight.Bold)
                         Text(item.explanation, modifier = Modifier.padding(8.dp), textAlign = TextAlign.Center)
                         item.feedbackExamples()?.let { AnsweredExamples(it, compact = false) }
                         item.spokenText?.let { spokenText ->
@@ -1834,6 +1894,18 @@ private fun answerChoicesFor(item: QuizItem, allowExplicitContent: Boolean): Lis
 
         answer in listOf("einen", "eine", "einem", "einer", "ein") ->
             listOf("ein", "eine", "einen", "einem", "einer")
+
+        answer in listOf("schwarzer", "schwarze", "schwarzes", "schwarzen") ->
+            listOf("schwarzer", "schwarze", "schwarzes", "schwarzen")
+
+        answer in listOf("kleiner", "kleine", "kleines", "kleinen") ->
+            listOf("kleiner", "kleine", "kleines", "kleinen")
+
+        answer in listOf("alter", "alte", "altes", "alten") ->
+            listOf("alter", "alte", "altes", "alten")
+
+        item.language == Language.FRENCH && answer in listOf("de", "d'", "en", "à") ->
+            listOf("de", "d'", "en", "à")
 
         answer in listOf("wichtiger", "wichtige", "wichtiges") ->
             listOf("wichtiger", "wichtige", "wichtiges")

@@ -26,6 +26,8 @@ pub async fn connect(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
             date_added TEXT,
             explicit INTEGER NOT NULL DEFAULT 0,
             emoji TEXT,
+            example_sentence TEXT,
+            example_translation TEXT,
             UNIQUE(language, term, translation)
         )",
     )
@@ -49,6 +51,8 @@ pub async fn connect(database_url: &str) -> Result<SqlitePool, sqlx::Error> {
     )
     .await?;
     ensure_column(&pool, "vocabulary", "emoji", "TEXT").await?;
+    ensure_column(&pool, "vocabulary", "example_sentence", "TEXT").await?;
+    ensure_column(&pool, "vocabulary", "example_translation", "TEXT").await?;
     sqlx::query(
         "CREATE TABLE IF NOT EXISTS questions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -316,7 +320,7 @@ pub async fn seed_if_empty(
             .get("difficulty")
             .and_then(Value::as_str)
             .unwrap_or_else(|| rank_vocabulary(language, term, translation));
-        sqlx::query("INSERT OR IGNORE INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji) VALUES(?,?,?,?,?,?,?,?,?,?,?)")
+        sqlx::query("INSERT OR IGNORE INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji,example_sentence,example_translation) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)")
             .bind(language)
             .bind(term)
             .bind(translation)
@@ -328,6 +332,8 @@ pub async fn seed_if_empty(
             .bind(entry.get("dateAdded").and_then(Value::as_str))
             .bind(seed_explicit(entry))
             .bind(seed_emoji(&root, entry))
+            .bind(entry.get("exampleSentence").and_then(Value::as_str))
+            .bind(entry.get("exampleTranslation").and_then(Value::as_str))
             .execute(&mut *tx).await?;
     }
     for entry in root["questions"].as_array().into_iter().flatten() {
@@ -390,9 +396,11 @@ pub async fn sync_core_vocabulary(
         .fetch_optional(pool)
         .await?;
         if let Some(id) = existing_id {
-            sqlx::query("UPDATE vocabulary SET explicit=?,emoji=COALESCE(emoji,?) WHERE id=?")
+            sqlx::query("UPDATE vocabulary SET explicit=?,emoji=COALESCE(emoji,?),example_sentence=COALESCE(example_sentence,?),example_translation=COALESCE(example_translation,?) WHERE id=?")
                 .bind(explicit)
                 .bind(emoji)
+                .bind(entry.get("exampleSentence").and_then(Value::as_str))
+                .bind(entry.get("exampleTranslation").and_then(Value::as_str))
                 .bind(id)
                 .execute(pool)
                 .await?;
@@ -402,17 +410,38 @@ pub async fn sync_core_vocabulary(
                     .execute(pool).await?;
             }
         } else {
-            sqlx::query("INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji) VALUES(?,?,?,?,?,?,?,?,?,?,?)")
+            sqlx::query("INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji,example_sentence,example_translation) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)")
                 .bind(language).bind(term).bind(translation).bind(article).bind(noun).bind(difficulty).bind(variant).bind(spoken_language).bind(date_added).bind(explicit).bind(emoji)
+                .bind(entry.get("exampleSentence").and_then(Value::as_str))
+                .bind(entry.get("exampleTranslation").and_then(Value::as_str))
                 .execute(pool).await?;
         }
+    }
+    for entry in root["questions"]
+        .as_array()
+        .into_iter()
+        .flatten()
+        .filter(|entry| entry.get("sync").and_then(Value::as_bool).unwrap_or(false))
+    {
+        sqlx::query("INSERT OR IGNORE INTO questions(language,category,prompt,answer,explanation,translation,hints_json,spoken_text,difficulty,date_added) VALUES(?,?,?,?,?,?,?,?,?,?)")
+            .bind(entry.get("language").and_then(Value::as_str).unwrap_or("GERMAN"))
+            .bind(entry["category"].as_str().unwrap_or("GRAMMAR"))
+            .bind(entry["prompt"].as_str().unwrap_or_default())
+            .bind(entry["answer"].as_str().unwrap_or_default())
+            .bind(entry.get("explanation").and_then(Value::as_str).unwrap_or(""))
+            .bind(entry.get("translation").and_then(Value::as_str))
+            .bind(entry.get("hints").map(Value::to_string).unwrap_or_else(|| "[]".into()))
+            .bind(entry.get("spokenText").and_then(Value::as_str))
+            .bind(entry.get("difficulty").and_then(Value::as_str).unwrap_or("MEDIUM"))
+            .bind(entry.get("dateAdded").and_then(Value::as_str))
+            .execute(pool).await?;
     }
     Ok(())
 }
 
 pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
     let vocab_rows = sqlx::query(
-        "SELECT id,language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji FROM vocabulary ORDER BY language,term",
+        "SELECT id,language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji,example_sentence,example_translation FROM vocabulary ORDER BY language,term",
     )
     .fetch_all(pool)
     .await?;
@@ -425,7 +454,9 @@ pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
         "spokenLanguage": row.get::<Option<String>,_>("spoken_language"),
         "dateAdded": row.get::<Option<String>,_>("date_added"),
         "explicit": row.get::<i64,_>("explicit") != 0,
-        "emoji": row.get::<Option<String>,_>("emoji")
+        "emoji": row.get::<Option<String>,_>("emoji"),
+        "exampleSentence": row.get::<Option<String>,_>("example_sentence"),
+        "exampleTranslation": row.get::<Option<String>,_>("example_translation")
     })).collect::<Vec<_>>();
     let questions = question_rows.into_iter().map(|row| {
         let hints: Value = serde_json::from_str(&row.get::<String,_>("hints_json")).unwrap_or(json!([]));
@@ -440,4 +471,79 @@ pub async fn export(pool: &SqlitePool) -> Result<Value, sqlx::Error> {
         })
     }).collect::<Vec<_>>();
     Ok(json!({"formatVersion":2,"vocabulary":vocabulary,"questions":questions}))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[tokio::test]
+    async fn examples_migrate_sync_and_export_without_overwriting_admin_edits() {
+        let file = std::env::temp_dir().join(format!("learning-{}.sqlite", uuid::Uuid::new_v4()));
+        let url = format!("sqlite://{}", file.display());
+        // A real legacy database with existing vocabulary and no example columns.
+        let options = SqliteConnectOptions::from_str(&url)
+            .unwrap()
+            .create_if_missing(true);
+        let legacy = SqlitePool::connect_with(options).await.unwrap();
+        sqlx::query("CREATE TABLE vocabulary(id INTEGER PRIMARY KEY, language TEXT NOT NULL, term TEXT NOT NULL, translation TEXT NOT NULL, article TEXT, noun TEXT, UNIQUE(language,term,translation))")
+            .execute(&legacy).await.unwrap();
+        sqlx::query(
+            "INSERT INTO vocabulary(language,term,translation) VALUES('FRENCH','dire','to say')",
+        )
+        .execute(&legacy)
+        .await
+        .unwrap();
+        legacy.close().await;
+        let pool = connect(&url).await.unwrap();
+        let seed = json!({"vocabulary":[
+            {"language":"FRENCH","term":"dire","translation":"to say","exampleSentence":"Vous pouvez le dire en anglais ?","exampleTranslation":"Can you say it in English?"},
+            {"language":"GERMAN","term":"weich","translation":"soft","exampleSentence":"Ich liebe deine weichen Lippen.","exampleTranslation":"I love your soft lips."}
+        ],"questions":[{"sync":true,"language":"FRENCH","category":"GRAMMAR","prompt":"Je veux ___.","answer":"parler"}]}).to_string();
+        sync_core_vocabulary(&pool, &seed).await.unwrap();
+        sync_core_vocabulary(&pool, &seed).await.unwrap();
+        let bank = export(&pool).await.unwrap();
+        assert_eq!(bank["vocabulary"].as_array().unwrap().len(), 2);
+        assert_eq!(bank["questions"].as_array().unwrap().len(), 1);
+        assert_eq!(
+            bank["vocabulary"][0]["exampleSentence"],
+            "Vous pouvez le dire en anglais ?"
+        );
+        assert_eq!(
+            bank["vocabulary"][1]["exampleTranslation"],
+            "I love your soft lips."
+        );
+        sqlx::query("UPDATE vocabulary SET example_sentence='Edited example' WHERE term='dire'")
+            .execute(&pool)
+            .await
+            .unwrap();
+        sync_core_vocabulary(&pool, &seed).await.unwrap();
+        assert_eq!(
+            export(&pool).await.unwrap()["vocabulary"][0]["exampleSentence"],
+            "Edited example"
+        );
+        pool.close().await;
+        std::fs::remove_file(file).unwrap();
+    }
+
+    #[tokio::test]
+    async fn fresh_seed_supports_examples_and_legacy_entries() {
+        let file = std::env::temp_dir().join(format!("learning-{}.sqlite", uuid::Uuid::new_v4()));
+        let pool = connect(&format!("sqlite://{}", file.display()))
+            .await
+            .unwrap();
+        seed_if_empty(&pool, include_str!("../seed/quiz_data.json"))
+            .await
+            .unwrap();
+        let bank = export(&pool).await.unwrap();
+        let rows = bank["vocabulary"].as_array().unwrap();
+        assert!(rows.iter().any(|v| v["exampleSentence"].is_string()));
+        assert!(rows.iter().any(|v| v["exampleSentence"].is_null()));
+        assert!(
+            rows.iter()
+                .any(|v| v["term"] == "geil" && v["explicit"] == true)
+        );
+        pool.close().await;
+        std::fs::remove_file(file).unwrap();
+    }
 }

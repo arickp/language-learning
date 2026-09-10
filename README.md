@@ -75,6 +75,16 @@ The volume name may differ (`docker volume ls | grep language-learning`). Recrea
 
 After the helper is running again, open **Settings** in the Android app and tap **Clear cache** so it drops the saved word bank and reloads `/api/quiz-data`. You can also force-stop the app.
 
+## Typed answers and saved examples
+
+On phones and tablets, grammar and article quizzes use a text field and **Check answer**. Vocabulary starts with multiple choice; after answering a word once, its next regular-quiz appearance asks you to spell the German or French term from its English meaning. Include the article when the learned term includes one. Either form of a slash-separated alternative is accepted. Capitalization, whitespace, and curly apostrophes are tolerated; accents and grammatical endings still matter.
+
+Android TV keeps multiple-choice answers in every category. Vocabulary exposure is saved only in Android SharedPreferences (`vocabulary_practice`), across app restarts, without server-side learner state. Clearing the downloadable word-bank cache keeps this learning progress; clearing the app's storage resets it.
+
+Vocabulary supports optional `exampleSentence` and `exampleTranslation` fields in the seed/API, stored as `example_sentence` and `example_translation` in SQLite. Edit them in the word-bank admin form. Saved examples appear after answering on both handhelds and TV and remain available offline with the cached word bank.
+
+The server adds the example columns automatically, imports missing vocabulary, and imports seed questions marked `sync: true` on startup. Existing saved examples are preserved. Rebuild and restart the server and refresh the Android word bank to receive the new content; no database deletion is needed.
+
 ## Trip quizzes
 
 Choose **Prepare me for my trip** on the Android home screen and paste either itinerary text or a public Google Doc or website URL. The companion server safely downloads public text/HTML links, rejects private-network addresses and responses larger than 1 MB, and sends the itinerary context to OpenAI to generate practical vocabulary and phrases for the selected language and region. Google Docs must be shared publicly so their plain-text export is accessible.
