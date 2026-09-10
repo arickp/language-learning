@@ -4,6 +4,78 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class QuizAnswerModeTest {
+    @Test fun firstSpellingAcceptsNounWithoutArticleAndKeepsFullFeedbackAnswer() {
+        val noun = QuizItem("Meaning?", "connecting flight", QuizCategory.VOCABULARY,
+            vocabularyTerm = "der Anschlussflug")
+        val spelling = noun.forPractice(false, setOf(noun.vocabularyProgressKey()!!))
+        assertTrue(spelling.acceptsAnswer("Anschlussflug"))
+        assertEquals("der Anschlussflug", spelling.answer)
+        assertFalse(spelling.acceptsAnswer("die Anschlussflug"))
+    }
+
+    @Test fun frenchAndGermanArticlesSupportNounOnlyOnAssistedSpelling() {
+        for ((language, term, noun) in listOf(
+            Triple(Language.FRENCH, "l’avion", "avion"),
+            Triple(Language.FRENCH, "les avions", "avions"),
+            Triple(Language.FRENCH, "un avion", "avion"),
+            Triple(Language.FRENCH, "une gare", "gare"),
+            Triple(Language.GERMAN, "ein Flug", "Flug"),
+            Triple(Language.GERMAN, "eine Reise", "Reise"),
+            Triple(Language.GERMAN, "die Flüge", "Flüge"),
+            Triple(Language.GERMAN, "das Haus", "Haus")
+        )) {
+            val item = QuizItem("Meaning?", "translation", QuizCategory.VOCABULARY,
+                language = language, vocabularyTerm = term)
+            val spelling = item.forPractice(false, setOf(item.vocabularyProgressKey()!!))
+            assertTrue(term, spelling.acceptsAnswer(noun))
+            assertFalse(term, spelling.copy(assistedSpelling = false).acceptsAnswer(noun))
+            assertTrue(spelling.copy(assistedSpelling = false).acceptsAnswer(term))
+        }
+    }
+
+    @Test fun spellingPromptExplainsArticleDefinitenessAndOnlyReliableNumber() {
+        for ((language, term, description) in listOf(
+            Triple(Language.GERMAN, "der Anschlussflug", "Definite article (the)"),
+            Triple(Language.GERMAN, "die Flüge", "Definite article (the)"),
+            Triple(Language.GERMAN, "ein Flug", "Indefinite article (a/an) · singular"),
+            Triple(Language.FRENCH, "l'avion", "Definite article (the)"),
+            Triple(Language.FRENCH, "les avions", "Definite article (the) · plural"),
+            Triple(Language.FRENCH, "une gare", "Indefinite article (a/an) · singular"),
+            Triple(Language.FRENCH, "des avions", "Indefinite article (some; plural of a/an) · plural")
+        )) {
+            val item = QuizItem("Meaning?", "translation", QuizCategory.VOCABULARY,
+                language = language, vocabularyTerm = term)
+            val spelling = item.forPractice(false, setOf(item.vocabularyProgressKey()!!))
+            assertTrue(term, spelling.prompt.contains(description))
+            if (term.startsWith("die ") || term.startsWith("l'")) {
+                assertFalse(spelling.prompt.contains("singular"))
+                assertFalse(spelling.prompt.contains("plural"))
+            }
+        }
+    }
+
+    @Test fun nounAlternativesStillRequireArticleOnLaterSpelling() {
+        val item = QuizItem("Meaning?", "newspaper", QuizCategory.VOCABULARY,
+            language = Language.FRENCH, vocabularyTerm = "le journal / quotidien")
+        val seen = setOf(item.vocabularyProgressKey()!!)
+        val first = item.forPractice(false, seen)
+        assertTrue(first.acceptsAnswer("quotidien"))
+        val later = item.forPractice(false, seen, seen)
+        assertFalse(later.acceptsAnswer("quotidien"))
+        assertTrue(later.acceptsAnswer("le quotidien"))
+    }
+
+    @Test fun verbsAndUnrecognizedPrefixesNeverGetArticleAssistance() {
+        for (term in listOf("répéter", "lire", "lernen", "einkaufen")) {
+            val item = QuizItem("Meaning?", "translation", QuizCategory.VOCABULARY,
+                vocabularyTerm = term)
+            val spelling = item.forPractice(false, setOf(item.vocabularyProgressKey()!!))
+            assertNull(spelling.spellingArticle())
+            assertTrue(spelling.acceptsAnswer(term))
+            assertFalse(spelling.prompt.contains("article"))
+        }
+    }
+
     private val word = QuizItem(
         prompt = "What does “doux / douce” mean?", answer = "soft / gentle",
         category = QuizCategory.VOCABULARY, language = Language.FRENCH,

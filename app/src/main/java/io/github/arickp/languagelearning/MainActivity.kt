@@ -175,6 +175,12 @@ private fun QuizGame() {
     val context = LocalContext.current
     val preferences = remember { context.getSharedPreferences("language_learning_settings", 0) }
     val progress = remember { context.getSharedPreferences("vocabulary_practice", 0) }
+    val spellingProgress = remember {
+        SpellingProgress(
+            read = { progress.getStringSet("spelling_attempted", emptySet()).orEmpty() },
+            write = { progress.edit().putStringSet("spelling_attempted", it).apply() }
+        )
+    }
     val isTv = (LocalConfiguration.current.uiMode and Configuration.UI_MODE_TYPE_MASK) ==
         Configuration.UI_MODE_TYPE_TELEVISION
     var screen by remember { mutableStateOf(Screen.HOME) }
@@ -257,7 +263,8 @@ private fun QuizGame() {
         val recentKeySet = recentQuestionKeys.toSet()
         questions = orderedQuestions(pool, recentQuestionKeys, recentKeySet)
             .take(selectedQuestionCount)
-            .map { it.forPractice(isTv, progress.getStringSet("seen", emptySet()).orEmpty()) }
+            .map { it.forPractice(isTv, progress.getStringSet("seen", emptySet()).orEmpty(),
+                spellingProgress.attemptedWords()) }
         startError = null
         recentQuestionKeys = (recentQuestionKeys + questions.map { it.historyKey() })
             .takeLast(maxOf(30, selectedQuestionCount * 3))
@@ -365,6 +372,8 @@ private fun QuizGame() {
                         onChoose = { answer ->
                             if (answeredChoices[index] == null) {
                                 answeredChoices = answeredChoices + (index to answer)
+                                // Submission only: never consume assistance on composition/navigation.
+                                spellingProgress.recordSubmission(item)
                                 if (item.category == QuizCategory.VOCABULARY && !item.spelling) {
                                     item.vocabularyProgressKey()?.let { key ->
                                         val seen = progress.getStringSet("seen", emptySet()).orEmpty().toSet() + key
@@ -1540,20 +1549,36 @@ private fun QuizScreen(
                 }
                 Spacer(Modifier.height(28.dp))
                 if (typedAnswer) {
-                    OutlinedTextField(
-                        value = draftAnswer,
-                        onValueChange = { draftAnswer = it },
-                        enabled = chosen == null,
-                        label = { Text(if (item.spelling) "Spell the word or phrase" else "Your answer") },
-                        singleLine = true,
-                        keyboardOptions = KeyboardOptions(
-                            autoCorrectEnabled = false,
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Done
-                        ),
-                        keyboardActions = KeyboardActions(onDone = { submitTypedAnswer() }),
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    val article = item.spellingArticle()
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        if (item.assistedSpelling && article != null) {
+                            // Always visible, including while the input is empty and unfocused.
+                            Text(article.article, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                        }
+                        OutlinedTextField(
+                            value = draftAnswer,
+                            onValueChange = { draftAnswer = it },
+                            enabled = chosen == null,
+                            label = { Text(when {
+                                article != null && item.assistedSpelling -> "Noun only"
+                                article != null -> "Article + noun"
+                                item.spelling -> "Spell the word or phrase"
+                                else -> "Your answer"
+                            }) },
+                            singleLine = true,
+                            keyboardOptions = KeyboardOptions(
+                                autoCorrectEnabled = false,
+                                keyboardType = KeyboardType.Text,
+                                imeAction = ImeAction.Done
+                            ),
+                            keyboardActions = KeyboardActions(onDone = { submitTypedAnswer() }),
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                     Spacer(Modifier.height(12.dp))
                     Button(
                         onClick = { submitTypedAnswer() },

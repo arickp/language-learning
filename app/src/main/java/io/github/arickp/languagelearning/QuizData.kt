@@ -65,6 +65,7 @@ data class QuizItem(
     /** Present only for seed vocabulary, where the target-language answer is known. */
     val vocabularyTerm: String? = null,
     val spelling: Boolean = false,
+    val assistedSpelling: Boolean = false,
     /** Answer decoys supplied with the question; when empty the shared word bank is used instead. */
     val distractors: List<String> = emptyList()
 )
