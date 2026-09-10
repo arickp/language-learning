@@ -2,6 +2,22 @@
 mod seed;
 
 #[test]
+fn passport_ihr_means_possessive_your_not_subject_you() {
+    let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("seed/manifest.json");
+    let root = seed::load(&path).unwrap();
+    let matches: Vec<_> = root["questions"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|q| {
+            q["language"] == "GERMAN" && q["prompt"] == "In “Ist das Ihr Pass?,” Ihr means…"
+        })
+        .collect();
+    assert_eq!(matches.len(), 1);
+    assert_eq!(matches[0]["answer"], "your (formal)");
+}
+
+#[test]
 fn loads_all_manifest_sections_with_language_and_shared_emojis() {
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("seed/manifest.json");
     let root = seed::load(&path).unwrap();

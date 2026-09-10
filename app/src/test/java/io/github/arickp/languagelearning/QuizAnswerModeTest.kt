@@ -4,6 +4,21 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class QuizAnswerModeTest {
+    @Test fun formalPossessiveMeaningAcceptsYourWithoutRegisterLabel() {
+        val item = QuizItem("In “Ist das Ihr Pass?,” Ihr means…", "your (formal)",
+            QuizCategory.GRAMMAR)
+        assertTrue(item.acceptsAnswer("your"))
+        assertTrue(item.acceptsAnswer(" YOUR. "))
+        assertTrue(item.acceptsAnswer("your (formal)"))
+        assertEquals("your (formal)", item.answer)
+        assertFalse(item.acceptsAnswer("you"))
+        assertFalse(item.acceptsAnswer("you (formal)"))
+        assertFalse(item.copy(answer = "you (formal)").acceptsAnswer("your"))
+        assertFalse(item.copy(spelling = true).acceptsAnswer("your"))
+        assertFalse(item.copy(category = QuizCategory.ARTICLES).acceptsAnswer("your"))
+        assertTrue(item.copy(category = QuizCategory.VOCABULARY).acceptsAnswer("your"))
+    }
+
     @Test fun firstSpellingAcceptsNounWithoutArticleAndKeepsFullFeedbackAnswer() {
         val noun = QuizItem("Meaning?", "connecting flight", QuizCategory.VOCABULARY,
             vocabularyTerm = "der Anschlussflug")

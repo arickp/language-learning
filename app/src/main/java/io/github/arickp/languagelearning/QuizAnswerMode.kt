@@ -68,6 +68,9 @@ fun QuizItem.spellingArticle(): SpellingArticle? {
 fun QuizItem.acceptsAnswer(value: String): Boolean {
     val normalized = normalizeQuizAnswer(value)
     if (normalized.isEmpty()) return false
+    // The register label explains the possessive meaning; it is not required in English.
+    if (!spelling && category in setOf(QuizCategory.GRAMMAR, QuizCategory.VOCABULARY) &&
+        normalizeQuizAnswer(answer) == "your (formal)" && normalized == "your") return true
     val article = spellingArticle()
     if (article != null) {
         if (normalized == normalizeQuizAnswer(answer)) return true
