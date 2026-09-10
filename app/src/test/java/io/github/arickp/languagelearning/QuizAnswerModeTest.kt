@@ -4,6 +4,18 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class QuizAnswerModeTest {
+    @Test fun pluralYouMeaningAcceptsYou() {
+        val item = QuizItem("Meaning?", "you all", QuizCategory.GRAMMAR)
+        assertTrue(item.acceptsAnswer("you"))
+        assertTrue(item.acceptsAnswer(" YOU. "))
+        assertTrue(item.acceptsAnswer("you all"))
+        assertTrue(item.copy(category = QuizCategory.VOCABULARY).acceptsAnswer("you"))
+        assertFalse(item.acceptsAnswer("your"))
+        assertFalse(item.copy(spelling = true).acceptsAnswer("you"))
+        assertFalse(item.copy(category = QuizCategory.ARTICLES).acceptsAnswer("you"))
+        assertFalse(item.copy(answer = "you all take").acceptsAnswer("you"))
+    }
+
     @Test fun formalPossessiveMeaningAcceptsYourWithoutRegisterLabel() {
         val item = QuizItem("In “Ist das Ihr Pass?,” Ihr means…", "your (formal)",
             QuizCategory.GRAMMAR)
