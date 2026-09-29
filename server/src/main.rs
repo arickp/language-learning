@@ -286,9 +286,30 @@ struct PracticeEvaluationRequest {
     audio_base64: String,
 }
 
+fn env_file_permission_warning(mode: u32) -> Option<&'static str> {
+    (mode & 0o077 != 0)
+        .then_some("WARNING: .env is accessible by group or other users; run: chmod 600 .env")
+}
+
+#[cfg(unix)]
+fn warn_if_env_file_is_insecure(path: &std::path::Path) {
+    use std::os::unix::fs::PermissionsExt;
+
+    if let Ok(metadata) = path.metadata()
+        && let Some(warning) = env_file_permission_warning(metadata.permissions().mode())
+    {
+        eprintln!("{warning}");
+    }
+}
+
+#[cfg(not(unix))]
+fn warn_if_env_file_is_insecure(_path: &std::path::Path) {}
+
 #[tokio::main]
 async fn main() {
-    dotenvy::dotenv().ok();
+    if let Ok(path) = dotenvy::dotenv() {
+        warn_if_env_file_is_insecure(&path);
+    }
     let api_key = env::var("OPENAI_API_KEY").expect("OPENAI_API_KEY must be set in server/.env");
     let model = env::var("OPENAI_MODEL").unwrap_or_else(|_| "gpt-5.6-luna".into());
     let tts_model = env::var("OPENAI_TTS_MODEL").unwrap_or_else(|_| "gpt-4o-mini-tts".into());
@@ -315,8 +336,7 @@ async fn main() {
         .expect("MAX_PRACTICE_EVALUATIONS must be a number");
     let database_url =
         env::var("DATABASE_URL").unwrap_or_else(|_| "sqlite://data/language-learning.db".into());
-    let seed_path =
-        env::var("SEED_MANIFEST_PATH").unwrap_or_else(|_| "seed/manifest.json".into());
+    let seed_path = env::var("SEED_MANIFEST_PATH").unwrap_or_else(|_| "seed/manifest.json".into());
     let seed_json = seed::load(std::path::Path::new(&seed_path))
         .unwrap_or_else(|error| panic!("could not load seed manifest {seed_path}: {error}"))
         .to_string();
@@ -1812,6 +1832,18 @@ fn openai_upstream_error(
 mod tests {
     use super::*;
     use std::net::{Ipv4Addr, Ipv6Addr};
+
+    #[test]
+    fn warns_when_env_file_is_accessible_by_group_or_others() {
+        assert!(env_file_permission_warning(0o640).is_some());
+        assert!(env_file_permission_warning(0o604).is_some());
+    }
+
+    #[test]
+    fn accepts_owner_only_env_file_permissions() {
+        assert!(env_file_permission_warning(0o600).is_none());
+        assert!(env_file_permission_warning(0o400).is_none());
+    }
 
     #[test]
     fn converts_google_doc_links_to_text_exports() {
