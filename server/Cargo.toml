@@ -20,6 +20,7 @@ uuid = { version = "1", features = ["v4"] }
 inherits = "release"
 opt-level = 1
 debug = false
+strip = "none"
 lto = false
 codegen-units = 256
 incremental = true
