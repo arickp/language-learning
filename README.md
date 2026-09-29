@@ -42,7 +42,7 @@ You can also test without a physical TV: in Android Studio's Device Manager, cre
 
 The starter German and French vocabulary bank lives in:
 
-`server/seed/quiz_data.json`
+`server/seed/manifest.json`
 
 After first start, the live word bank is stored in SQLite and is easiest to edit in the server’s `/admin` page. Each vocabulary entry needs a `term` and `translation`. An optional `emoji` is shown beside that word's answer choices; the admin page includes a searchable emoji picker, so editors do not need to find and paste symbols manually. Add `article` and `noun` to automatically create an article question too. The optional `questions` list accepts custom vocabulary, article, or grammar questions with explanations, translations, and progressive hints.
 
@@ -50,11 +50,19 @@ JSON requires double quotes and commas between entries. Android Studio highlight
 
 Each SQLite vocabulary entry and custom question has an editable difficulty in the companion server's word-bank manager. Existing entries receive an initial semantic ranking during the database upgrade; manual changes made in the manager are preserved.
 
-Restarting the helper does **not** reload the whole bank from JSON. Seed import runs only when the database is empty. Later starts only insert missing seed rows and update entries marked `core` or `sync` (plus `explicit` / `emoji`). Admin edits and extra rows stay until you reset.
+The manifest references separate German/French `vocabulary`, `verbs`, `phrases`, and `grammar` JSON arrays, plus shared emoji, category, and difficulty files. Vocabulary, verbs, and phrases feed the vocabulary bank; grammar feeds custom questions. Language is inferred from the manifest section and checked against any explicit entry language.
+
+The server reads these files at **startup**, before opening SQLite. Set `SEED_MANIFEST_PATH` to an absolute manifest path when launching outside `server/`. Without that setting it prefers `seed/new_seed/manifest.json` when present, otherwise `seed/manifest.json` (the current repository layout). Paths inside the manifest are relative to its directory. Keep the entire referenced tree with a deployed binary. Native seed-only changes require a restart, not recompilation; Docker images must be rebuilt with `docker compose up --build -d` unless you deliberately mount a seed tree.
+
+**Do not wipe SQLite for a normal seed update.** Fresh databases import all vocabulary and questions. Existing databases insert missing vocabulary by exact `(language, term, translation)` identity and missing questions marked `sync: true`. Existing questions are not updated. Vocabulary marked `core` or `sync` still updates article, noun, difficulty, variant, spoken language, and supplied date; explicit flags are refreshed for matching rows. This can overwrite admin edits to those fields. Different translations of the same term are kept as separate rows, not silently overwritten.
+
+New shared emoji mappings fill **SQL NULL** emoji fields on matching seed vocabulary; existing emojis (including empty strings) are preserved. Entry-level emoji overrides the shared mapping, whose translation keys match exactly. Saved examples fill NULL fields only; changing or removing a seed example does not replace an existing saved example.
+
+**Removing entries from seed does not delete existing SQLite rows.** There is no historical seed-ownership record, so automatic deletion cannot distinguish old seed content from user-added or edited content safely. In particular, old horny/slut translations, `avoir envie de quelqu'un`, `l'envie`, `le vagin`, `le sein`, and a previously saved kissing-Lily example may remain in an existing database. After backing up SQLite, use `/admin` to delete the specific unwanted rows and clear/replace the saved example; unrelated content is left alone. Removed content will not be re-imported if absent from the current seed. Refresh the Android word-bank cache afterward. A full reset below is optional and destructive, not required for rollout.
 
 ### Reset the word bank to the seed file
 
-Stop the companion server first. Then delete the SQLite file so the next start recreates it from `server/seed/quiz_data.json`:
+This discards **all server word-bank admin edits and custom entries**. Back up the database first. Stop the companion server, then delete the SQLite file so the next start recreates it from `server/seed/manifest.json`:
 
 ```bash
 rm -f server/data/language-learning.db \
@@ -74,6 +82,16 @@ docker volume rm server_language-learning-data
 The volume name may differ (`docker volume ls | grep language-learning`). Recreate the container with `docker compose up --build -d`.
 
 After the helper is running again, open **Settings** in the Android app and tap **Clear cache** so it drops the saved word bank and reloads `/api/quiz-data`. You can also force-stop the app.
+
+## Typed answers and saved examples
+
+On phones and tablets, grammar and article quizzes use a text field and **Check answer**. Vocabulary starts with multiple choice; after answering a word once, its next regular-quiz appearance asks you to spell the German or French term from its English meaning. Include the article when the learned term includes one. Either form of a slash-separated alternative is accepted. Capitalization, whitespace, and curly apostrophes are tolerated; accents and grammatical endings still matter.
+
+Android TV keeps multiple-choice answers in every category. Vocabulary exposure is saved only in Android SharedPreferences (`vocabulary_practice`), across app restarts, without server-side learner state. Clearing the downloadable word-bank cache keeps this learning progress; clearing the app's storage resets it.
+
+Vocabulary supports optional `exampleSentence` and `exampleTranslation` fields in the seed/API, stored as `example_sentence` and `example_translation` in SQLite. Edit them in the word-bank admin form. Saved examples appear after answering on both handhelds and TV and remain available offline with the cached word bank.
+
+The server adds the example columns automatically, imports missing vocabulary, and imports seed questions marked `sync: true` on startup. Existing saved examples are preserved, including examples removed from seed; edit those explicitly in `/admin`. Restart the updated server (rebuild the Docker image when applicable) and refresh the Android word bank to receive new content; no database deletion is needed.
 
 ## Trip quizzes
 

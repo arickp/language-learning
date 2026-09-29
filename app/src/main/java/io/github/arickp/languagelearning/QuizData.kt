@@ -60,6 +60,12 @@ data class QuizItem(
     val dateAdded: String? = null,
     val explicit: Boolean = false,
     val emoji: String? = null,
+    val exampleSentence: String? = null,
+    val exampleTranslation: String? = null,
+    /** Present only for seed vocabulary, where the target-language answer is known. */
+    val vocabularyTerm: String? = null,
+    val spelling: Boolean = false,
+    val assistedSpelling: Boolean = false,
     /** Answer decoys supplied with the question; when empty the shared word bank is used instead. */
     val distractors: List<String> = emptyList()
 )
@@ -149,6 +155,9 @@ object QuizData {
                 spokenText = term,
                 dateAdded = dateAdded,
                 explicit = explicit,
+                vocabularyTerm = term,
+                exampleSentence = entry.optionalString("exampleSentence"),
+                exampleTranslation = entry.optionalString("exampleTranslation"),
                 emoji = emoji
             )
 
@@ -156,7 +165,7 @@ object QuizData {
             val noun = entry.optionalString("noun")
             if (article != null && noun != null) {
                 loaded += QuizItem(
-                    prompt = "Choose the article: ___ $noun",
+                    prompt = "Complete the article: ___ $noun",
                     answer = article,
                     category = QuizCategory.ARTICLES,
                     difficulty = difficulty,
@@ -167,7 +176,9 @@ object QuizData {
                     translation = translation,
                     spokenText = "$article $noun",
                     dateAdded = dateAdded,
-                    explicit = explicit
+                    explicit = explicit,
+                    exampleSentence = entry.optionalString("exampleSentence"),
+                    exampleTranslation = entry.optionalString("exampleTranslation")
                 )
             }
         }

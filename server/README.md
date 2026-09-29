@@ -96,7 +96,7 @@ Start the existing container again later:
 docker compose up -d
 ```
 
-Rebuild after changing the Rust code:
+Rebuild after changing Rust code **or packaged seed files**:
 
 ```bash
 docker compose up --build -d
@@ -153,5 +153,6 @@ Why port `41082`? “Four, hex for L, two—get it?” It is a tiny language-lea
 - **Permission error from OpenAI:** Confirm the key has **Responses: Write** and/or **Audio/Speech: Write**, depending on the feature.
 - **Connection refused:** Check the address and port, and allow incoming connections if the macOS firewall prompts you.
 - **Lookup limit reached:** Restart the server to reset its in-memory counters, or deliberately raise the corresponding limit in `.env`.
-- **Word bank still has old or admin-edited entries:** Restarting does not rebuild SQLite from `seed/quiz_data.json`. Stop the helper, delete `data/language-learning.db` (and `-wal` / `-shm` if present), then start again. With Docker Compose, remove the `language-learning-data` volume. See the root README section **Reset the word bank to the seed file**.
+- **Word bank still has old entries:** Startup loads `seed/manifest.json` and its referenced files (override with `SEED_MANIFEST_PATH`). SQLite is updated non-destructively: missing vocabulary and sync-marked questions are inserted, NULL emojis/examples are filled, and core/sync metadata is refreshed. Removed seed rows and existing saved examples/emojis are not deleted or replaced automatically. Back up SQLite, remove specific unwanted entries or examples in `/admin`, and refresh the Android word-bank cache. Do not wipe the database for normal updates. See the root README **Customize the questions** for exact behavior and the optional destructive reset.
+- **Could not load seed manifest:** Deploy the complete referenced seed tree and launch from `server/`, or set `SEED_MANIFEST_PATH` to its absolute manifest path. Invalid/missing files stop startup before SQLite is opened. The Docker runtime includes the seed tree; rebuild the image after changing it.
 - **A cached pronunciation still plays after the server stops:** This is expected; previously generated audio is cached locally on the Android device.

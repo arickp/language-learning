@@ -1,4 +1,5 @@
 mod database;
+mod seed;
 
 use axum::{
     Form, Json, Router,
@@ -195,6 +196,10 @@ struct VocabularyInput {
     explicit: bool,
     #[serde(default)]
     emoji: Option<String>,
+    #[serde(default, alias = "exampleSentence")]
+    example_sentence: Option<String>,
+    #[serde(default, alias = "exampleTranslation")]
+    example_translation: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -310,13 +315,18 @@ async fn main() {
         .expect("MAX_PRACTICE_EVALUATIONS must be a number");
     let database_url =
         env::var("DATABASE_URL").unwrap_or_else(|_| "sqlite://data/language-learning.db".into());
+    let seed_path =
+        env::var("SEED_MANIFEST_PATH").unwrap_or_else(|_| "seed/manifest.json".into());
+    let seed_json = seed::load(std::path::Path::new(&seed_path))
+        .unwrap_or_else(|error| panic!("could not load seed manifest {seed_path}: {error}"))
+        .to_string();
     let database = database::connect(&database_url)
         .await
         .expect("could not open SQLite database");
-    database::seed_if_empty(&database, include_str!("../seed/quiz_data.json"))
+    database::seed_if_empty(&database, &seed_json)
         .await
         .expect("could not import initial word bank");
-    database::sync_core_vocabulary(&database, include_str!("../seed/quiz_data.json"))
+    database::sync_core_vocabulary(&database, &seed_json)
         .await
         .expect("could not add core beginner vocabulary");
     let admin_token = env::var("ADMIN_TOKEN").unwrap_or_default();
@@ -1093,7 +1103,7 @@ async fn create_vocabulary(
     let date_added = clean_optional(input.date_added)
         .unwrap_or_else(|| chrono::Local::now().format("%Y-%m-%d").to_string());
     let result = sqlx::query(
-        "INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+        "INSERT INTO vocabulary(language,term,translation,article,noun,difficulty,variant,spoken_language,date_added,explicit,emoji,example_sentence,example_translation) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
     )
     .bind(&input.language)
     .bind(input.term.trim())
@@ -1106,6 +1116,8 @@ async fn create_vocabulary(
     .bind(date_added)
     .bind(if input.explicit { 1i64 } else { 0 })
     .bind(input.emoji.map(|emoji| emoji.trim().to_string()))
+    .bind(clean_optional(input.example_sentence))
+    .bind(clean_optional(input.example_translation))
     .execute(&state.database)
     .await
     .map_err(internal_error)?;
@@ -1126,7 +1138,7 @@ async fn update_vocabulary(
 ) -> Result<Json<Value>, (StatusCode, String)> {
     authorize(&headers, &state)?;
     sqlx::query(
-        "UPDATE vocabulary SET language=?,term=?,translation=?,article=?,noun=?,difficulty=?,variant=?,spoken_language=?,explicit=?,emoji=? WHERE id=?",
+        "UPDATE vocabulary SET language=?,term=?,translation=?,article=?,noun=?,difficulty=?,variant=?,spoken_language=?,explicit=?,emoji=?,example_sentence=?,example_translation=? WHERE id=?",
     )
     .bind(&input.language)
     .bind(input.term.trim())
@@ -1138,6 +1150,8 @@ async fn update_vocabulary(
     .bind(clean_optional(input.spoken_language))
     .bind(if input.explicit { 1i64 } else { 0 })
     .bind(input.emoji.map(|emoji| emoji.trim().to_string()))
+    .bind(clean_optional(input.example_sentence))
+    .bind(clean_optional(input.example_translation))
     .bind(id)
     .execute(&state.database)
     .await
