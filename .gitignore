@@ -31,3 +31,4 @@ server/data/
 **/.env.*
 !.env.example
 !**/.env.example
+credentials/**
