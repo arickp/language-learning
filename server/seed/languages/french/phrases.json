@@ -1,0 +1,510 @@
+[
+  {
+    "language": "FRENCH",
+    "term": "au revoir",
+    "translation": "goodbye",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "s'il vous plaît",
+    "translation": "please",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "Vapotage interdit",
+    "translation": "No vaping / Vaping prohibited",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "Est-ce qu'on peut vapoter ici ?",
+    "translation": "Is vaping allowed here?",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Sak pase?",
+    "translation": "What's up? / What's happening? (casual)",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "N ap boule.",
+    "translation": "We're hanging in there / doing okay (casual response)",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Mwen poze.",
+    "translation": "I'm chilling / taking it easy",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Kijan ou ye?",
+    "translation": "How are you?",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Mwen byen.",
+    "translation": "I'm well / I'm fine",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Pa gen pwoblèm.",
+    "translation": "No problem.",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Mèsi anpil.",
+    "translation": "Thank you very much.",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Ann ale!",
+    "translation": "Let's go!",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "de bonne humeur",
+    "translation": "in a good mood"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tout droit",
+    "translation": "straight ahead"
+  },
+  {
+    "language": "FRENCH",
+    "term": "là devant",
+    "translation": "up ahead"
+  },
+  {
+    "language": "FRENCH",
+    "term": "pas du tout",
+    "translation": "not at all"
+  },
+  {
+    "language": "FRENCH",
+    "term": "aucune idée",
+    "translation": "no idea"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bon appétit",
+    "translation": "enjoy your meal",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "pour la première fois",
+    "translation": "for the first time"
+  },
+  {
+    "language": "FRENCH",
+    "term": "au coin de la rue",
+    "translation": "around the corner"
+  },
+  {
+    "language": "FRENCH",
+    "term": "à l'heure",
+    "translation": "on time"
+  },
+  {
+    "language": "FRENCH",
+    "term": "c'est vrai",
+    "translation": "that's right / true"
+  },
+  {
+    "language": "FRENCH",
+    "term": "c'est pourquoi",
+    "translation": "therefore / that's why"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tout à fait",
+    "translation": "quite / pretty / whole"
+  },
+  {
+    "language": "FRENCH",
+    "term": "en ce moment",
+    "translation": "right now"
+  },
+  {
+    "language": "FRENCH",
+    "term": "à tout à l'heure",
+    "translation": "see you later",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "juste devant",
+    "translation": "right in front of it"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ouvertement LGBTQ+",
+    "translation": "out / openly LGBTQ+"
+  },
+  {
+    "language": "FRENCH",
+    "term": "dans le placard",
+    "translation": "not out / closeted"
+  },
+  {
+    "language": "FRENCH",
+    "term": "préféré + nom",
+    "translation": "favorite …"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le plus",
+    "translation": "the most"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bon marché",
+    "translation": "cheap"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ne t'inquiète pas",
+    "translation": "don't worry"
+  },
+  {
+    "language": "FRENCH",
+    "term": "encore une fois",
+    "translation": "again"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je prends",
+    "translation": "I take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bonne chance",
+    "translation": "good luck",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tu prends",
+    "translation": "you take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "il / elle prend",
+    "translation": "he / she / it takes"
+  },
+  {
+    "language": "FRENCH",
+    "term": "nous prenons",
+    "translation": "we take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "vous prenez",
+    "translation": "you all take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ils / elles prennent",
+    "translation": "they take / you formally take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je paie",
+    "translation": "I pay"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Regarde !",
+    "translation": "Look!"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je rends visite",
+    "translation": "I visit"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je ne sais pas",
+    "translation": "I do not know",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Je suis content.",
+    "translation": "I'm happy / I'm looking forward to it."
+  },
+  {
+    "language": "FRENCH",
+    "term": "j'étais",
+    "translation": "I was"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tu étais",
+    "translation": "you were"
+  },
+  {
+    "language": "FRENCH",
+    "term": "il / elle était",
+    "translation": "he / she / it was"
+  },
+  {
+    "language": "FRENCH",
+    "term": "nous étions",
+    "translation": "we were"
+  },
+  {
+    "language": "FRENCH",
+    "term": "vous étiez",
+    "translation": "you all were"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ils / elles étaient",
+    "translation": "they were / you formally were"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Parle-lui !",
+    "translation": "Talk to her!"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Fais le tour de la maison !",
+    "translation": "Look around the house!"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Je cherche …",
+    "translation": "I'm looking for …"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je deviens",
+    "translation": "I become / I will"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tu deviens",
+    "translation": "you become / you will"
+  },
+  {
+    "language": "FRENCH",
+    "term": "il / elle devient",
+    "translation": "he / she / it becomes or will"
+  },
+  {
+    "language": "FRENCH",
+    "term": "nous devenons",
+    "translation": "we become / we will"
+  },
+  {
+    "language": "FRENCH",
+    "term": "vous devenez",
+    "translation": "you all become / will"
+  },
+  {
+    "language": "FRENCH",
+    "term": "un moment, s'il vous plaît",
+    "translation": "one moment, please",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ils / elles deviennent",
+    "translation": "they become / you formally become"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il commence à faire froid.",
+    "translation": "It is getting cold."
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il va pleuvoir.",
+    "translation": "It will rain."
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il y a …",
+    "translation": "There is / there are …"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il y a un parc.",
+    "translation": "There is a park."
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il y a une boulangerie.",
+    "translation": "There is a bakery."
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il y a un musée.",
+    "translation": "There is a museum."
+  },
+  {
+    "language": "FRENCH",
+    "term": "comment allez-vous ?",
+    "translation": "how are you?",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Où est-ce qu'il y a un … ?",
+    "translation": "Where is there a …?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ça va bien",
+    "translation": "I am doing well",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Il y a même un …",
+    "translation": "There is even a …"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Je n'aime pas ça du tout.",
+    "translation": "I don't like that at all."
+  },
+  {
+    "language": "FRENCH",
+    "term": "Je reçois …",
+    "translation": "I get / receive …"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Je vous en prie !",
+    "translation": "You're welcome!",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Sans vouloir vous offenser.",
+    "translation": "No offense. / Without meaning to offend you.",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Merci de + infinitif",
+    "translation": "please do something (polite instruction)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Mon français est un travail en cours",
+    "translation": "My French is a work in progress",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "Au moins, j'essaie",
+    "translation": "At least I'm trying",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "à bientôt",
+    "translation": "see you soon",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "excusez-moi",
+    "translation": "excuse me",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "je ne comprends pas",
+    "translation": "I do not understand",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bonne journée",
+    "translation": "have a good day",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bonne nuit",
+    "translation": "good night",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "combien ça coûte",
+    "translation": "how much does it cost",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "à demain",
+    "translation": "see you tomorrow",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "formatVersion": 1,
+  "languages": {
+    "german": {
+      "vocabulary": {
+        "path": "languages/german/vocabulary.json"
+      },
+      "verbs": {
+        "path": "languages/german/verbs.json"
+      },
+      "grammar": {
+        "path": "languages/german/grammar.json"
+      },
+      "phrases": {
+        "path": "languages/german/phrases.json"
+      }
+    },
+    "french": {
+      "vocabulary": {
+        "path": "languages/french/vocabulary.json"
+      },
+      "verbs": {
+        "path": "languages/french/verbs.json"
+      },
+      "grammar": {
+        "path": "languages/french/grammar.json"
+      },
+      "phrases": {
+        "path": "languages/french/phrases.json"
+      }
+    }
+  },
+  "shared": {
+    "categories": {
+      "path": "shared/categories.json"
+    },
+    "levels": {
+      "path": "shared/levels.json"
+    },
+    "emojiByTranslation": {
+      "path": "shared/emoji_by_translation.json"
+    }
+  },
+  "notes": "Edit this file to add or change study material. language is GERMAN or FRENCH. Add article and noun to automatically create an article question. Optional dateAdded (YYYY-MM-DD) marks when a word was added so the app can quiz newest words first. Set explicit to true for sexual, vulgar, or NSFW vocabulary; the Android app hides those words unless the user allows explicit content. Optional emoji adds a visual marker; emojiByTranslation supplies shared defaults by English meaning."
+}

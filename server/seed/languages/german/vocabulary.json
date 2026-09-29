@@ -1,0 +1,3089 @@
+[
+  {
+    "term": "das Mädchen",
+    "translation": "girl",
+    "article": "das",
+    "noun": "Mädchen",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "der Junge",
+    "translation": "boy",
+    "article": "der",
+    "noun": "Junge",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "das Kind",
+    "translation": "child",
+    "article": "das",
+    "noun": "Kind",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Mutter",
+    "translation": "mother / mom",
+    "article": "die",
+    "noun": "Mutter",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "der Vater",
+    "translation": "father / dad",
+    "article": "der",
+    "noun": "Vater",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Familie",
+    "translation": "family",
+    "article": "die",
+    "noun": "Familie",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "das Haus",
+    "translation": "house / home",
+    "article": "das",
+    "noun": "Haus",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Schule",
+    "translation": "school",
+    "article": "die",
+    "noun": "Schule",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "der Freund",
+    "translation": "friend",
+    "article": "der",
+    "noun": "Freund",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Freundin",
+    "translation": "friend",
+    "article": "die",
+    "noun": "Freundin",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "der Hund",
+    "translation": "dog",
+    "article": "der",
+    "noun": "Hund",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Katze",
+    "translation": "cat",
+    "article": "die",
+    "noun": "Katze",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "das Wasser",
+    "translation": "water",
+    "article": "das",
+    "noun": "Wasser",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "das Essen",
+    "translation": "food",
+    "article": "das",
+    "noun": "Essen",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "das Auto",
+    "translation": "car",
+    "article": "das",
+    "noun": "Auto",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "Hallo",
+    "translation": "hello",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "Tschüss",
+    "translation": "goodbye",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "bitte",
+    "translation": "please",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "danke",
+    "translation": "thank you",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "ja",
+    "translation": "yes",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "nein",
+    "translation": "no",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "null",
+    "translation": "zero",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "eins",
+    "translation": "one",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "zwei",
+    "translation": "two",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "drei",
+    "translation": "three",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "vier",
+    "translation": "four",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "fünf",
+    "translation": "five",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "sechs",
+    "translation": "six",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "sieben",
+    "translation": "seven",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "acht",
+    "translation": "eight",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "neun",
+    "translation": "nine",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "zehn",
+    "translation": "ten",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "term": "die Dragqueen",
+    "translation": "drag queen / drag performer",
+    "article": "die",
+    "noun": "Dragqueen",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Deadname",
+    "translation": "a former name that a person no longer uses, especially a trans person's former name",
+    "article": "der",
+    "noun": "Deadname",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Throuple",
+    "translation": "throuple; a committed relationship among three people (informal)",
+    "article": "das",
+    "noun": "Throuple",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "polyamor",
+    "translation": "polyamorous; having consensual romantic relationships with more than one person",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "nichtbinär",
+    "translation": "nonbinary",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Pronomen",
+    "translation": "pronouns",
+    "article": "die",
+    "noun": "Pronomen",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "das Coming-out",
+    "translation": "coming out; telling others about one's identity or orientation",
+    "article": "das",
+    "noun": "Coming-out",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Wahlfamilie",
+    "translation": "chosen family",
+    "article": "die",
+    "noun": "Wahlfamilie",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "queer",
+    "translation": "queer; a broad identity term reclaimed by many LGBTQ+ people",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Regenbogenfamilie",
+    "translation": "rainbow family; a family with one or more LGBTQ+ parents",
+    "article": "die",
+    "noun": "Regenbogenfamilie",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "das Mettbrötchen",
+    "translation": "bread roll with raw minced pork",
+    "article": "das",
+    "noun": "Mettbrötchen",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Schnitzel",
+    "translation": "breaded cutlet / schnitzel",
+    "article": "das",
+    "noun": "Schnitzel",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "der Döner",
+    "translation": "döner kebab",
+    "article": "der",
+    "noun": "Döner",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "die Autobahn",
+    "translation": "motorway / freeway",
+    "article": "die",
+    "noun": "Autobahn",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "der E-Scooter",
+    "translation": "electric kick scooter, such as a Lime scooter",
+    "article": "der",
+    "noun": "E-Scooter",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "das E-Bike",
+    "translation": "electric bicycle / e-bike",
+    "article": "das",
+    "noun": "E-Bike",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "der Fahrdienst",
+    "translation": "ride service / hired-car service, such as Uber",
+    "article": "der",
+    "noun": "Fahrdienst",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Fahrdienst-App",
+    "translation": "ride-hailing app",
+    "article": "die",
+    "noun": "Fahrdienst-App",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Mitfahrgelegenheit",
+    "translation": "a carpool or opportunity to ride with someone going the same way",
+    "article": "die",
+    "noun": "Mitfahrgelegenheit",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Carsharing",
+    "translation": "short-term shared-car rental / car sharing",
+    "article": "das",
+    "noun": "Carsharing",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die E-Zigarette",
+    "translation": "electronic cigarette / e-cigarette",
+    "article": "die",
+    "noun": "E-Zigarette",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "die Vape",
+    "translation": "vape / vaping device (informal)",
+    "article": "die",
+    "noun": "Vape",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "das Liquid",
+    "translation": "vape liquid / e-liquid",
+    "article": "das",
+    "noun": "Liquid",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "die Einweg-E-Zigarette",
+    "translation": "disposable vape / disposable e-cigarette",
+    "article": "die",
+    "noun": "Einweg-E-Zigarette",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "nikotinfrei",
+    "translation": "nicotine-free",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "der Raucherbereich",
+    "translation": "designated smoking area",
+    "article": "der",
+    "noun": "Raucherbereich",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "der Nichtraucherbereich",
+    "translation": "non-smoking area",
+    "article": "der",
+    "noun": "Nichtraucherbereich",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "der Mettigel",
+    "translation": "hedgehog-shaped dish of raw minced pork",
+    "article": "der",
+    "noun": "Mettigel",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Labskaus",
+    "translation": "northern German mash of corned beef, potatoes, and beetroot",
+    "article": "der",
+    "noun": "Labskaus",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Eisbein",
+    "translation": "cured or boiled pork knuckle",
+    "article": "das",
+    "noun": "Eisbein",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die DDR",
+    "translation": "East Germany (officially, the German Democratic Republic)",
+    "article": "die",
+    "noun": "DDR",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "der Kommunismus",
+    "translation": "communism",
+    "article": "der",
+    "noun": "Kommunismus",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Sozialismus",
+    "translation": "socialism",
+    "article": "der",
+    "noun": "Sozialismus",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Genosse",
+    "translation": "male comrade; also a fellow party member",
+    "article": "der",
+    "noun": "Genosse",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Genossin",
+    "translation": "female comrade; also a fellow party member",
+    "article": "die",
+    "noun": "Genossin",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Planwirtschaft",
+    "translation": "planned economy",
+    "article": "die",
+    "noun": "Planwirtschaft",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Fünfjahrplan",
+    "translation": "five-year plan",
+    "article": "der",
+    "noun": "Fünfjahrplan",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Volkseigentum",
+    "translation": "state or collectively owned property (historical East German term)",
+    "article": "das",
+    "noun": "Volkseigentum",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der volkseigene Betrieb",
+    "translation": "publicly owned enterprise in East Germany (VEB)",
+    "article": "der",
+    "noun": "volkseigene Betrieb",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die Stasi",
+    "translation": "East Germany's Ministry for State Security / secret police",
+    "article": "die",
+    "noun": "Stasi",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Berliner Mauer",
+    "translation": "the Berlin Wall",
+    "article": "die",
+    "noun": "Berliner Mauer",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "term": "die Republikflucht",
+    "translation": "unauthorized emigration from East Germany (official historical term)",
+    "article": "die",
+    "noun": "Republikflucht",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Intershop",
+    "translation": "East German shop selling scarce imported goods for Western currency",
+    "article": "der",
+    "noun": "Intershop",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "das Westpaket",
+    "translation": "care package sent from West Germany to East Germany",
+    "article": "das",
+    "noun": "Westpaket",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Lampe",
+    "translation": "lamp",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Lampe"
+  },
+  {
+    "term": "der Trabi",
+    "translation": "nickname for a Trabant car from East Germany",
+    "article": "der",
+    "noun": "Trabi",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Plattenbau",
+    "translation": "prefabricated concrete apartment building",
+    "article": "der",
+    "noun": "Plattenbau",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Jugendweihe",
+    "translation": "secular coming-of-age ceremony, strongly promoted in East Germany",
+    "article": "die",
+    "noun": "Jugendweihe",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Thälmannpionier",
+    "translation": "member of East Germany's Thälmann Pioneer youth organization",
+    "article": "der",
+    "noun": "Thälmannpionier",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Arbeiter-und-Bauern-Staat",
+    "translation": "workers' and peasants' state (official ideological phrase)",
+    "article": "der",
+    "noun": "Arbeiter-und-Bauern-Staat",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die Mangelwirtschaft",
+    "translation": "economy characterized by chronic shortages",
+    "article": "die",
+    "noun": "Mangelwirtschaft",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die Ostalgie",
+    "translation": "nostalgia for aspects of life and culture in East Germany",
+    "article": "die",
+    "noun": "Ostalgie",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die Wende",
+    "translation": "the political turning point surrounding the end of East Germany",
+    "article": "die",
+    "noun": "Wende",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "die Wiedervereinigung",
+    "translation": "German reunification",
+    "article": "die",
+    "noun": "Wiedervereinigung",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Broiler",
+    "translation": "roast chicken (distinctive East German usage)",
+    "article": "der",
+    "noun": "Broiler",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "der Schallplattenunterhalter",
+    "translation": "disc jockey / DJ (official East German term)",
+    "article": "der",
+    "noun": "Schallplattenunterhalter",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "die Krusta",
+    "translation": "thick-crust pizza-like dish from East Germany",
+    "article": "die",
+    "noun": "Krusta",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der antifaschistische Schutzwall",
+    "translation": "“anti-fascist protective rampart,” East German propaganda term for the Berlin Wall",
+    "article": "der",
+    "noun": "antifaschistische Schutzwall",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "der Paradeiser",
+    "translation": "tomato (Austrian German; Tomate in Germany)",
+    "article": "der",
+    "noun": "Paradeiser",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "der Erdapfel",
+    "translation": "potato (Austrian German; Kartoffel in Germany)",
+    "article": "der",
+    "noun": "Erdapfel",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "das Sackerl",
+    "translation": "small bag (Austrian German; Tüte in Germany)",
+    "article": "das",
+    "noun": "Sackerl",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "der Jänner",
+    "translation": "January (Austrian German; Januar in Germany)",
+    "article": "der",
+    "noun": "Jänner",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "die Marille",
+    "translation": "apricot (Austrian German; Aprikose in Germany)",
+    "article": "die",
+    "noun": "Marille",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "der Topfen",
+    "translation": "quark / fresh curd cheese (Austrian German)",
+    "article": "der",
+    "noun": "Topfen",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "das Schlagobers",
+    "translation": "whipped cream (Austrian German; Schlagsahne in Germany)",
+    "article": "das",
+    "noun": "Schlagobers",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "das Stiegenhaus",
+    "translation": "stairwell (Austrian German; Treppenhaus in Germany)",
+    "article": "das",
+    "noun": "Stiegenhaus",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "der Mistkübel",
+    "translation": "trash can (Austrian German; Mülleimer in Germany)",
+    "article": "der",
+    "noun": "Mistkübel",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "die Palatschinke",
+    "translation": "thin pancake / crêpe (Austrian German)",
+    "article": "die",
+    "noun": "Palatschinke",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "das Gewand",
+    "translation": "clothing (common Austrian usage; literally garment in Germany)",
+    "article": "das",
+    "noun": "Gewand",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "heuer",
+    "translation": "this year (Austrian German)",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "leiwand",
+    "translation": "great / awesome (casual Austrian German)",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Velo",
+    "translation": "bicycle (Swiss German; Fahrrad in Germany)",
+    "article": "das",
+    "noun": "Velo",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Natel",
+    "translation": "mobile phone (traditional Swiss usage; Handy in Germany)",
+    "article": "das",
+    "noun": "Natel",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "der Töff",
+    "translation": "motorcycle (Swiss German; Motorrad in Germany)",
+    "article": "der",
+    "noun": "Töff",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Billet",
+    "translation": "ticket (Swiss German; Fahrkarte or Ticket in Germany)",
+    "article": "das",
+    "noun": "Billet",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Spital",
+    "translation": "hospital (Swiss German; Krankenhaus in Germany)",
+    "article": "das",
+    "noun": "Spital",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "der Rahm",
+    "translation": "cream (Swiss German; Sahne in Germany)",
+    "article": "der",
+    "noun": "Rahm",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Rüebli",
+    "translation": "carrot (Swiss German; Karotte or Möhre in Germany)",
+    "article": "das",
+    "noun": "Rüebli",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Gipfeli",
+    "translation": "Swiss crescent-shaped pastry / croissant",
+    "article": "das",
+    "noun": "Gipfeli",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Poulet",
+    "translation": "chicken (Swiss German; Hähnchen in Germany)",
+    "article": "das",
+    "noun": "Poulet",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Znüni",
+    "translation": "mid-morning snack (Swiss German)",
+    "article": "das",
+    "noun": "Znüni",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Zvieri",
+    "translation": "afternoon snack (Swiss German)",
+    "article": "das",
+    "noun": "Zvieri",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "die Peperoni",
+    "translation": "bell pepper (Swiss usage; may mean hot chili in Germany)",
+    "article": "die",
+    "noun": "Peperoni",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "das Chuchichäschtli",
+    "translation": "kitchen cupboard (iconic Swiss German dialect word)",
+    "article": "das",
+    "noun": "Chuchichäschtli",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "wer",
+    "translation": "who"
+  },
+  {
+    "term": "der Tourist",
+    "translation": "tourist",
+    "article": "der",
+    "noun": "Tourist"
+  },
+  {
+    "term": "die Touristin",
+    "translation": "female tourist",
+    "article": "die",
+    "noun": "Touristin"
+  },
+  {
+    "term": "die Touristen",
+    "translation": "tourists",
+    "article": "die",
+    "noun": "Touristen"
+  },
+  {
+    "term": "ordentlich",
+    "translation": "neat / orderly / clean"
+  },
+  {
+    "term": "sauber",
+    "translation": "clean"
+  },
+  {
+    "term": "wichtig",
+    "translation": "important"
+  },
+  {
+    "term": "fast",
+    "translation": "almost"
+  },
+  {
+    "term": "gemein",
+    "translation": "mean"
+  },
+  {
+    "term": "wahrscheinlich",
+    "translation": "probably"
+  },
+  {
+    "term": "sicher",
+    "translation": "safe / sure / certain"
+  },
+  {
+    "term": "gefährlich",
+    "translation": "dangerous"
+  },
+  {
+    "term": "geradeaus",
+    "translation": "straight ahead"
+  },
+  {
+    "term": "geschlossen",
+    "translation": "closed"
+  },
+  {
+    "term": "langweilig",
+    "translation": "boring"
+  },
+  {
+    "term": "müde",
+    "translation": "tired"
+  },
+  {
+    "term": "bestimmt",
+    "translation": "definitely / certainly / probably"
+  },
+  {
+    "term": "leer",
+    "translation": "empty"
+  },
+  {
+    "term": "dort",
+    "translation": "there"
+  },
+  {
+    "term": "pünktlich",
+    "translation": "on time"
+  },
+  {
+    "term": "darum",
+    "translation": "therefore / that's why"
+  },
+  {
+    "term": "selten",
+    "translation": "rarely / seldom"
+  },
+  {
+    "term": "gestern",
+    "translation": "yesterday"
+  },
+  {
+    "term": "genug",
+    "translation": "enough"
+  },
+  {
+    "term": "schwer",
+    "translation": "hard / difficult / heavy"
+  },
+  {
+    "term": "ganz",
+    "translation": "quite / pretty / whole"
+  },
+  {
+    "term": "gerade",
+    "translation": "right now"
+  },
+  {
+    "term": "vielleicht",
+    "translation": "maybe"
+  },
+  {
+    "term": "geoutet",
+    "translation": "out / openly LGBTQ+"
+  },
+  {
+    "term": "ungeoutet",
+    "translation": "not out / closeted"
+  },
+  {
+    "term": "weniger",
+    "translation": "less / fewer"
+  },
+  {
+    "term": "komisch",
+    "translation": "strange / weird / funny"
+  },
+  {
+    "term": "billig",
+    "translation": "cheap"
+  },
+  {
+    "term": "nett",
+    "translation": "nice / kind"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Löffel",
+    "translation": "spoon",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Löffel"
+  },
+  {
+    "term": "fertig",
+    "translation": "finished / ready"
+  },
+  {
+    "term": "verloren",
+    "translation": "lost / doomed"
+  },
+  {
+    "term": "nochmal",
+    "translation": "again"
+  },
+  {
+    "term": "der Pullover",
+    "translation": "sweater",
+    "article": "der",
+    "noun": "Pullover"
+  },
+  {
+    "term": "der Teppich",
+    "translation": "carpet",
+    "article": "der",
+    "noun": "Teppich"
+  },
+  {
+    "term": "der Snack",
+    "translation": "snack",
+    "article": "der",
+    "noun": "Snack"
+  },
+  {
+    "term": "der Hut",
+    "translation": "hat",
+    "article": "der",
+    "noun": "Hut"
+  },
+  {
+    "term": "der Handschuh",
+    "translation": "glove",
+    "article": "der",
+    "noun": "Handschuh"
+  },
+  {
+    "term": "der Käse",
+    "translation": "cheese",
+    "article": "der",
+    "noun": "Käse"
+  },
+  {
+    "term": "der Schnee",
+    "translation": "snow",
+    "article": "der",
+    "noun": "Schnee"
+  },
+  {
+    "term": "der Stift",
+    "translation": "pen",
+    "article": "der",
+    "noun": "Stift"
+  },
+  {
+    "term": "der Kiosk",
+    "translation": "kiosk",
+    "article": "der",
+    "noun": "Kiosk"
+  },
+  {
+    "term": "der Bioladen",
+    "translation": "organic food shop",
+    "article": "der",
+    "noun": "Bioladen"
+  },
+  {
+    "term": "der Park",
+    "translation": "park",
+    "article": "der",
+    "noun": "Park"
+  },
+  {
+    "term": "der Flughafen",
+    "translation": "airport",
+    "article": "der",
+    "noun": "Flughafen"
+  },
+  {
+    "term": "der Bahnhof",
+    "translation": "train station",
+    "article": "der",
+    "noun": "Bahnhof"
+  },
+  {
+    "term": "der Bus",
+    "translation": "bus",
+    "article": "der",
+    "noun": "Bus"
+  },
+  {
+    "term": "der Bericht",
+    "translation": "report / narrative",
+    "article": "der",
+    "noun": "Bericht"
+  },
+  {
+    "term": "der Imbiss",
+    "translation": "snack bar / takeaway stand",
+    "article": "der",
+    "noun": "Imbiss"
+  },
+  {
+    "term": "der Ball",
+    "translation": "ball",
+    "article": "der",
+    "noun": "Ball"
+  },
+  {
+    "term": "der See",
+    "translation": "lake",
+    "article": "der",
+    "noun": "See"
+  },
+  {
+    "term": "der Feiertag",
+    "translation": "public holiday",
+    "article": "der",
+    "noun": "Feiertag"
+  },
+  {
+    "term": "der Urlaub",
+    "translation": "vacation / holiday",
+    "article": "der",
+    "noun": "Urlaub"
+  },
+  {
+    "term": "der Kurs",
+    "translation": "class / course",
+    "article": "der",
+    "noun": "Kurs"
+  },
+  {
+    "term": "der Kunde",
+    "translation": "customer",
+    "article": "der",
+    "noun": "Kunde"
+  },
+  {
+    "term": "der Schrank",
+    "translation": "closet / cabinet",
+    "article": "der",
+    "noun": "Schrank"
+  },
+  {
+    "term": "der Staubsauger",
+    "translation": "vacuum cleaner",
+    "article": "der",
+    "noun": "Staubsauger"
+  },
+  {
+    "term": "der Reis",
+    "translation": "rice",
+    "article": "der",
+    "noun": "Reis"
+  },
+  {
+    "term": "der Supermarkt",
+    "translation": "supermarket",
+    "article": "der",
+    "noun": "Supermarkt",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "der Knödel",
+    "translation": "dumpling",
+    "article": "der",
+    "noun": "Knödel"
+  },
+  {
+    "term": "der Rentner",
+    "translation": "retiree",
+    "article": "der",
+    "noun": "Rentner"
+  },
+  {
+    "term": "die Seife",
+    "translation": "soap",
+    "article": "die",
+    "noun": "Seife"
+  },
+  {
+    "term": "die Mütze",
+    "translation": "beanie / knit cap",
+    "article": "die",
+    "noun": "Mütze"
+  },
+  {
+    "term": "die Kappe",
+    "translation": "cap",
+    "article": "die",
+    "noun": "Kappe"
+  },
+  {
+    "term": "die Blume",
+    "translation": "flower",
+    "article": "die",
+    "noun": "Blume"
+  },
+  {
+    "term": "die Stadt",
+    "translation": "city",
+    "article": "die",
+    "noun": "Stadt"
+  },
+  {
+    "term": "die Bank",
+    "translation": "bank / bench",
+    "article": "die",
+    "noun": "Bank"
+  },
+  {
+    "term": "die Straßenbahn",
+    "translation": "tram / streetcar",
+    "article": "die",
+    "noun": "Straßenbahn"
+  },
+  {
+    "term": "die Bäckerei",
+    "translation": "bakery",
+    "article": "die",
+    "noun": "Bäckerei"
+  },
+  {
+    "term": "die Post",
+    "translation": "mail / post office",
+    "article": "die",
+    "noun": "Post"
+  },
+  {
+    "term": "die Sprache",
+    "translation": "language",
+    "article": "die",
+    "noun": "Sprache"
+  },
+  {
+    "term": "die Moschee",
+    "translation": "mosque",
+    "article": "die",
+    "noun": "Moschee"
+  },
+  {
+    "term": "die Kirche",
+    "translation": "church",
+    "article": "die",
+    "noun": "Kirche"
+  },
+  {
+    "term": "die Synagoge",
+    "translation": "synagogue",
+    "article": "die",
+    "noun": "Synagoge"
+  },
+  {
+    "term": "die Tankstelle",
+    "translation": "gas / petrol station",
+    "article": "die",
+    "noun": "Tankstelle"
+  },
+  {
+    "term": "die Bushaltestelle",
+    "translation": "bus stop",
+    "article": "die",
+    "noun": "Bushaltestelle"
+  },
+  {
+    "term": "die Prüfung",
+    "translation": "exam",
+    "article": "die",
+    "noun": "Prüfung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Jacke",
+    "translation": "jacket",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Jacke"
+  },
+  {
+    "term": "die Karte",
+    "translation": "card / map",
+    "article": "die",
+    "noun": "Karte",
+    "exampleSentence": "Karte oder bar?",
+    "exampleTranslation": "Card or cash?"
+  },
+  {
+    "term": "die Pizza",
+    "translation": "pizza",
+    "article": "die",
+    "noun": "Pizza"
+  },
+  {
+    "term": "die See",
+    "translation": "sea",
+    "article": "die",
+    "noun": "See"
+  },
+  {
+    "term": "die Kunst",
+    "translation": "art",
+    "article": "die",
+    "noun": "Kunst"
+  },
+  {
+    "term": "die Brücke",
+    "translation": "bridge",
+    "article": "die",
+    "noun": "Brücke"
+  },
+  {
+    "term": "die Vorlesung",
+    "translation": "lecture",
+    "article": "die",
+    "noun": "Vorlesung"
+  },
+  {
+    "term": "die Traube",
+    "translation": "grape",
+    "article": "die",
+    "noun": "Traube"
+  },
+  {
+    "term": "die Drogerie",
+    "translation": "drugstore",
+    "article": "die",
+    "noun": "Drogerie"
+  },
+  {
+    "term": "die Farbe",
+    "translation": "color",
+    "article": "die",
+    "noun": "Farbe"
+  },
+  {
+    "term": "die Zahnbürste",
+    "translation": "toothbrush",
+    "article": "die",
+    "noun": "Zahnbürste"
+  },
+  {
+    "term": "die Tüte",
+    "translation": "grocery bag",
+    "article": "die",
+    "noun": "Tüte"
+  },
+  {
+    "term": "die Teigtasche",
+    "translation": "filled dough pocket / dumpling",
+    "article": "die",
+    "noun": "Teigtasche"
+  },
+  {
+    "term": "die Sache",
+    "translation": "thing / matter / issue",
+    "article": "die",
+    "noun": "Sache"
+  },
+  {
+    "term": "die Geschichte",
+    "translation": "history / story",
+    "article": "die",
+    "noun": "Geschichte"
+  },
+  {
+    "term": "die Ferien",
+    "translation": "school holidays / vacation period",
+    "article": "die",
+    "noun": "Ferien"
+  },
+  {
+    "term": "das Puzzle",
+    "translation": "puzzle",
+    "article": "das",
+    "noun": "Puzzle"
+  },
+  {
+    "term": "das Spielzeug",
+    "translation": "toy",
+    "article": "das",
+    "noun": "Spielzeug"
+  },
+  {
+    "term": "das Buch",
+    "translation": "book",
+    "article": "das",
+    "noun": "Buch"
+  },
+  {
+    "term": "das Geschenk",
+    "translation": "gift",
+    "article": "das",
+    "noun": "Geschenk"
+  },
+  {
+    "term": "das Schloss",
+    "translation": "castle / lock",
+    "article": "das",
+    "noun": "Schloss"
+  },
+  {
+    "term": "das Gebäude",
+    "translation": "building / structure",
+    "article": "das",
+    "noun": "Gebäude"
+  },
+  {
+    "term": "das Gemüse",
+    "translation": "vegetables",
+    "article": "das",
+    "noun": "Gemüse"
+  },
+  {
+    "term": "das Krankenhaus",
+    "translation": "hospital",
+    "article": "das",
+    "noun": "Krankenhaus"
+  },
+  {
+    "term": "das Konzert",
+    "translation": "concert",
+    "article": "das",
+    "noun": "Konzert"
+  },
+  {
+    "term": "das Theater",
+    "translation": "theater",
+    "article": "das",
+    "noun": "Theater"
+  },
+  {
+    "term": "das Schwimmbad",
+    "translation": "swimming pool",
+    "article": "das",
+    "noun": "Schwimmbad"
+  },
+  {
+    "term": "das Fenster",
+    "translation": "window",
+    "article": "das",
+    "noun": "Fenster"
+  },
+  {
+    "term": "das Museum",
+    "translation": "museum",
+    "article": "das",
+    "noun": "Museum"
+  },
+  {
+    "term": "das Meer",
+    "translation": "sea",
+    "article": "das",
+    "noun": "Meer"
+  },
+  {
+    "term": "das Viertel",
+    "translation": "quarter / neighborhood",
+    "article": "das",
+    "noun": "Viertel"
+  },
+  {
+    "term": "das Restaurant",
+    "translation": "restaurant",
+    "article": "das",
+    "noun": "Restaurant"
+  },
+  {
+    "term": "das Kaufhaus",
+    "translation": "department store",
+    "article": "das",
+    "noun": "Kaufhaus"
+  },
+  {
+    "term": "das Thema",
+    "translation": "topic / theme",
+    "article": "das",
+    "noun": "Thema"
+  },
+  {
+    "term": "das Shampoo",
+    "translation": "shampoo",
+    "article": "das",
+    "noun": "Shampoo"
+  },
+  {
+    "term": "das Geschäft",
+    "translation": "store / business",
+    "article": "das",
+    "noun": "Geschäft"
+  },
+  {
+    "term": "das Heft",
+    "translation": "notebook / exercise book",
+    "article": "das",
+    "noun": "Heft"
+  },
+  {
+    "term": "das Handy",
+    "translation": "mobile phone / cell phone",
+    "article": "das",
+    "noun": "Handy"
+  },
+  {
+    "term": "das Smartphone",
+    "translation": "smartphone",
+    "article": "das",
+    "noun": "Smartphone"
+  },
+  {
+    "term": "das Ladegerät",
+    "translation": "charger",
+    "article": "das",
+    "noun": "Ladegerät"
+  },
+  {
+    "term": "das Ladekabel",
+    "translation": "charging cable",
+    "article": "das",
+    "noun": "Ladekabel"
+  },
+  {
+    "term": "der Akku",
+    "translation": "rechargeable battery",
+    "article": "der",
+    "noun": "Akku"
+  },
+  {
+    "term": "der Bildschirm",
+    "translation": "screen",
+    "article": "der",
+    "noun": "Bildschirm"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Zeitung",
+    "translation": "newspaper",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Zeitung"
+  },
+  {
+    "term": "die App",
+    "translation": "app",
+    "article": "die",
+    "noun": "App"
+  },
+  {
+    "term": "die Nachricht",
+    "translation": "message / notification",
+    "article": "die",
+    "noun": "Nachricht"
+  },
+  {
+    "term": "die Kopfhörer",
+    "translation": "headphones",
+    "article": "die",
+    "noun": "Kopfhörer"
+  },
+  {
+    "term": "die Steckdose",
+    "translation": "electrical outlet",
+    "article": "die",
+    "noun": "Steckdose"
+  },
+  {
+    "term": "das WLAN",
+    "translation": "Wi-Fi",
+    "article": "das",
+    "noun": "WLAN"
+  },
+  {
+    "term": "verheiratet",
+    "translation": "married",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "verschieden",
+    "translation": "various / different",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "herunter",
+    "translation": "down",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "damit",
+    "translation": "with it / with that / so that",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "arm",
+    "translation": "poor",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Armen",
+    "translation": "the poor",
+    "article": "die",
+    "noun": "Armen",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "deswegen",
+    "translation": "therefore / because of this",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "rückständig",
+    "translation": "backwards / behind the times",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "geheim",
+    "translation": "secret",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "überrascht",
+    "translation": "surprised",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Knochen",
+    "translation": "bone",
+    "article": "der",
+    "noun": "Knochen",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Zustand",
+    "translation": "state / condition / situation",
+    "article": "der",
+    "noun": "Zustand",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Brauch",
+    "translation": "custom / tradition",
+    "article": "der",
+    "noun": "Brauch",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Art",
+    "translation": "kind / sort / type",
+    "article": "die",
+    "noun": "Art",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Wahl",
+    "translation": "choice / election",
+    "article": "die",
+    "noun": "Wahl",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Anreise",
+    "translation": "arrival / journey there",
+    "article": "die",
+    "noun": "Anreise",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Feier",
+    "translation": "celebration / party",
+    "article": "die",
+    "noun": "Feier",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Kerze",
+    "translation": "candle",
+    "article": "die",
+    "noun": "Kerze",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Torte",
+    "translation": "cake / torte",
+    "article": "die",
+    "noun": "Torte",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "das Pfand",
+    "translation": "deposit (such as a bottle deposit)",
+    "article": "das",
+    "noun": "Pfand",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die USA",
+    "translation": "the USA",
+    "article": "die",
+    "noun": "USA",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Kaste",
+    "translation": "caste",
+    "article": "die",
+    "noun": "Kaste",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "das Kastensystem",
+    "translation": "caste system",
+    "article": "das",
+    "noun": "Kastensystem",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Berg",
+    "translation": "mountain",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Berg"
+  },
+  {
+    "term": "das Fleisch",
+    "translation": "meat",
+    "article": "das",
+    "noun": "Fleisch",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "das Fett",
+    "translation": "fat",
+    "article": "das",
+    "noun": "Fett",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Fettstreifen",
+    "translation": "strip of fat",
+    "article": "der",
+    "noun": "Fettstreifen",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Bauer",
+    "translation": "farmer / peasant",
+    "article": "der",
+    "noun": "Bauer",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Plebejer",
+    "translation": "plebeian / commoner",
+    "article": "der",
+    "noun": "Plebejer",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Klasse",
+    "translation": "class",
+    "article": "die",
+    "noun": "Klasse",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Europäer",
+    "translation": "European",
+    "article": "der",
+    "noun": "Europäer",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "schlecht",
+    "translation": "bad / poor (quality)",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Anteil",
+    "translation": "share / percentage / portion",
+    "article": "der",
+    "noun": "Anteil",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Preis",
+    "translation": "price",
+    "article": "der",
+    "noun": "Preis",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Leute",
+    "translation": "people",
+    "article": "die",
+    "noun": "Leute",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "der Rest",
+    "translation": "rest / leftover",
+    "article": "der",
+    "noun": "Rest",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "die Hundereste",
+    "translation": "scraps for dogs / leftover meat fit only for dogs",
+    "article": "die",
+    "noun": "Hundereste",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "hoch",
+    "translation": "high / tall / up",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "leise",
+    "translation": "quiet / softly",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "bekannt",
+    "translation": "well known / familiar",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "erleichtert",
+    "translation": "relieved",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "zufrieden",
+    "translation": "satisfied / content",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "aufgeregt",
+    "translation": "excited / nervous",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "gemütlich",
+    "translation": "cozy / comfortable",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "hoffentlich",
+    "translation": "hopefully",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "die Ruhe",
+    "translation": "quiet / calm / peace",
+    "article": "die",
+    "noun": "Ruhe",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "die Reise",
+    "translation": "trip / journey",
+    "article": "die",
+    "noun": "Reise",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "die Folge",
+    "translation": "episode / consequence",
+    "article": "die",
+    "noun": "Folge",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "das Regal",
+    "translation": "shelf",
+    "article": "das",
+    "noun": "Regal",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "das Denkmal",
+    "translation": "monument / memorial",
+    "article": "das",
+    "noun": "Denkmal",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "das Ohr",
+    "translation": "ear",
+    "article": "das",
+    "noun": "Ohr",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "das Rathaus",
+    "translation": "city hall",
+    "article": "das",
+    "noun": "Rathaus",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "durch",
+    "translation": "through",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "für",
+    "translation": "for",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "gegen",
+    "translation": "against",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "ohne",
+    "translation": "without",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "um",
+    "translation": "around / at (a time)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "dieser",
+    "translation": "this (masculine nominative)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "diese",
+    "translation": "this / these (feminine or plural nominative)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "dieses",
+    "translation": "this (neuter nominative)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "term": "früh",
+    "translation": "early",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "möglich",
+    "translation": "possible",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "kompliziert",
+    "translation": "complicated",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "bequem",
+    "translation": "comfortable / convenient",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "gleich",
+    "translation": "soon / in a moment",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "sondern",
+    "translation": "but rather",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "schwach",
+    "translation": "weak",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "meistens",
+    "translation": "usually / mostly",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "sonst",
+    "translation": "otherwise",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "wach",
+    "translation": "awake",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "stark",
+    "translation": "strong",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "nervig",
+    "translation": "annoying",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "breit",
+    "translation": "wide / broad",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "beide",
+    "translation": "both",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Beides geht.",
+    "exampleTranslation": "Either one works."
+  },
+  {
+    "language": "GERMAN",
+    "term": "falsch",
+    "translation": "wrong / incorrect / false",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "noch",
+    "translation": "still / yet",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "eigentlich",
+    "translation": "actually",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "sofort",
+    "translation": "immediately",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "langsamer",
+    "translation": "more slowly",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Kannst du etwas langsamer sprechen?",
+    "exampleTranslation": "Can you speak a little more slowly?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "nur",
+    "translation": "only",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Nur bar.",
+    "exampleTranslation": "Cash only."
+  },
+  {
+    "language": "GERMAN",
+    "term": "einmal",
+    "translation": "once / one admission or order",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Einmal Eintritt, bitte.",
+    "exampleTranslation": "One admission, please."
+  },
+  {
+    "language": "GERMAN",
+    "term": "bewegend",
+    "translation": "moving / touching",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Das war sehr bewegend. Danke.",
+    "exampleTranslation": "That was very moving. Thank you."
+  },
+  {
+    "language": "GERMAN",
+    "term": "weich",
+    "translation": "soft",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich liebe deine weichen Lippen.",
+    "exampleTranslation": "I love your soft lips."
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Drucker",
+    "translation": "printer",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Drucker"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Brief",
+    "translation": "letter",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Brief"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Briefumschlag",
+    "translation": "envelope",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Briefumschlag"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Umschlag",
+    "translation": "cover / wrapper / envelope",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Umschlag"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Empfänger",
+    "translation": "recipient / addressee",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Empfänger"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Fluss",
+    "translation": "river",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Fluss"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Rucksack",
+    "translation": "backpack",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Rucksack"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Koffer",
+    "translation": "suitcase",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Koffer"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Führerschein",
+    "translation": "driver's license",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Führerschein",
+    "exampleSentence": "Hier ist mein Führerschein.",
+    "exampleTranslation": "Here is my driver's license."
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Rabatt",
+    "translation": "discount",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Rabatt",
+    "exampleSentence": "Gibt es einen Rabatt, wenn ich bar bezahle?",
+    "exampleTranslation": "Is there a discount if I pay cash?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Kassenbon",
+    "translation": "receipt",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Kassenbon"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Quittung",
+    "translation": "receipt / proof of payment",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Quittung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Reisepass",
+    "translation": "passport",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Reisepass"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Anschlussflug",
+    "translation": "connecting flight",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Anschlussflug"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Abflug",
+    "translation": "flight departure",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Abflug"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Sicherheitscheck",
+    "translation": "security screening",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Sicherheitscheck"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Markt",
+    "translation": "market",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Markt"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Sicherheitskontrolle",
+    "translation": "security screening",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Sicherheitskontrolle"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Postleitzahl",
+    "translation": "postal code",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Postleitzahl"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Reservierung",
+    "translation": "reservation",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Reservierung",
+    "exampleSentence": "Guten Tag, ich habe eine Reservierung auf den Namen Popelka.",
+    "exampleTranslation": "Hello, I have a reservation under the name Popelka."
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Toilette",
+    "translation": "toilet / restroom",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Toilette",
+    "exampleSentence": "Gibt es eine Toilette?",
+    "exampleTranslation": "Is there a restroom?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Abfahrt",
+    "translation": "departure (train / bus / car)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Abfahrt"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Abreise",
+    "translation": "departure / leaving on a trip",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Abreise"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Bordkarte",
+    "translation": "boarding pass",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Bordkarte"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Ankunft",
+    "translation": "arrival",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Ankunft"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Umkleiden",
+    "translation": "changing rooms",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Umkleiden"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Duschen",
+    "translation": "showers",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Duschen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Ausstellungen",
+    "translation": "exhibitions",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Ausstellungen",
+    "exampleSentence": "Die Ausstellungen waren wirklich toll!",
+    "exampleTranslation": "The exhibitions were really great!"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Lippe",
+    "translation": "lip",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Lippe"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Lippen",
+    "translation": "lips",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Lippen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Geschwisterkind",
+    "translation": "sibling",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Geschwisterkind"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Lebensmittel",
+    "translation": "groceries / food",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Lebensmittel"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Paket",
+    "translation": "package",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Paket"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Sprudelwasser",
+    "translation": "sparkling water",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Sprudelwasser"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Gepäck",
+    "translation": "luggage",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Gepäck"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Handgepäck",
+    "translation": "carry-on luggage",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Handgepäck"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Gate",
+    "translation": "gate (at the airport)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Gate"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Mietwagen",
+    "translation": "rental car",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Mietwagen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Autovermietung",
+    "translation": "car-rental company",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Autovermietung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Schlüssel",
+    "translation": "key",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Schlüssel"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Versicherung",
+    "translation": "insurance",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Versicherung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Selbstbeteiligung",
+    "translation": "deductible / excess",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Selbstbeteiligung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Schaden",
+    "translation": "damage",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Schaden"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Kratzer",
+    "translation": "scratch",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Kratzer"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Reifen",
+    "translation": "tire",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Reifen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Benzin",
+    "translation": "gasoline",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Benzin"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Diesel",
+    "translation": "diesel",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Diesel"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Ausfahrt",
+    "translation": "exit",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Ausfahrt"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Einfahrt",
+    "translation": "entrance / entry",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Einfahrt"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Parkplatz",
+    "translation": "parking space / parking lot",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "der",
+    "noun": "Parkplatz"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Parkhaus",
+    "translation": "parking garage",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "das",
+    "noun": "Parkhaus"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Geschwindigkeitsbegrenzung",
+    "translation": "speed limit",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "die",
+    "noun": "Geschwindigkeitsbegrenzung"
+  },
+  {
+    "term": "nach",
+    "translation": "to / after (cities, countries, home, directions)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Flasche",
+    "translation": "bottle",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Flasche"
+  },
+  {
+    "term": "zu",
+    "translation": "to (people, buildings, events)",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "term": "wo",
+    "translation": "where (location)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "wohin",
+    "translation": "where to (destination)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "woher",
+    "translation": "where from (origin)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "term": "Grünkohl mit Pinkel",
+    "translation": "kale with a traditional northern German sausage",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "term": "der Schatz",
+    "translation": "darling / honey / treasure",
+    "article": "der",
+    "noun": "Schatz",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "der Aufzug",
+    "translation": "elevator",
+    "article": "der",
+    "noun": "Aufzug",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "der Notfall",
+    "translation": "emergency",
+    "article": "der",
+    "noun": "Notfall",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "der Korb",
+    "translation": "basket",
+    "article": "der",
+    "noun": "Korb",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "der Wettbewerb",
+    "translation": "competition",
+    "article": "der",
+    "noun": "Wettbewerb",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "der Fehler",
+    "translation": "mistake / error",
+    "article": "der",
+    "noun": "Fehler",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "der Müll",
+    "translation": "trash",
+    "article": "der",
+    "noun": "Müll",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Umkleide",
+    "translation": "changing room",
+    "article": "die",
+    "noun": "Umkleide",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "die Dusche",
+    "translation": "shower",
+    "article": "die",
+    "noun": "Dusche",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Ausstellung",
+    "translation": "exhibition",
+    "article": "die",
+    "noun": "Ausstellung",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Aufgabe",
+    "translation": "task",
+    "article": "die",
+    "noun": "Aufgabe",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Seite",
+    "translation": "page",
+    "article": "die",
+    "noun": "Seite",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Hose",
+    "translation": "pants, trousers",
+    "article": "die",
+    "noun": "Hose",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Praline",
+    "translation": "chocolate / praline",
+    "article": "die",
+    "noun": "Praline",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "die Gabel",
+    "translation": "fork",
+    "article": "die",
+    "noun": "Gabel",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Kellnerin",
+    "translation": "waitress",
+    "article": "die",
+    "noun": "Kellnerin",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "die Notwendigkeit",
+    "translation": "necessity",
+    "article": "die",
+    "noun": "Notwendigkeit",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "die Nüsse",
+    "translation": "nuts",
+    "article": "die",
+    "noun": "Nüsse",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "die Hausaufgaben",
+    "translation": "homework",
+    "article": "die",
+    "noun": "Hausaufgaben",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "einen Sicherheitsgurt anlegen",
+    "translation": "put on/fasten a seat belt",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Diesel oder Benzin tanken",
+    "translation": "fill with diesel or gas",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Sitzeinstellungen",
+    "translation": "seat settings/adjustments",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Sitzeinstellungen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Spiegeleinstellungen",
+    "translation": "mirror settings/adjustments",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Spiegeleinstellungen"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Fahrzeugeinstellung",
+    "translation": "vehicle setting",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Fahrzeugeinstellung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Lenkradeinstellung",
+    "translation": "steering-wheel adjustment",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Lenkradeinstellung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die elektrische Sitzverstellung",
+    "translation": "power/electric seat adjustment",
+    "difficulty": "HARD",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "elektrische Sitzverstellung"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Fahrrad",
+    "translation": "bicycle / bike",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Fahrrad"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Hemd",
+    "translation": "shirt",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Hemd"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Rezept",
+    "translation": "recipe",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Rezept"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Apfel",
+    "translation": "apple",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Apfel"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Banane",
+    "translation": "banana",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Banane"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Tür",
+    "translation": "door",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Tür"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Tisch",
+    "translation": "table",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Tisch"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Stuhl",
+    "translation": "chair",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Stuhl"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Brot",
+    "translation": "bread",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Brot"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Butter",
+    "translation": "butter",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Butter"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Kaffee",
+    "translation": "coffee",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Kaffee"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Milch",
+    "translation": "milk",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Milch"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Glas",
+    "translation": "glass",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Glas"
+  },
+  {
+    "language": "GERMAN",
+    "term": "die Küche",
+    "translation": "kitchen",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "die",
+    "noun": "Küche"
+  },
+  {
+    "language": "GERMAN",
+    "term": "der Garten",
+    "translation": "garden",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "der",
+    "noun": "Garten"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Geld",
+    "translation": "money",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Geld"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Foto",
+    "translation": "photo",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Foto"
+  },
+  {
+    "language": "GERMAN",
+    "term": "das Zimmer",
+    "translation": "room",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "das",
+    "noun": "Zimmer"
+  }
+]

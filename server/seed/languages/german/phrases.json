@@ -1,0 +1,1046 @@
+[
+  {
+    "term": "Dampfen verboten",
+    "translation": "No vaping / Vaping prohibited",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "Darf man hier dampfen?",
+    "translation": "Is vaping allowed here?",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "Das geht sich aus.",
+    "translation": "That will work / fit / be enough (Austrian German)",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "term": "Einen Moment, bitte",
+    "translation": "one moment, please",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "gut drauf",
+    "translation": "in a good mood"
+  },
+  {
+    "term": "da vorne",
+    "translation": "up ahead"
+  },
+  {
+    "term": "da drüben",
+    "translation": "over there"
+  },
+  {
+    "term": "gar nicht",
+    "translation": "not at all"
+  },
+  {
+    "term": "weit weg",
+    "translation": "far away"
+  },
+  {
+    "term": "keine Ahnung",
+    "translation": "no idea"
+  },
+  {
+    "term": "zum ersten Mal",
+    "translation": "for the first time",
+    "exampleSentence": "Ich bin zum ersten Mal hier.",
+    "exampleTranslation": "It's my first time here."
+  },
+  {
+    "term": "um die Ecke",
+    "translation": "around the corner"
+  },
+  {
+    "term": "direkt davor",
+    "translation": "right in front of it"
+  },
+  {
+    "term": "Lieblings- + noun",
+    "translation": "favorite …"
+  },
+  {
+    "term": "am meisten",
+    "translation": "the most"
+  },
+  {
+    "term": "Das klingt gut",
+    "translation": "that sounds good",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "ich nehme",
+    "translation": "I take"
+  },
+  {
+    "term": "du nimmst",
+    "translation": "you take"
+  },
+  {
+    "term": "er / sie / es nimmt",
+    "translation": "he / she / it takes"
+  },
+  {
+    "term": "wir nehmen",
+    "translation": "we take"
+  },
+  {
+    "term": "ihr nehmt",
+    "translation": "you all take"
+  },
+  {
+    "term": "sie / Sie nehmen",
+    "translation": "they take / you formally take"
+  },
+  {
+    "term": "ich bezahle",
+    "translation": "I pay"
+  },
+  {
+    "term": "Guck mal!",
+    "translation": "Look!"
+  },
+  {
+    "term": "ich besuche",
+    "translation": "I visit"
+  },
+  {
+    "term": "Ich freue mich.",
+    "translation": "I'm happy / I'm looking forward to it."
+  },
+  {
+    "term": "ich war",
+    "translation": "I was"
+  },
+  {
+    "term": "du warst",
+    "translation": "you were"
+  },
+  {
+    "term": "er / sie / es war",
+    "translation": "he / she / it was"
+  },
+  {
+    "term": "wir waren",
+    "translation": "we were"
+  },
+  {
+    "term": "ihr wart",
+    "translation": "you all were"
+  },
+  {
+    "term": "sie / Sie waren",
+    "translation": "they were / you formally were"
+  },
+  {
+    "term": "Rede mit ihr!",
+    "translation": "Talk to her!"
+  },
+  {
+    "term": "Schau dich im Haus um!",
+    "translation": "Look around the house!"
+  },
+  {
+    "term": "Ich suche …",
+    "translation": "I'm looking for …"
+  },
+  {
+    "term": "ich werde",
+    "translation": "I become / I will"
+  },
+  {
+    "term": "du wirst",
+    "translation": "you become / you will"
+  },
+  {
+    "term": "er / sie / es wird",
+    "translation": "he / she / it becomes or will"
+  },
+  {
+    "term": "wir werden",
+    "translation": "we become / we will"
+  },
+  {
+    "term": "ihr werdet",
+    "translation": "you all become / will"
+  },
+  {
+    "term": "sie / Sie werden",
+    "translation": "they become / you formally become"
+  },
+  {
+    "term": "Es wird kalt.",
+    "translation": "It is getting cold."
+  },
+  {
+    "term": "Es wird regnen.",
+    "translation": "It will rain."
+  },
+  {
+    "term": "Es gibt …",
+    "translation": "There is / there are …"
+  },
+  {
+    "term": "Es gibt einen Park.",
+    "translation": "There is a park."
+  },
+  {
+    "term": "Es gibt eine Bäckerei.",
+    "translation": "There is a bakery."
+  },
+  {
+    "term": "Es gibt ein Museum.",
+    "translation": "There is a museum."
+  },
+  {
+    "term": "Wo gibt es ein …?",
+    "translation": "Where is there a …?"
+  },
+  {
+    "term": "Es gibt sogar ein …",
+    "translation": "There is even a …"
+  },
+  {
+    "term": "Ich mag das gar nicht.",
+    "translation": "I don't like that at all."
+  },
+  {
+    "term": "Ich bekomme …",
+    "translation": "I get / receive …"
+  },
+  {
+    "term": "Nichts für ungut.",
+    "translation": "No offense.",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "ein paar + noun",
+    "translation": "a couple of …",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "würde + infinitive",
+    "translation": "would + verb",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "ich darf",
+    "translation": "I am allowed to / I may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "du darfst",
+    "translation": "you are allowed to / you may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "er / sie / es darf",
+    "translation": "he / she / it is allowed to / may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "wir dürfen",
+    "translation": "we are allowed to / we may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "ihr dürft",
+    "translation": "you all are allowed to / may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "sie / Sie dürfen",
+    "translation": "they are allowed to / you formally may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "Viel Spaß!",
+    "translation": "Have lots of fun!",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "nicht einmal",
+    "translation": "not even",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "Schämt ihr euch?",
+    "translation": "Are you ashamed?",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "um … zu + infinitive",
+    "translation": "in order to",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "term": "auf jeden Fall",
+    "translation": "definitely / in any case",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich kaufe auf jeden Fall ein T-Shirt.",
+    "exampleTranslation": "I'll definitely buy a T-shirt."
+  },
+  {
+    "language": "GERMAN",
+    "term": "Mein Deutsch ist noch in Arbeit",
+    "translation": "My German is still a work in progress",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Wenigstens versuche ich es",
+    "translation": "At least I'm trying",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Ist ein Handtuch inklusive?",
+    "translation": "Is a towel included?",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Ja, gerne!",
+    "translation": "Yes, gladly! / Sure!",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Dieses Wort kenne ich nicht",
+    "translation": "I don't know this word",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "ich sollte",
+    "translation": "I should",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "du solltest",
+    "translation": "you should (informal singular)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "er sollte",
+    "translation": "he should",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "sie sollten",
+    "translation": "they should",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "wir sollten",
+    "translation": "we should",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Wie geht es dir?",
+    "translation": "How are you? (informal singular)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Wie geht es euch?",
+    "translation": "How are you? (informal plural)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Wie geht es Ihnen?",
+    "translation": "How are you? (formal)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Muss ich Diesel oder Benzin tanken?",
+    "translation": "Do I need to fill up with diesel or gasoline?",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "term": "stimmt",
+    "translation": "that's right / true",
+    "exampleSentence": "Stimmt so.",
+    "exampleTranslation": "Keep the change. (When paying.)"
+  },
+  {
+    "language": "GERMAN",
+    "term": "egal",
+    "translation": "doesn't matter",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Das ist egal.",
+    "exampleTranslation": "It doesn't matter."
+  },
+  {
+    "language": "GERMAN",
+    "term": "Bis später",
+    "translation": "see you later",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "Mach's gut",
+    "translation": "take care",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "ordentlich",
+    "translation": "neat, orderly, clean",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "wichtig",
+    "translation": "important",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "fast",
+    "translation": "almost",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "verheiratet",
+    "translation": "married",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "gemein",
+    "translation": "mean",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "wahrscheinlich",
+    "translation": "probably",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "sicher",
+    "translation": "safe; sure, certain",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "gefährlich",
+    "translation": "dangerous",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "geradeaus",
+    "translation": "straight ahead",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "geschlossen",
+    "translation": "closed",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "langweilig",
+    "translation": "boring",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "müde",
+    "translation": "tired",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "bestimmt",
+    "translation": "definitely / certainly / probably",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "leer",
+    "translation": "empty",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "dort",
+    "translation": "there",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "pünktlich",
+    "translation": "on time",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "darum",
+    "translation": "therefore",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "selten",
+    "translation": "rare / rarely",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "gestern",
+    "translation": "yesterday",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "genug",
+    "translation": "enough",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "schwer",
+    "translation": "hard, difficult, heavy",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "ganz",
+    "translation": "quite / pretty",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "gerade",
+    "translation": "right now",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "vielleicht",
+    "translation": "maybe",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "geoutet",
+    "translation": "out",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "weniger",
+    "translation": "less, fewer",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "Lieblings + noun",
+    "translation": "favorite",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "komische",
+    "translation": "strange, weird, funny",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Guten Appetit",
+    "translation": "enjoy your meal",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "billig",
+    "translation": "cheap",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "nett",
+    "translation": "nice, kind",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "fertig",
+    "translation": "finished",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "verloren",
+    "translation": "lost, doomed",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "nochmal",
+    "translation": "again",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "verschiedene",
+    "translation": "various",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "herunter",
+    "translation": "down",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "damit",
+    "translation": "with it / with that",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "arm",
+    "translation": "poor",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "deswegen",
+    "translation": "therefore, because of this",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "rückständigen",
+    "translation": "backwards",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "Nichts für ungut",
+    "translation": "No offense",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "geheim",
+    "translation": "secret",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "überrascht",
+    "translation": "surprised",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "ganze",
+    "translation": "all, whole",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "hoch",
+    "translation": "high, tall, up",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "leise",
+    "translation": "quiet",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "bekannt",
+    "translation": "well known",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "erleichtert",
+    "translation": "relieved",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "zufrieden",
+    "translation": "satisfied",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Viel Glück",
+    "translation": "good luck",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "aufgeregt",
+    "translation": "excited",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "gemütlich",
+    "translation": "comfortable",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "hoffentlich",
+    "translation": "hopefully",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "früh",
+    "translation": "early",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "möglich",
+    "translation": "possible",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "kompliziert",
+    "translation": "complicated",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "bequem",
+    "translation": "comfortable / convenient / easy",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "gleich",
+    "translation": "soon",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "schwach",
+    "translation": "weak",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "meistens",
+    "translation": "mostly",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "sonst",
+    "translation": "otherwise",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "wach",
+    "translation": "awake",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "stark",
+    "translation": "strong",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "nervig",
+    "translation": "annoying",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "breit",
+    "translation": "wide, broad",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "beide",
+    "translation": "both",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "falsch",
+    "translation": "wrong, incorrect, false",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "noch",
+    "translation": "still, yet",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "eigentlich",
+    "translation": "actually",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "sofort",
+    "translation": "immediately",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "langsamer",
+    "translation": "more slowly",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Alles Gute",
+    "translation": "all the best",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "nur",
+    "translation": "only",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "einmal",
+    "translation": "once / one time",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Ich weiß nicht",
+    "translation": "I do not know",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "Dieses Wort kenne ich nicht.",
+    "translation": "I don’t know this word",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "bewegend",
+    "translation": "moving / touching",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "weich",
+    "translation": "soft",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "süß",
+    "translation": "cute",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "abgelaufen",
+    "translation": "expired / elapsed",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "kostenlos",
+    "translation": "free / free of charge",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "schlimm",
+    "translation": "bad / serious / awful",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "zurzeit",
+    "translation": "currently, these days",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "deutlich",
+    "translation": "clearly, distinctly, plainly",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "furchtbar",
+    "translation": "terrible, awful",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "in Eile",
+    "translation": "in a hurry",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "günstig",
+    "translation": "reasonably priced, cheap",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "als",
+    "translation": "than",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "höflich",
+    "translation": "polite",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "gleiche",
+    "translation": "same",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "trotzdem",
+    "translation": "nevertheless, regardless",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "bereit",
+    "translation": "ready, willing, prepared",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "kurz",
+    "translation": "short",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "klug",
+    "translation": "smart",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "faul",
+    "translation": "idle, lazy",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "aufregend",
+    "translation": "exciting",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "Entschuldigung, ich bin spät dran!",
+    "translation": "Sorry, I’m running late!",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "draußen",
+    "translation": "outside",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "drinnen",
+    "translation": "inside",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "Ich habe eine Besprechung",
+    "translation": "I have a meeting",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "bunt",
+    "translation": "colorful",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "Entschuldigung",
+    "translation": "excuse me / sorry",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "virtuell arbeiten",
+    "translation": "to work virtually",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-29"
+  }
+]

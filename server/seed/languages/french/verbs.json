@@ -1,0 +1,426 @@
+[
+  {
+    "language": "FRENCH",
+    "term": "vapoter",
+    "translation": "to vape",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "fumer",
+    "translation": "to smoke",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "prendre",
+    "translation": "to take"
+  },
+  {
+    "language": "FRENCH",
+    "term": "partager",
+    "translation": "to share / divide"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ouvrir",
+    "translation": "to open",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "payer",
+    "translation": "to pay"
+  },
+  {
+    "language": "FRENCH",
+    "term": "déranger",
+    "translation": "to disturb / bother"
+  },
+  {
+    "language": "FRENCH",
+    "term": "cliquer",
+    "translation": "to click"
+  },
+  {
+    "language": "FRENCH",
+    "term": "rendre visite à",
+    "translation": "to visit a person, place, or event"
+  },
+  {
+    "language": "FRENCH",
+    "term": "visiter",
+    "translation": "to visit / tour / sightsee"
+  },
+  {
+    "language": "FRENCH",
+    "term": "se promener",
+    "translation": "to walk / go for a walk"
+  },
+  {
+    "language": "FRENCH",
+    "term": "aller chercher",
+    "translation": "to fetch / go get"
+  },
+  {
+    "language": "FRENCH",
+    "term": "emporter",
+    "translation": "to take along"
+  },
+  {
+    "language": "FRENCH",
+    "term": "cuisiner",
+    "translation": "to cook",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "compter",
+    "translation": "to count"
+  },
+  {
+    "language": "FRENCH",
+    "term": "faire plaisir",
+    "translation": "to make happy / please"
+  },
+  {
+    "language": "FRENCH",
+    "term": "entendre",
+    "translation": "to hear"
+  },
+  {
+    "language": "FRENCH",
+    "term": "dire",
+    "translation": "to say",
+    "exampleSentence": "Vous pouvez le dire en anglais ?",
+    "exampleTranslation": "Can you say it in English?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "être debout",
+    "translation": "to stand"
+  },
+  {
+    "language": "FRENCH",
+    "term": "nettoyer",
+    "translation": "to clean"
+  },
+  {
+    "language": "FRENCH",
+    "term": "fermer",
+    "translation": "to close"
+  },
+  {
+    "language": "FRENCH",
+    "term": "s'arrêter",
+    "translation": "to stop"
+  },
+  {
+    "language": "FRENCH",
+    "term": "devenir",
+    "translation": "to become / future-tense helper"
+  },
+  {
+    "language": "FRENCH",
+    "term": "chercher",
+    "translation": "to look for"
+  },
+  {
+    "language": "FRENCH",
+    "term": "trouver",
+    "translation": "to find"
+  },
+  {
+    "language": "FRENCH",
+    "term": "écouter",
+    "translation": "to listen"
+  },
+  {
+    "language": "FRENCH",
+    "term": "parler",
+    "translation": "to speak"
+  },
+  {
+    "language": "FRENCH",
+    "term": "télécharger",
+    "translation": "to download"
+  },
+  {
+    "language": "FRENCH",
+    "term": "téléverser",
+    "translation": "to upload (especially Québec)"
+  },
+  {
+    "language": "FRENCH",
+    "term": "clavarder",
+    "translation": "to chat online (Québec)"
+  },
+  {
+    "language": "FRENCH",
+    "term": "recharger",
+    "translation": "to charge / recharge"
+  },
+  {
+    "language": "FRENCH",
+    "term": "baisser",
+    "translation": "to lower / to drop",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "vendre",
+    "translation": "to sell",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "retirer",
+    "translation": "to remove / take out",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "donner",
+    "translation": "to give",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "manger",
+    "translation": "to eat",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "indiquer",
+    "translation": "to indicate / label",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "remarquer",
+    "translation": "to notice",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "offenser",
+    "translation": "to offend",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "mettre à jour",
+    "translation": "to update",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "avoir sommeil",
+    "translation": "to be sleepy",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "J'ai sommeil maintenant.",
+    "exampleTranslation": "I'm sleepy now."
+  },
+  {
+    "language": "FRENCH",
+    "term": "lancer",
+    "translation": "to throw / launch / run",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Lancer les tests.",
+    "exampleTranslation": "Run the tests."
+  },
+  {
+    "language": "FRENCH",
+    "term": "ajouter",
+    "translation": "to add",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "J'ajoute une étape au workflow.",
+    "exampleTranslation": "I'm adding a step to the workflow."
+  },
+  {
+    "language": "FRENCH",
+    "term": "afficher",
+    "translation": "to display / show",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "nager",
+    "translation": "to swim",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "réussir",
+    "translation": "to succeed",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "apprendre",
+    "translation": "to learn",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "J'ai beaucoup appris sur l'histoire.",
+    "exampleTranslation": "I learned a lot about history."
+  },
+  {
+    "language": "FRENCH",
+    "term": "manquer",
+    "translation": "to be missed / be missing",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Tu manques à Lily.",
+    "exampleTranslation": "Lily misses you."
+  },
+  {
+    "language": "FRENCH",
+    "term": "durer",
+    "translation": "to last",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "boire",
+    "translation": "to drink",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "laisser",
+    "translation": "to leave something somewhere / with someone",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Je voudrais laisser mon sac à dos et ma valise ici avant de prendre ma chambre.",
+    "exampleTranslation": "I'd like to leave my backpack and suitcase here before checking into my room."
+  },
+  {
+    "language": "FRENCH",
+    "term": "garder",
+    "translation": "to keep",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Gardez la monnaie.",
+    "exampleTranslation": "Keep the change."
+  },
+  {
+    "language": "FRENCH",
+    "term": "aider",
+    "translation": "to help",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "embarquer",
+    "translation": "to board",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "atterrir",
+    "translation": "to land",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "comprendre",
+    "translation": "to understand",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Je n'ai pas compris.",
+    "exampleTranslation": "I didn't understand."
+  },
+  {
+    "language": "FRENCH",
+    "term": "répéter",
+    "translation": "to repeat",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Vous pouvez répéter, s'il vous plaît ?",
+    "exampleTranslation": "Can you repeat that, please?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "intéresser",
+    "translation": "to interest",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "C'est exactement le genre d'histoire qui m'intéresse.",
+    "exampleTranslation": "This is exactly the kind of history that interests me."
+  },
+  {
+    "language": "FRENCH",
+    "term": "aller",
+    "translation": "to go",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "venir",
+    "translation": "to come",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "lire",
+    "translation": "to read",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "écrire",
+    "translation": "to write",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "dormir",
+    "translation": "to sleep",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "attendre",
+    "translation": "to wait",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "travailler",
+    "translation": "to work",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "FRENCH",
+    "term": "acheter",
+    "translation": "to buy",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  }
+]

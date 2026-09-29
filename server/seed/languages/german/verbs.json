@@ -1,0 +1,610 @@
+[
+  {
+    "term": "dampfen",
+    "translation": "to vape (informal; literally, to steam)",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "term": "rauchen",
+    "translation": "to smoke",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "variant": "AUSTRIA",
+    "term": "angreifen",
+    "translation": "to touch or handle (Austria); often understood as “to attack” in Germany",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "parkieren",
+    "translation": "to park (Swiss German; parken in Germany)",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "variant": "SWISS_GERMAN",
+    "term": "grillieren",
+    "translation": "to grill / barbecue (Swiss German; grillen in Germany)",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "term": "nehmen",
+    "translation": "to take"
+  },
+  {
+    "term": "teilen",
+    "translation": "to share / divide"
+  },
+  {
+    "term": "bezahlen",
+    "translation": "to pay",
+    "exampleSentence": "Soll ich mit Karte oder bar bezahlen?",
+    "exampleTranslation": "Should I pay by card or in cash?"
+  },
+  {
+    "term": "stören",
+    "translation": "to disturb / bother"
+  },
+  {
+    "language": "GERMAN",
+    "term": "öffnen",
+    "translation": "to open",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "anklicken",
+    "translation": "to click"
+  },
+  {
+    "term": "besuchen",
+    "translation": "to visit a person, place, or event"
+  },
+  {
+    "term": "besichtigen",
+    "translation": "to tour / sightsee / look around"
+  },
+  {
+    "term": "spazieren",
+    "translation": "to walk / go for a walk"
+  },
+  {
+    "term": "holen",
+    "translation": "to fetch / go get"
+  },
+  {
+    "term": "mitnehmen",
+    "translation": "to take along"
+  },
+  {
+    "term": "zählen",
+    "translation": "to count"
+  },
+  {
+    "term": "freuen",
+    "translation": "to make happy / please"
+  },
+  {
+    "term": "hören",
+    "translation": "to hear"
+  },
+  {
+    "term": "sagen",
+    "translation": "to say",
+    "exampleSentence": "Können Sie das auf Englisch sagen?",
+    "exampleTranslation": "Can you say that in English?"
+  },
+  {
+    "term": "stehen",
+    "translation": "to stand"
+  },
+  {
+    "term": "putzen",
+    "translation": "to clean"
+  },
+  {
+    "term": "schließen",
+    "translation": "to close"
+  },
+  {
+    "term": "anhalten",
+    "translation": "to stop"
+  },
+  {
+    "term": "werden",
+    "translation": "to become / future-tense helper"
+  },
+  {
+    "term": "aufladen",
+    "translation": "to charge / recharge"
+  },
+  {
+    "term": "bemerken",
+    "translation": "to notice",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "aufräumen",
+    "translation": "to tidy up / put things away",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "glauben",
+    "translation": "to believe",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "schämen",
+    "translation": "to be ashamed",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "entfernen",
+    "translation": "to remove",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "setzen",
+    "translation": "to put / place / set",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "GERMAN",
+    "term": "kaufen",
+    "translation": "to buy",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "feiern",
+    "translation": "to celebrate / to party",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "probieren",
+    "translation": "to try / taste / sample",
+    "dateAdded": "2026-09-02",
+    "exampleSentence": "Darf ich den Vanillejoghurt probieren?",
+    "exampleTranslation": "May I sample the vanilla yogurt?"
+  },
+  {
+    "term": "dürfen",
+    "translation": "to be allowed to / may",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "bestehen",
+    "translation": "to pass (an exam) / consist of / continue to exist",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "verkaufen",
+    "translation": "to sell",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "fressen",
+    "translation": "to feed (of animals)",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "geben",
+    "translation": "to give",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "schreiben",
+    "translation": "to write",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "bekommen",
+    "translation": "to get / receive",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "term": "ausleihen",
+    "translation": "to borrow",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "zurückgeben",
+    "translation": "to return / give back",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "treffen",
+    "translation": "to meet",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "term": "untersuchen",
+    "translation": "to examine",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "term": "versuchen",
+    "translation": "to try / attempt",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "verdienen",
+    "translation": "to earn / deserve",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "schicken",
+    "translation": "to send",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "kochen",
+    "translation": "to cook",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "lachen",
+    "translation": "to laugh",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "empfehlen",
+    "translation": "to recommend",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Was empfehlen Sie?",
+    "exampleTranslation": "What do you recommend?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "anrufen",
+    "translation": "to call (on the phone)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Rufst du manchmal deine Freunde an?",
+    "exampleTranslation": "Do you sometimes call your friends?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "fehlen",
+    "translation": "to be missing / lack",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Mir fehlt mein Hund.",
+    "exampleTranslation": "I miss my dog."
+  },
+  {
+    "language": "GERMAN",
+    "term": "vermissen",
+    "translation": "to miss (someone)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Lily vermisst dich.",
+    "exampleTranslation": "Lily misses you."
+  },
+  {
+    "language": "GERMAN",
+    "term": "schenken",
+    "translation": "to give as a gift",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "spinnen",
+    "translation": "to spin / be crazy",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "lassen",
+    "translation": "to leave something somewhere / let",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Kann ich meinen Koffer und meinen Rucksack hier lassen?",
+    "exampleTranslation": "Can I leave my suitcase and backpack here?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "zeigen",
+    "translation": "to show",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Können Sie mir das bitte zeigen?",
+    "exampleTranslation": "Can you show me that, please?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "helfen",
+    "translation": "to help",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "abholen",
+    "translation": "to pick up",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich möchte das Auto abholen.",
+    "exampleTranslation": "I'd like to pick up the car."
+  },
+  {
+    "language": "GERMAN",
+    "term": "einsteigen",
+    "translation": "to board / get in",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "landen",
+    "translation": "to land",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "GERMAN",
+    "term": "heißen",
+    "translation": "to be called",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Wie heißt du?",
+    "exampleTranslation": "What's your name?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "verstehen",
+    "translation": "to understand",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich habe das nicht verstanden.",
+    "exampleTranslation": "I didn't understand that."
+  },
+  {
+    "language": "GERMAN",
+    "term": "wiederholen",
+    "translation": "to repeat",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Können Sie das bitte wiederholen?",
+    "exampleTranslation": "Can you repeat that, please?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "warten",
+    "translation": "to wait",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "lernen",
+    "translation": "to learn",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich habe viel über Geschichte gelernt.",
+    "exampleTranslation": "I learned a lot about history."
+  },
+  {
+    "language": "GERMAN",
+    "term": "interessieren",
+    "translation": "to interest",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Das ist genau die Art von Geschichte, die mich interessiert.",
+    "exampleTranslation": "This is exactly the kind of history that interests me."
+  },
+  {
+    "language": "GERMAN",
+    "term": "sollen",
+    "translation": "should / to be supposed to",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Wo soll ich das Auto zurückgeben?",
+    "exampleTranslation": "Where should I return the car?"
+  },
+  {
+    "language": "GERMAN",
+    "term": "suchen",
+    "translation": "to search",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "gelernt",
+    "translation": "learned (past participle of lernen)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Ich habe viel über Geschichte gelernt.",
+    "exampleTranslation": "I learned a lot about history."
+  },
+  {
+    "language": "GERMAN",
+    "term": "verstanden",
+    "translation": "understood (past participle of verstehen)",
+    "exampleSentence": "Ich habe das nicht verstanden.",
+    "exampleTranslation": "I didn't understand that.",
+    "dateAdded": "2026-09-09",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "erklären",
+    "translation": "to explain",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "anziehen",
+    "translation": "to put on / dress / get dressed",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "benutzen",
+    "translation": "to use",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "schreien",
+    "translation": "to yell / scream",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "entspannen",
+    "translation": "to relax / ease / slacken",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "werfen",
+    "translation": "to throw",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "pendeln",
+    "translation": "to commute",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "hüten",
+    "translation": "to guard / watch over",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "lügen",
+    "translation": "to lie / falsify",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "vergessen",
+    "translation": "to forget",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "language": "GERMAN",
+    "term": "finden",
+    "translation": "to find",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "term": "aufnehmen",
+    "translation": "to record audio / music",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "verbringen",
+    "translation": "to spend / pass time",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "besiegen",
+    "translation": "to defeat / beat an opponent",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "schlagen",
+    "translation": "to beat (like in a game)",
+    "dateAdded": "2026-09-29",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "term": "vorstellen",
+    "translation": "to introduce",
+    "dateAdded": "2026-09-29",
+    "difficulty": "EASY"
+  },
+  {
+    "term": "anlegen",
+    "translation": "to create / set up; put on / apply",
+    "dateAdded": "2026-09-29",
+    "difficulty": "HARD"
+  },
+  {
+    "language": "GERMAN",
+    "term": "gehen",
+    "translation": "to go / walk",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "kommen",
+    "translation": "to come",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "sprechen",
+    "translation": "to speak",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "lesen",
+    "translation": "to read",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "essen",
+    "translation": "to eat",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "trinken",
+    "translation": "to drink",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "schlafen",
+    "translation": "to sleep",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  },
+  {
+    "language": "GERMAN",
+    "term": "arbeiten",
+    "translation": "to work",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29"
+  }
+]

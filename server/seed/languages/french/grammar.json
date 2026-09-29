@@ -1,0 +1,148 @@
+[
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Je ___ français. (to speak)",
+    "answer": "parle",
+    "explanation": "With je, parler becomes je parle."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Nous ___ français. (to speak)",
+    "answer": "parlons",
+    "explanation": "With nous, parler becomes nous parlons."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Je ___ un café. (to take)",
+    "answer": "prends",
+    "explanation": "The first-person form of prendre is prends."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Nous ___ au musée. (to go)",
+    "answer": "allons",
+    "explanation": "The nous form of aller is allons."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Je ___ fatigué. (to be)",
+    "answer": "suis",
+    "explanation": "The first-person form of être is suis."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Ils ___ heureux. (to be)",
+    "answer": "sont",
+    "explanation": "The third-person plural form of être is sont."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "J'___ un livre. (to have)",
+    "answer": "ai",
+    "explanation": "The first-person form of avoir is ai."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Vous ___ une question. (to have)",
+    "answer": "avez",
+    "explanation": "The vous form of avoir is avez."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Which subject pronoun means “we”?",
+    "answer": "nous",
+    "explanation": "nous = we."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Which subject pronoun means informal singular “you”?",
+    "answer": "tu",
+    "explanation": "tu is informal singular you."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Which subject pronoun means formal or plural “you”?",
+    "answer": "vous",
+    "explanation": "vous is formal singular or plural you."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "de + le contracts to…",
+    "answer": "du",
+    "explanation": "de + le contracts to du."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "à + le contracts to…",
+    "answer": "au",
+    "explanation": "à + le contracts to au."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Make “Je aime” correctly",
+    "answer": "J'aime",
+    "explanation": "Je elides to j' before a vowel sound."
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "C'est intéressant ___ parler. (preposition)",
+    "answer": "de",
+    "explanation": "Use de + infinitive after « c’est intéressant ».",
+    "spokenText": "C'est intéressant de parler.",
+    "translation": "C'est intéressant de parler.\nIt is interesting to talk.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "C'est intéressant ___ apprendre davantage. (de before a vowel)",
+    "answer": "d'",
+    "explanation": "De becomes d’ before a vowel.",
+    "spokenText": "C'est intéressant d'apprendre davantage.",
+    "translation": "C'est intéressant d'apprendre davantage.\nIt is interesting to learn more.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "Je veux ___. (to speak)",
+    "answer": "parler",
+    "explanation": "Vouloir takes a bare infinitive, with no à or de.",
+    "spokenText": "Je veux parler.",
+    "translation": "Je veux parler.\nI want to speak.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "category": "GRAMMAR",
+    "prompt": "C'est intéressant d'___ parler. (replace de cette histoire)",
+    "answer": "en",
+    "explanation": "En goes before the infinitive it belongs to.",
+    "spokenText": "C'est intéressant d'en parler.",
+    "translation": "C'est intéressant d'en parler.\nIt is interesting to talk about it.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  }
+]

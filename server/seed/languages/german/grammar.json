@@ -1,0 +1,877 @@
+[
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich sehe ___ Mann. (der Mann)",
+    "answer": "den",
+    "explanation": "A direct object is accusative; masculine der becomes den."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich fahre mit ___ Bus. (der Bus)",
+    "answer": "dem",
+    "explanation": "mit always takes dative; masculine der becomes dem."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir gehen in ___ Apotheke.",
+    "answer": "die",
+    "explanation": "Movement toward a destination takes accusative; feminine die stays die.",
+    "hints": [
+      "The gender of Apotheke (pharmacy) is feminine.",
+      "This sentence uses the accusative case because it describes movement toward a destination.",
+      "In the accusative case, feminine definite articles stay die."
+    ]
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir sind in ___ Apotheke.",
+    "answer": "der",
+    "explanation": "A fixed location takes dative; feminine die becomes der."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gebe ___ Frau die Karte.",
+    "answer": "der",
+    "explanation": "The recipient is the indirect object, so Frau is dative."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich besuche ___ Museum.",
+    "answer": "das",
+    "explanation": "Museum is a neuter direct object; das remains das in accusative."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich spreche mit ___ Freunden.",
+    "answer": "den",
+    "explanation": "mit takes dative; plural uses den and usually adds -n to the noun."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ist das ___ Hund? (your, informal)",
+    "answer": "dein",
+    "explanation": "Nominative masculine uses the base ein-word form: dein."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Which case normally marks the direct object?",
+    "answer": "accusative",
+    "explanation": "The accusative case marks the direct object."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Which case normally marks the indirect object?",
+    "answer": "dative",
+    "explanation": "The dative case commonly marks the recipient or beneficiary."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "durch, ohne, gegen, für, um take which case?",
+    "answer": "accusative",
+    "explanation": "The DOGFU prepositions always take accusative."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "aus, bei, mit, nach, seit, von, zu take which case?",
+    "answer": "dative",
+    "explanation": "These common prepositions always take dative."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Movement toward a destination answers…",
+    "answer": "wohin?",
+    "explanation": "Two-way prepositions take accusative for wohin?—where to?"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "A fixed location answers…",
+    "answer": "wo?",
+    "explanation": "Two-way prepositions take dative for wo?—where?"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Accusative pronoun for ich",
+    "answer": "mich",
+    "translation": "Er sieht mich. — He sees me.",
+    "explanation": "ich → mich in the accusative.",
+    "spokenText": "Er sieht mich."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Accusative pronoun for er",
+    "answer": "ihn",
+    "translation": "Ich sehe ihn. — I see him.",
+    "explanation": "er → ihn in the accusative.",
+    "spokenText": "Ich sehe ihn."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Dative pronoun for ich",
+    "answer": "mir",
+    "translation": "Kannst du mir helfen? — Can you help me?",
+    "explanation": "ich → mir in the dative.",
+    "spokenText": "Kannst du mir helfen?"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Dative pronoun for du",
+    "answer": "dir",
+    "translation": "Ich gebe dir die Karte. — I give you the card.",
+    "explanation": "du → dir in the dative.",
+    "spokenText": "Ich gebe dir die Karte."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Dative pronoun for sie (she)",
+    "answer": "ihr",
+    "translation": "Ich gebe ihr die Karte. — I give her the card.",
+    "explanation": "sie → ihr means to/for her.",
+    "spokenText": "Ich gebe ihr die Karte."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "bei dem contracts to…",
+    "answer": "beim",
+    "explanation": "bei dem → beim."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "von dem contracts to…",
+    "answer": "vom",
+    "explanation": "von dem → vom."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "zu dem contracts to…",
+    "answer": "zum",
+    "explanation": "zu dem → zum."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "zu der contracts to…",
+    "answer": "zur",
+    "explanation": "zu der → zur."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Es gibt ___ Park. (der Park)",
+    "answer": "einen",
+    "explanation": "Es gibt takes accusative; masculine ein becomes einen."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich fahre ___ Berlin.",
+    "answer": "nach",
+    "explanation": "nach is used with cities and countries that have no article."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich fliege ___ Deutschland.",
+    "answer": "nach",
+    "explanation": "Countries without an article take nach, not zu."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gehe ___ Hause.",
+    "answer": "nach",
+    "explanation": "Home uses the fixed phrase nach Hause."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir fahren ___ Norden.",
+    "answer": "nach",
+    "explanation": "Directions such as Norden, Süden, Osten, Westen take nach."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gehe ___ dem Arzt.",
+    "answer": "zu",
+    "explanation": "Going to a person uses zu (+ dative). zu dem contracts to zum."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "zu dem Arzt contracts to…",
+    "answer": "zum",
+    "explanation": "zu + dem → zum. People and institutions use zu, not nach."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "zu der Schule contracts to…",
+    "answer": "zur",
+    "explanation": "zu + der → zur. Buildings and institutions take zu."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Cities, countries without articles, directions, and home usually take…",
+    "answer": "nach",
+    "explanation": "nach Berlin, nach Deutschland, nach Norden, nach Hause."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "A person, building, institution, or event usually takes…",
+    "answer": "zu",
+    "explanation": "zum Arzt, zur Schule, zur Arbeit, zur Grillparty."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir gehen durch ___ Park. (der Park)",
+    "answer": "den",
+    "explanation": "durch always takes accusative; masculine der becomes den."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Das Geschenk ist für ___ Frau. (die Frau)",
+    "answer": "die",
+    "explanation": "für always takes accusative; feminine die stays die."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich bin ohne ___ Auto. (das Auto)",
+    "answer": "das",
+    "explanation": "ohne always takes accusative; neuter das stays das."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Das Spiel ist gegen ___ Verein. (der Verein)",
+    "answer": "den",
+    "explanation": "gegen always takes accusative; masculine der becomes den."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir sitzen um ___ Tisch. (der Tisch)",
+    "answer": "den",
+    "explanation": "um always takes accusative; masculine der becomes den."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Mann ist nett. (this, nominative)",
+    "answer": "dieser",
+    "explanation": "Nominative masculine this/that is dieser, matching der."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Frau ist nett. (this, nominative)",
+    "answer": "diese",
+    "explanation": "Nominative feminine this/that is diese, matching die."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Kind ist nett. (this, nominative)",
+    "answer": "dieses",
+    "explanation": "Nominative neuter this/that is dieses, matching das."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Bücher sind neu. (these, nominative)",
+    "answer": "diese",
+    "explanation": "Nominative plural these is diese, matching die."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Nominative form of “this” before a masculine noun",
+    "answer": "dieser",
+    "explanation": "dieser Hund — masculine nominative, like der."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Nominative form of “this” before a feminine noun",
+    "answer": "diese",
+    "explanation": "diese Pizza — feminine nominative, like die."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Nominative form of “this” before a neuter noun",
+    "answer": "dieses",
+    "explanation": "dieses Buch — neuter nominative, like das."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich lerne Deutsch, ___ in Berlin zu arbeiten.",
+    "answer": "um",
+    "explanation": "Purpose (“in order to”) is um … zu. um comes first; zu sits right before the infinitive.",
+    "dateAdded": "2026-09-03",
+    "hints": [
+      "This clause states a purpose: in order to work in Berlin.",
+      "The pattern is um + rest of the clause + zu + infinitive."
+    ]
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gehe einkaufen, um Brot ___ kaufen.",
+    "answer": "zu",
+    "explanation": "zu comes immediately before the infinitive: um Brot zu kaufen.",
+    "dateAdded": "2026-09-03",
+    "hints": [
+      "um … zu wraps the whole purpose clause.",
+      "zu is not at the start; it stands right before kaufen."
+    ]
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Wir fahren nach Berlin, ___ das Museum zu besuchen.",
+    "answer": "um",
+    "explanation": "um introduces the purpose; zu remains in front of besuchen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich spare Geld, um ein Auto ___ kaufen.",
+    "answer": "zu",
+    "explanation": "Objects stay between um and zu: um ein Auto zu kaufen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "um … zu means…",
+    "answer": "in order to",
+    "explanation": "um + (complements) + zu + infinitive expresses purpose: in order to.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "“In order to” with no new subject uses…",
+    "answer": "um … zu",
+    "explanation": "Same subject as the main clause: Ich lerne, um zu arbeiten. A different subject needs damit instead.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "um + anrufen (separable)",
+    "answer": "anzurufen",
+    "explanation": "With separable verbs, zu slots between prefix and stem: anzurufen, not zu anrufen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich spiele mit ___ Hund. (your dog)",
+    "answer": "deinem",
+    "explanation": "mit takes dative; masculine dein becomes deinem."
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Which case normally marks the subject?",
+    "answer": "nominative",
+    "explanation": "Nominative is the subject — the person or thing doing the action.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Der Mann gibt dem Kind den Ball,” dem Kind is…",
+    "answer": "dative",
+    "explanation": "dem Kind is the recipient, so it is dative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Der Mann gibt dem Kind den Ball,” den Ball is…",
+    "answer": "accusative",
+    "explanation": "den Ball is the direct object, so it is accusative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich kaufe ___ Pullover. (ein Pullover)",
+    "answer": "einen",
+    "explanation": "A masculine direct object: ein becomes einen in the accusative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich nehme ___ Pizza. (die Pizza)",
+    "answer": "die",
+    "explanation": "Feminine articles stay die in the accusative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich sehe ___ Freunde. (your friends, informal)",
+    "answer": "deine",
+    "explanation": "Plural possessive deine stays deine in nominative and accusative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Accusative pronoun for du",
+    "answer": "dich",
+    "translation": "Ich sehe dich. — I see you.",
+    "explanation": "du → dich in the accusative.",
+    "spokenText": "Ich sehe dich.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Accusative pronoun for wir",
+    "answer": "uns",
+    "translation": "Er sieht uns. — He sees us.",
+    "explanation": "wir → uns in the accusative.",
+    "spokenText": "Er sieht uns.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Accusative pronoun for ihr (you all)",
+    "answer": "euch",
+    "translation": "Ich sehe euch. — I see you all.",
+    "explanation": "ihr → euch in the accusative.",
+    "spokenText": "Ich sehe euch.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gebe ___ Mann die Karte. (der Mann)",
+    "answer": "dem",
+    "explanation": "The recipient is dative; masculine der becomes dem.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich helfe ___ Frau. (die Frau)",
+    "answer": "der",
+    "explanation": "helfen takes dative; feminine die becomes der.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich muss an ___ Kasse bezahlen. (die Kasse)",
+    "answer": "der",
+    "explanation": "an + location is dative; feminine die becomes der.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In the dative plural the article is usually…",
+    "answer": "den",
+    "explanation": "Dative plural uses den, and the noun usually adds -n.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Dative pronoun for er",
+    "answer": "ihm",
+    "translation": "Ich gebe ihm das Buch. — I give him the book.\nIch helfe ihm. — I help him.",
+    "explanation": "er → ihm in the dative (to/for him).",
+    "spokenText": "Ich gebe ihm das Buch.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Dative pronoun for sie (they)",
+    "answer": "ihnen",
+    "translation": "Ich gebe ihnen die Karten. — I give them the cards.\nIch helfe ihnen. — I help them.",
+    "explanation": "sie (they) → ihnen in the dative.",
+    "spokenText": "Ich gebe ihnen die Karten.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich stelle die Tasse auf ___ Tisch. (der Tisch)",
+    "answer": "den",
+    "explanation": "Putting something onto the table is wohin?, so auf takes accusative.",
+    "dateAdded": "2026-09-03",
+    "hints": [
+      "auf is a two-way preposition.",
+      "Movement onto a surface answers wohin? and takes accusative."
+    ]
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Die Tasse steht auf ___ Tisch. (der Tisch)",
+    "answer": "dem",
+    "explanation": "The cup is already on the table (wo?), so auf takes dative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich sehe ___ Hund. (your dog, informal)",
+    "answer": "deinen",
+    "explanation": "Masculine accusative: dein becomes deinen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich sehe ___ Pizza. (your pizza, informal)",
+    "answer": "deine",
+    "explanation": "Feminine possessive deine stays deine in the accusative.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich spreche mit ___ Schwester. (your sister, informal)",
+    "answer": "deiner",
+    "explanation": "mit is dative; feminine dein becomes deiner.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Informal singular “your” is…",
+    "answer": "dein",
+    "explanation": "dein = your (one person, informal). Ihr with a capital I is formal your.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Ihr seid müde,” Ihr means…",
+    "answer": "you all",
+    "explanation": "Capitalized at the start of the sentence, this Ihr is the informal plural subject: you all.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Ich gebe ihr die Karte,” ihr means…",
+    "answer": "to her",
+    "explanation": "Lowercase ihr after the verb is the dative pronoun: to/for her.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Das ist ihr Hund,” ihr means…",
+    "answer": "her / their",
+    "explanation": "Here ihr is the possessive base form: her or their.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "In “Ist das Ihr Pass?,” Ihr means…",
+    "answer": "your (formal)",
+    "explanation": "Capitalized Ihr in the middle of a sentence is formal your.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Sie braucht ___ Regenschirm. (her umbrella)",
+    "answer": "ihren",
+    "explanation": "Masculine accusative: ihr becomes ihren.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "mit ___ Regenschirm (her umbrella)",
+    "answer": "ihrem",
+    "explanation": "mit is dative; masculine ihr becomes ihrem.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "mit ___ Jacke (her jacket)",
+    "answer": "ihrer",
+    "explanation": "mit is dative; feminine ihr becomes ihrer.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "mit ___ Freunden (her friends)",
+    "answer": "ihren",
+    "explanation": "Dative plural: ihre becomes ihren, and Freunde usually adds -n.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "ein ___ Mann (wichtig)",
+    "answer": "wichtiger",
+    "explanation": "ein + adjective + masculine noun takes -er: ein wichtiger Mann.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "eine ___ Frau (wichtig)",
+    "answer": "wichtige",
+    "explanation": "eine + adjective + feminine noun takes -e: eine wichtige Frau.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "ein ___ Spiel (wichtig)",
+    "answer": "wichtiges",
+    "explanation": "ein + adjective + neuter noun takes -es: ein wichtiges Spiel.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Es gibt ___ Apotheke. (eine Apotheke)",
+    "answer": "eine",
+    "explanation": "Es gibt takes accusative; feminine eine stays eine.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Es gibt ___ Museum. (ein Museum)",
+    "answer": "ein",
+    "explanation": "Es gibt takes accusative; neuter ein stays ein.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Das Geschenk ist für ___ Freund. (mein Freund)",
+    "answer": "meinen",
+    "explanation": "für always takes accusative; masculine mein becomes meinen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich bin ohne ___ Termin. (ein Termin)",
+    "answer": "einen",
+    "explanation": "ohne always takes accusative; masculine ein becomes einen.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich komme von ___ Arbeit. (die Arbeit)",
+    "answer": "der",
+    "explanation": "von always takes dative; feminine die becomes der.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich fahre mit ___ Straßenbahn. (die Straßenbahn)",
+    "answer": "der",
+    "explanation": "mit always takes dative; feminine die becomes der.",
+    "dateAdded": "2026-09-03"
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "der ___ Hund (klein, nominative)",
+    "answer": "kleine",
+    "explanation": "After der/die/das, singular nominative adjectives take -e.",
+    "spokenText": "Der kleine Hund ist hier.",
+    "translation": "Der kleine Hund ist hier.\nThe little dog is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "ein ___ Hund (klein, nominative)",
+    "answer": "kleiner",
+    "explanation": "Ein has no masculine ending: the adjective supplies -er.",
+    "spokenText": "Ein kleiner Hund ist hier.",
+    "translation": "Ein kleiner Hund ist hier.\nA little dog is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "der ___ Mann (alt, nominative)",
+    "answer": "alte",
+    "explanation": "After der in the nominative, the adjective takes -e.",
+    "spokenText": "Der alte Mann ist hier.",
+    "translation": "Der alte Mann ist hier.\nThe old man is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "ein ___ Mann (alt, nominative)",
+    "answer": "alter",
+    "explanation": "After ein in the masculine nominative, the adjective takes -er.",
+    "spokenText": "Ein alter Mann ist hier.",
+    "translation": "Ein alter Mann ist hier.\nAn old man is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "das ___ Auto (schwarz, nominative)",
+    "answer": "schwarze",
+    "explanation": "After das in the nominative, the adjective takes -e.",
+    "spokenText": "Das schwarze Auto ist hier.",
+    "translation": "Das schwarze Auto ist hier.\nThe black car is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "ein ___ Auto (schwarz, nominative)",
+    "answer": "schwarzes",
+    "explanation": "Ein does not mark neuter gender, so the adjective takes -es.",
+    "spokenText": "Ein schwarzes Auto ist hier.",
+    "translation": "Ein schwarzes Auto ist hier.\nA black car is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "die ___ Hündin (schwarz, nominative)",
+    "answer": "schwarze",
+    "explanation": "After die in the singular nominative, the adjective takes -e.",
+    "spokenText": "Die schwarze Hündin ist hier.",
+    "translation": "Die schwarze Hündin ist hier.\nThe black female dog is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "eine ___ Hündin (schwarz, nominative)",
+    "answer": "schwarze",
+    "explanation": "After eine in the nominative, the adjective takes -e.",
+    "spokenText": "Eine schwarze Hündin ist hier.",
+    "translation": "Eine schwarze Hündin ist hier.\nA black female dog is here.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Hund (schwarz, nominative, no article)",
+    "answer": "schwarzer",
+    "explanation": "With no article, masculine nominative adjectives take -er.",
+    "spokenText": "Schwarzer Hund",
+    "translation": "Schwarzer Hund\nBlack dog",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Hündin (schwarz, nominative, no article)",
+    "answer": "schwarze",
+    "explanation": "With no article, feminine nominative adjectives take -e.",
+    "spokenText": "Schwarze Hündin",
+    "translation": "Schwarze Hündin\nBlack female dog",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "___ Auto (schwarz, nominative, no article)",
+    "answer": "schwarzes",
+    "explanation": "With no article, neuter nominative adjectives take -es.",
+    "spokenText": "Schwarzes Auto",
+    "translation": "Schwarzes Auto\nBlack car",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gehe ___ Arbeit. (zu + die Arbeit)",
+    "answer": "zur",
+    "explanation": "Zu takes the dative: zu der contracts to zur.",
+    "spokenText": "Ich gehe zur Arbeit.",
+    "translation": "Ich gehe zur Arbeit.\nI am going to work.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  },
+  {
+    "language": "GERMAN",
+    "category": "GRAMMAR",
+    "prompt": "Ich gehe ___ Grillparty. (zu + die Grillparty)",
+    "answer": "zur",
+    "explanation": "For this event, use zu + dative: zur Grillparty.",
+    "spokenText": "Ich gehe zur Grillparty.",
+    "translation": "Ich gehe zur Grillparty.\nI am going to the barbecue.",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "sync": true
+  }
+]

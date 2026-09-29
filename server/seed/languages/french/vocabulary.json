@@ -1,0 +1,2874 @@
+[
+  {
+    "language": "FRENCH",
+    "term": "la fille",
+    "translation": "girl",
+    "article": "la",
+    "noun": "fille",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le garçon",
+    "translation": "boy",
+    "article": "le",
+    "noun": "garçon",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'enfant",
+    "translation": "child",
+    "article": "l'",
+    "noun": "enfant",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la mère",
+    "translation": "mother / mom",
+    "article": "la",
+    "noun": "mère",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le père",
+    "translation": "father / dad",
+    "article": "le",
+    "noun": "père",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la famille",
+    "translation": "family",
+    "article": "la",
+    "noun": "famille",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la maison",
+    "translation": "house / home",
+    "article": "la",
+    "noun": "maison",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'école",
+    "translation": "school",
+    "article": "l'",
+    "noun": "école",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'ami",
+    "translation": "friend",
+    "article": "l'",
+    "noun": "ami",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'amie",
+    "translation": "friend",
+    "article": "l'",
+    "noun": "amie",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le chien",
+    "translation": "dog",
+    "article": "le",
+    "noun": "chien",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le chat",
+    "translation": "cat",
+    "article": "le",
+    "noun": "chat",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'eau",
+    "translation": "water",
+    "article": "l'",
+    "noun": "eau",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la nourriture",
+    "translation": "food",
+    "article": "la",
+    "noun": "nourriture",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la voiture",
+    "translation": "car",
+    "article": "la",
+    "noun": "voiture",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "bonjour",
+    "translation": "hello / good morning",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "merci",
+    "translation": "thank you",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "oui",
+    "translation": "yes",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "non",
+    "translation": "no",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "zéro",
+    "translation": "zero",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "un",
+    "translation": "one",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "deux",
+    "translation": "two",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "trois",
+    "translation": "three",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "quatre",
+    "translation": "four",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "cinq",
+    "translation": "five",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "six",
+    "translation": "six",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "sept",
+    "translation": "seven",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "huit",
+    "translation": "eight",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "neuf",
+    "translation": "nine",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "dix",
+    "translation": "ten",
+    "difficulty": "EASY",
+    "core": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la drag queen",
+    "translation": "drag queen / drag performer",
+    "article": "la",
+    "noun": "drag queen",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le morinom",
+    "translation": "deadname; a former name that a person no longer uses, especially a trans person's former name",
+    "article": "le",
+    "noun": "morinom",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le trouple",
+    "translation": "throuple; a committed relationship among three people (informal)",
+    "article": "le",
+    "noun": "trouple",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "les pronoms",
+    "translation": "pronouns",
+    "article": "les",
+    "noun": "pronoms",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le coming out",
+    "translation": "coming out; telling others about one's identity or orientation",
+    "article": "le",
+    "noun": "coming out",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la famille choisie",
+    "translation": "chosen family",
+    "article": "la",
+    "noun": "famille choisie",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "queer",
+    "translation": "queer; a broad identity term reclaimed by many LGBTQ+ people",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la famille arc-en-ciel",
+    "translation": "rainbow family; a family with one or more LGBTQ+ parents",
+    "article": "la",
+    "noun": "famille arc-en-ciel",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le filet américain",
+    "translation": "seasoned raw minced beef (Belgium)",
+    "article": "le",
+    "noun": "filet américain",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "CANADA",
+    "term": "la poutine",
+    "translation": "poutine; fries topped with cheese curds and gravy (Québec)",
+    "article": "la",
+    "noun": "poutine",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la trottinette électrique",
+    "translation": "electric kick scooter, such as a Lime scooter",
+    "article": "la",
+    "noun": "trottinette électrique",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le vélo électrique",
+    "translation": "electric bicycle / e-bike",
+    "article": "le",
+    "noun": "vélo électrique",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le VTC",
+    "translation": "app-booked car with a professional driver, such as Uber",
+    "article": "le",
+    "noun": "VTC",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'application de VTC",
+    "translation": "ride-hailing app",
+    "article": "l'",
+    "noun": "application de VTC",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le covoiturage",
+    "translation": "carpooling / sharing a journey with other travelers",
+    "article": "le",
+    "noun": "covoiturage",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'autopartage",
+    "translation": "short-term shared-car rental / car sharing",
+    "article": "l'",
+    "noun": "autopartage",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la cigarette électronique",
+    "translation": "electronic cigarette / e-cigarette",
+    "article": "la",
+    "noun": "cigarette électronique",
+    "difficulty": "EASY",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "CANADA",
+    "term": "la vapoteuse",
+    "translation": "vape / vaping device (especially common in Québec)",
+    "article": "la",
+    "noun": "vapoteuse",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le liquide pour cigarette électronique",
+    "translation": "vape liquid / e-liquid",
+    "article": "le",
+    "noun": "liquide pour cigarette électronique",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "FRANCE",
+    "term": "la puff",
+    "translation": "disposable vape (informal term used in France)",
+    "article": "la",
+    "noun": "puff",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'espace non-fumeur",
+    "translation": "non-smoking area",
+    "article": "l'",
+    "noun": "espace non-fumeur",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la baguette",
+    "translation": "baguette / long French bread",
+    "article": "la",
+    "noun": "baguette",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le croissant",
+    "translation": "croissant",
+    "article": "le",
+    "noun": "croissant",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'éclair",
+    "translation": "éclair / cream-filled pastry",
+    "article": "l'",
+    "noun": "éclair",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la chocolatine",
+    "translation": "pain au chocolat (regional name in southwestern France)",
+    "article": "la",
+    "noun": "chocolatine",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pain au chocolat",
+    "translation": "chocolate-filled pastry (the widespread name in France)",
+    "article": "le",
+    "noun": "pain au chocolat",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'andouillette",
+    "translation": "strong-smelling sausage made largely from pork intestine",
+    "article": "l'",
+    "noun": "andouillette",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "les escargots",
+    "translation": "snails, often served with garlic-parsley butter",
+    "article": "les",
+    "noun": "escargots",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "les cuisses de grenouille",
+    "translation": "frog legs (an occasional or regional dish, not an everyday food)",
+    "article": "les",
+    "noun": "cuisses de grenouille",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "le foie gras",
+    "translation": "fatty duck or goose liver produced by force-feeding",
+    "article": "le",
+    "noun": "foie gras",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "souple",
+    "translation": "please",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "zanmi",
+    "translation": "friend",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "lakay",
+    "translation": "home / back home / one's home country",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "bagay",
+    "translation": "thing / stuff / matter",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "tripotay",
+    "translation": "gossip",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "tap-tap",
+    "translation": "colorfully painted shared taxi or bus in Haiti",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "konpa",
+    "translation": "Haitian dance-music genre",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "griyo",
+    "translation": "Haitian fried pork dish",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la lampe",
+    "translation": "lamp",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "lampe"
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "pikliz",
+    "translation": "spicy Haitian pickled-vegetable condiment",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "qui",
+    "translation": "who"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le touriste",
+    "translation": "tourist",
+    "article": "le",
+    "noun": "touriste"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la touriste",
+    "translation": "female tourist",
+    "article": "la",
+    "noun": "touriste"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les touristes",
+    "translation": "tourists",
+    "article": "les",
+    "noun": "touristes"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ordonné",
+    "translation": "neat / orderly / clean"
+  },
+  {
+    "language": "FRENCH",
+    "term": "propre",
+    "translation": "clean"
+  },
+  {
+    "language": "FRENCH",
+    "term": "important",
+    "translation": "important"
+  },
+  {
+    "language": "FRENCH",
+    "term": "presque",
+    "translation": "almost"
+  },
+  {
+    "language": "FRENCH",
+    "term": "méchant",
+    "translation": "mean"
+  },
+  {
+    "language": "FRENCH",
+    "term": "probablement",
+    "translation": "probably"
+  },
+  {
+    "language": "FRENCH",
+    "term": "sûr",
+    "translation": "safe / sure / certain"
+  },
+  {
+    "language": "FRENCH",
+    "term": "dangereux",
+    "translation": "dangerous"
+  },
+  {
+    "language": "FRENCH",
+    "term": "fermé",
+    "translation": "closed"
+  },
+  {
+    "language": "FRENCH",
+    "term": "là-bas",
+    "translation": "over there"
+  },
+  {
+    "language": "FRENCH",
+    "term": "ennuyeux",
+    "translation": "boring"
+  },
+  {
+    "language": "FRENCH",
+    "term": "fatigué",
+    "translation": "tired"
+  },
+  {
+    "language": "FRENCH",
+    "term": "loin",
+    "translation": "far away"
+  },
+  {
+    "language": "FRENCH",
+    "term": "certainement",
+    "translation": "definitely / certainly / probably"
+  },
+  {
+    "language": "FRENCH",
+    "term": "vide",
+    "translation": "empty"
+  },
+  {
+    "language": "FRENCH",
+    "term": "là",
+    "translation": "there"
+  },
+  {
+    "language": "FRENCH",
+    "term": "rarement",
+    "translation": "rarely / seldom"
+  },
+  {
+    "language": "FRENCH",
+    "term": "souvent",
+    "translation": "often"
+  },
+  {
+    "language": "FRENCH",
+    "term": "assez",
+    "translation": "enough"
+  },
+  {
+    "language": "FRENCH",
+    "term": "dur",
+    "translation": "hard / difficult / heavy"
+  },
+  {
+    "language": "FRENCH",
+    "term": "peut-être",
+    "translation": "maybe"
+  },
+  {
+    "language": "FRENCH",
+    "term": "moins",
+    "translation": "less / fewer"
+  },
+  {
+    "language": "FRENCH",
+    "term": "bizarre",
+    "translation": "strange / weird / funny"
+  },
+  {
+    "language": "FRENCH",
+    "term": "gentil",
+    "translation": "nice / kind"
+  },
+  {
+    "language": "FRENCH",
+    "term": "prêt",
+    "translation": "finished / ready"
+  },
+  {
+    "language": "FRENCH",
+    "term": "perdu",
+    "translation": "lost / doomed"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pull",
+    "translation": "sweater",
+    "article": "le",
+    "noun": "pull"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le tapis",
+    "translation": "carpet",
+    "article": "le",
+    "noun": "tapis"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le snack",
+    "translation": "snack",
+    "article": "le",
+    "noun": "snack"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le chapeau",
+    "translation": "hat",
+    "article": "le",
+    "noun": "chapeau"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le gant",
+    "translation": "glove",
+    "article": "le",
+    "noun": "gant"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le fromage",
+    "translation": "cheese",
+    "article": "le",
+    "noun": "fromage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la neige",
+    "translation": "snow",
+    "article": "la",
+    "noun": "neige"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le stylo",
+    "translation": "pen",
+    "article": "le",
+    "noun": "stylo"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le kiosque",
+    "translation": "kiosk",
+    "article": "le",
+    "noun": "kiosque"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le magasin bio",
+    "translation": "organic food shop",
+    "article": "le",
+    "noun": "magasin bio"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le parc",
+    "translation": "park",
+    "article": "le",
+    "noun": "parc"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'aéroport",
+    "translation": "airport"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la gare",
+    "translation": "train station",
+    "article": "la",
+    "noun": "gare"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le bus",
+    "translation": "bus",
+    "article": "le",
+    "noun": "bus"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le rapport",
+    "translation": "report / narrative",
+    "article": "le",
+    "noun": "rapport"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le snack-bar",
+    "translation": "snack bar / takeaway stand",
+    "article": "le",
+    "noun": "snack-bar"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le ballon",
+    "translation": "ball",
+    "article": "le",
+    "noun": "ballon"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le lac",
+    "translation": "lake",
+    "article": "le",
+    "noun": "lac"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le jour férié",
+    "translation": "public holiday",
+    "article": "le",
+    "noun": "jour férié"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les vacances",
+    "translation": "vacation / holiday",
+    "article": "les",
+    "noun": "vacances"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le cours",
+    "translation": "class / course",
+    "article": "le",
+    "noun": "cours"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le client",
+    "translation": "customer",
+    "article": "le",
+    "noun": "client"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le placard",
+    "translation": "closet / cabinet",
+    "article": "le",
+    "noun": "placard"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'aspirateur",
+    "translation": "vacuum cleaner"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le riz",
+    "translation": "rice",
+    "article": "le",
+    "noun": "riz"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le supermarché",
+    "translation": "supermarket",
+    "article": "le",
+    "noun": "supermarché"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la boulette",
+    "translation": "dumpling",
+    "article": "la",
+    "noun": "boulette"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le retraité",
+    "translation": "retiree",
+    "article": "le",
+    "noun": "retraité"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le savon",
+    "translation": "soap",
+    "article": "le",
+    "noun": "savon"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le bonnet",
+    "translation": "beanie / knit cap",
+    "article": "le",
+    "noun": "bonnet"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la casquette",
+    "translation": "cap",
+    "article": "la",
+    "noun": "casquette"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la fleur",
+    "translation": "flower",
+    "article": "la",
+    "noun": "fleur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la ville",
+    "translation": "city",
+    "article": "la",
+    "noun": "ville"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le tramway",
+    "translation": "tram / streetcar",
+    "article": "le",
+    "noun": "tramway"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la boulangerie",
+    "translation": "bakery",
+    "article": "la",
+    "noun": "boulangerie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la poste",
+    "translation": "mail / post office",
+    "article": "la",
+    "noun": "poste"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la langue",
+    "translation": "language",
+    "article": "la",
+    "noun": "langue"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la mosquée",
+    "translation": "mosque",
+    "article": "la",
+    "noun": "mosquée"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'église",
+    "translation": "church"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la synagogue",
+    "translation": "synagogue",
+    "article": "la",
+    "noun": "synagogue"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la pharmacie",
+    "translation": "pharmacy",
+    "article": "la",
+    "noun": "pharmacie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la station-service",
+    "translation": "gas / petrol station",
+    "article": "la",
+    "noun": "station-service"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'examen",
+    "translation": "exam"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la carte",
+    "translation": "card / map",
+    "article": "la",
+    "noun": "carte"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la pizza",
+    "translation": "pizza",
+    "article": "la",
+    "noun": "pizza"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la mer",
+    "translation": "sea",
+    "article": "la",
+    "noun": "mer"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'art",
+    "translation": "art"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pont",
+    "translation": "bridge",
+    "article": "le",
+    "noun": "pont"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le cours magistral",
+    "translation": "lecture",
+    "article": "le",
+    "noun": "cours magistral"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le raisin",
+    "translation": "grape",
+    "article": "le",
+    "noun": "raisin"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la droguerie",
+    "translation": "drugstore",
+    "article": "la",
+    "noun": "droguerie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la couleur",
+    "translation": "color",
+    "article": "la",
+    "noun": "couleur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la brosse à dents",
+    "translation": "toothbrush",
+    "article": "la",
+    "noun": "brosse à dents"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le sac de courses",
+    "translation": "grocery bag",
+    "article": "le",
+    "noun": "sac de courses"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le ravioli",
+    "translation": "filled dough pocket / dumpling",
+    "article": "le",
+    "noun": "ravioli"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la chose",
+    "translation": "thing / matter / issue",
+    "article": "la",
+    "noun": "chose"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'histoire",
+    "translation": "history / story"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les vacances scolaires",
+    "translation": "school holidays / vacation period",
+    "article": "les",
+    "noun": "vacances scolaires"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le puzzle",
+    "translation": "puzzle",
+    "article": "le",
+    "noun": "puzzle"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le jouet",
+    "translation": "toy",
+    "article": "le",
+    "noun": "jouet"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le livre",
+    "translation": "book",
+    "article": "le",
+    "noun": "livre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le cadeau",
+    "translation": "gift",
+    "article": "le",
+    "noun": "cadeau"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le bâtiment",
+    "translation": "building / structure",
+    "article": "le",
+    "noun": "bâtiment"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les légumes",
+    "translation": "vegetables",
+    "article": "les",
+    "noun": "légumes"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'hôpital",
+    "translation": "hospital"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le concert",
+    "translation": "concert",
+    "article": "le",
+    "noun": "concert"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le théâtre",
+    "translation": "theater",
+    "article": "le",
+    "noun": "théâtre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la piscine",
+    "translation": "swimming pool",
+    "article": "la",
+    "noun": "piscine"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la fenêtre",
+    "translation": "window",
+    "article": "la",
+    "noun": "fenêtre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le musée",
+    "translation": "museum",
+    "article": "le",
+    "noun": "musée"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le quartier",
+    "translation": "quarter / neighborhood",
+    "article": "le",
+    "noun": "quartier"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le restaurant",
+    "translation": "restaurant",
+    "article": "le",
+    "noun": "restaurant"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le grand magasin",
+    "translation": "department store",
+    "article": "le",
+    "noun": "grand magasin"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le thème",
+    "translation": "topic / theme",
+    "article": "le",
+    "noun": "thème"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le shampooing",
+    "translation": "shampoo",
+    "article": "le",
+    "noun": "shampooing"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le magasin",
+    "translation": "store / business",
+    "article": "le",
+    "noun": "magasin"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le cahier",
+    "translation": "notebook / exercise book",
+    "article": "le",
+    "noun": "cahier"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le voisin",
+    "translation": "neighbor",
+    "article": "le",
+    "noun": "voisin"
+  },
+  {
+    "language": "FRENCH",
+    "term": "toujours",
+    "translation": "always"
+  },
+  {
+    "language": "FRENCH",
+    "term": "jamais",
+    "translation": "never"
+  },
+  {
+    "language": "FRENCH",
+    "term": "maintenant",
+    "translation": "now"
+  },
+  {
+    "language": "FRENCH",
+    "term": "demain",
+    "translation": "tomorrow"
+  },
+  {
+    "language": "FRENCH",
+    "term": "hier",
+    "translation": "yesterday"
+  },
+  {
+    "language": "FRENCH",
+    "term": "heureux",
+    "translation": "happy"
+  },
+  {
+    "language": "FRENCH",
+    "term": "facile",
+    "translation": "easy"
+  },
+  {
+    "language": "FRENCH",
+    "term": "difficile",
+    "translation": "difficult"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le train",
+    "translation": "train",
+    "article": "le",
+    "noun": "train"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le portefeuille",
+    "translation": "wallet",
+    "article": "le",
+    "noun": "portefeuille"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le problème",
+    "translation": "problem",
+    "article": "le",
+    "noun": "problème"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le programme",
+    "translation": "program",
+    "article": "le",
+    "noun": "programme"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le système",
+    "translation": "system",
+    "article": "le",
+    "noun": "système"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le modèle",
+    "translation": "model",
+    "article": "le",
+    "noun": "modèle"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le téléphone",
+    "translation": "telephone",
+    "article": "le",
+    "noun": "téléphone"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le silence",
+    "translation": "silence",
+    "article": "le",
+    "noun": "silence"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le squelette",
+    "translation": "skeleton",
+    "article": "le",
+    "noun": "squelette"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le lycée",
+    "translation": "high school",
+    "article": "le",
+    "noun": "lycée"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le génie",
+    "translation": "genius",
+    "article": "le",
+    "noun": "génie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le parapluie",
+    "translation": "umbrella",
+    "article": "le",
+    "noun": "parapluie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le garage",
+    "translation": "garage",
+    "article": "le",
+    "noun": "garage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le voyage",
+    "translation": "trip / journey",
+    "article": "le",
+    "noun": "voyage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le message",
+    "translation": "message",
+    "article": "le",
+    "noun": "message"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le visage",
+    "translation": "face",
+    "article": "le",
+    "noun": "visage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le courage",
+    "translation": "courage",
+    "article": "le",
+    "noun": "courage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le domaine",
+    "translation": "field / domain",
+    "article": "le",
+    "noun": "domaine"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le chapitre",
+    "translation": "chapter",
+    "article": "le",
+    "noun": "chapitre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le groupe",
+    "translation": "group",
+    "article": "le",
+    "noun": "groupe"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le monde",
+    "translation": "world",
+    "article": "le",
+    "noun": "monde"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le choix",
+    "translation": "choice",
+    "article": "le",
+    "noun": "choix"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le travail",
+    "translation": "work",
+    "article": "le",
+    "noun": "travail"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le bonheur",
+    "translation": "happiness",
+    "article": "le",
+    "noun": "bonheur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le malheur",
+    "translation": "misfortune",
+    "article": "le",
+    "noun": "malheur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la main",
+    "translation": "hand",
+    "article": "la",
+    "noun": "main"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la dent",
+    "translation": "tooth",
+    "article": "la",
+    "noun": "dent"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la peau",
+    "translation": "skin",
+    "article": "la",
+    "noun": "peau"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la fin",
+    "translation": "end",
+    "article": "la",
+    "noun": "fin"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la fois",
+    "translation": "time / occurrence",
+    "article": "la",
+    "noun": "fois"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la voix",
+    "translation": "voice",
+    "article": "la",
+    "noun": "voix"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la paix",
+    "translation": "peace",
+    "article": "la",
+    "noun": "paix"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la souris",
+    "translation": "mouse",
+    "article": "la",
+    "noun": "souris"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la nuit",
+    "translation": "night",
+    "article": "la",
+    "noun": "nuit"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la forêt",
+    "translation": "forest",
+    "article": "la",
+    "noun": "forêt"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la chaleur",
+    "translation": "heat / warmth",
+    "article": "la",
+    "noun": "chaleur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la valeur",
+    "translation": "value",
+    "article": "la",
+    "noun": "valeur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la peur",
+    "translation": "fear",
+    "article": "la",
+    "noun": "peur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la question",
+    "translation": "question",
+    "article": "la",
+    "noun": "question"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la photo",
+    "translation": "photo",
+    "article": "la",
+    "noun": "photo"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la radio",
+    "translation": "radio",
+    "article": "la",
+    "noun": "radio"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la moto",
+    "translation": "motorcycle",
+    "article": "la",
+    "noun": "moto"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la vidéo",
+    "translation": "video",
+    "article": "la",
+    "noun": "vidéo"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la cuillère",
+    "translation": "spoon",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "cuillère"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la météo",
+    "translation": "weather forecast",
+    "article": "la",
+    "noun": "météo"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la planète",
+    "translation": "planet",
+    "article": "la",
+    "noun": "planète"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la veste",
+    "translation": "jacket",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "veste"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la barbe",
+    "translation": "beard",
+    "article": "la",
+    "noun": "barbe"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la moustache",
+    "translation": "mustache",
+    "article": "la",
+    "noun": "moustache"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la personne",
+    "translation": "person (always grammatically feminine)",
+    "article": "la",
+    "noun": "personne"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la victime",
+    "translation": "victim (always grammatically feminine)",
+    "article": "la",
+    "noun": "victime"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le courriel",
+    "translation": "email (official; especially common in Québec)",
+    "article": "le",
+    "noun": "courriel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le logiciel",
+    "translation": "software",
+    "article": "le",
+    "noun": "logiciel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le journal",
+    "translation": "newspaper",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "journal"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le progiciel",
+    "translation": "software package",
+    "article": "le",
+    "noun": "progiciel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'ordinateur",
+    "translation": "computer"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'ordiphone",
+    "translation": "smartphone (official term in France)"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le téléphone intelligent",
+    "translation": "smartphone (Québec)",
+    "article": "le",
+    "noun": "téléphone intelligent"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la tablette tactile",
+    "translation": "tablet computer",
+    "article": "la",
+    "noun": "tablette tactile"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le navigateur",
+    "translation": "web browser",
+    "article": "le",
+    "noun": "navigateur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le moteur de recherche",
+    "translation": "search engine",
+    "article": "le",
+    "noun": "moteur de recherche"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la Toile",
+    "translation": "the Web (literally, the Web / web)",
+    "article": "la",
+    "noun": "Toile"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'internaute",
+    "translation": "internet user"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le webmestre",
+    "translation": "webmaster",
+    "article": "le",
+    "noun": "webmestre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le site web",
+    "translation": "website",
+    "article": "le",
+    "noun": "site web"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la page d'accueil",
+    "translation": "home page",
+    "article": "la",
+    "noun": "page d'accueil"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'hyperlien",
+    "translation": "hyperlink"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le lien hypertexte",
+    "translation": "hypertext link",
+    "article": "le",
+    "noun": "lien hypertexte"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la pièce jointe",
+    "translation": "email attachment",
+    "article": "la",
+    "noun": "pièce jointe"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le téléchargement",
+    "translation": "download",
+    "article": "le",
+    "noun": "téléchargement"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le téléversement",
+    "translation": "upload (especially Québec)",
+    "article": "le",
+    "noun": "téléversement"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'infonuagique",
+    "translation": "cloud computing (Québec)"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le nuage informatique",
+    "translation": "computing cloud",
+    "article": "le",
+    "noun": "nuage informatique"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le stockage en nuage",
+    "translation": "cloud storage",
+    "article": "le",
+    "noun": "stockage en nuage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le clavardage",
+    "translation": "online chat (Québec)",
+    "article": "le",
+    "noun": "clavardage"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la montagne",
+    "translation": "mountain",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "montagne"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la messagerie instantanée",
+    "translation": "instant messaging",
+    "article": "la",
+    "noun": "messagerie instantanée"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pourriel",
+    "translation": "spam email (especially Québec)",
+    "article": "le",
+    "noun": "pourriel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le polluriel",
+    "translation": "spam email (institutional alternative)",
+    "article": "le",
+    "noun": "polluriel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'hameçonnage",
+    "translation": "phishing"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le rançongiciel",
+    "translation": "ransomware",
+    "article": "le",
+    "noun": "rançongiciel"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le logiciel malveillant",
+    "translation": "malware",
+    "article": "le",
+    "noun": "logiciel malveillant"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le logiciel espion",
+    "translation": "spyware",
+    "article": "le",
+    "noun": "logiciel espion"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pare-feu",
+    "translation": "firewall",
+    "article": "le",
+    "noun": "pare-feu"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la cybersécurité",
+    "translation": "cybersecurity",
+    "article": "la",
+    "noun": "cybersécurité"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la cyberattaque",
+    "translation": "cyberattack",
+    "article": "la",
+    "noun": "cyberattaque"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le cyberharcèlement",
+    "translation": "cyberbullying / online harassment",
+    "article": "le",
+    "noun": "cyberharcèlement"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le mot-dièse",
+    "translation": "hashtag (official term)",
+    "article": "le",
+    "noun": "mot-dièse"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'arobase",
+    "translation": "at sign (@)"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la binette",
+    "translation": "emoticon / smiley (Québec)",
+    "article": "la",
+    "noun": "binette"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'émoticône",
+    "translation": "emoticon"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'émoji",
+    "translation": "emoji"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'égoportrait",
+    "translation": "selfie (Québec)",
+    "article": "l'",
+    "noun": "égoportrait"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le balado",
+    "translation": "podcast (Québec)",
+    "article": "le",
+    "noun": "balado"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la baladodiffusion",
+    "translation": "podcasting (Québec)",
+    "article": "la",
+    "noun": "baladodiffusion"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le blogue",
+    "translation": "blog (especially Québec)",
+    "article": "le",
+    "noun": "blogue"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le blogueur",
+    "translation": "blogger",
+    "article": "le",
+    "noun": "blogueur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le vidéoblogue",
+    "translation": "video blog / vlog",
+    "article": "le",
+    "noun": "vidéoblogue"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le gazouillis",
+    "translation": "tweet / short social-media post (Québec)",
+    "article": "le",
+    "noun": "gazouillis"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'infolettre",
+    "translation": "email newsletter (Québec)",
+    "article": "l'",
+    "noun": "infolettre"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la visioconférence",
+    "translation": "videoconference",
+    "article": "la",
+    "noun": "visioconférence"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la vidéoconférence",
+    "translation": "videoconference",
+    "article": "la",
+    "noun": "vidéoconférence"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la foire aux questions",
+    "translation": "frequently asked questions / FAQ",
+    "article": "la",
+    "noun": "foire aux questions"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le mot de passe",
+    "translation": "password",
+    "article": "le",
+    "noun": "mot de passe"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'identifiant",
+    "translation": "username / login identifier"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la sauvegarde",
+    "translation": "backup",
+    "article": "la",
+    "noun": "sauvegarde"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la base de données",
+    "translation": "database",
+    "article": "la",
+    "noun": "base de données"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les données",
+    "translation": "data",
+    "article": "les",
+    "noun": "données"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le réseau social",
+    "translation": "social network",
+    "article": "le",
+    "noun": "réseau social"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la réalité virtuelle",
+    "translation": "virtual reality",
+    "article": "la",
+    "noun": "réalité virtuelle"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la réalité augmentée",
+    "translation": "augmented reality",
+    "article": "la",
+    "noun": "réalité augmentée"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le portable",
+    "translation": "mobile phone / cell phone",
+    "article": "le",
+    "noun": "portable"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le téléphone portable",
+    "translation": "mobile phone / cell phone",
+    "article": "le",
+    "noun": "téléphone portable"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le chargeur",
+    "translation": "charger",
+    "article": "le",
+    "noun": "chargeur"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le câble de recharge",
+    "translation": "charging cable",
+    "article": "le",
+    "noun": "câble de recharge"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la batterie rechargeable",
+    "translation": "rechargeable battery",
+    "article": "la",
+    "noun": "batterie rechargeable"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'écran",
+    "translation": "screen"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'appli",
+    "translation": "app"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la notification",
+    "translation": "message / notification",
+    "article": "la",
+    "noun": "notification"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les écouteurs",
+    "translation": "headphones",
+    "article": "les",
+    "noun": "écouteurs"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la prise électrique",
+    "translation": "electrical outlet",
+    "article": "la",
+    "noun": "prise électrique"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le Wi-Fi",
+    "translation": "Wi-Fi",
+    "article": "le",
+    "noun": "Wi-Fi"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les amis",
+    "translation": "friends",
+    "article": "les",
+    "noun": "amis"
+  },
+  {
+    "language": "FRENCH",
+    "term": "sale",
+    "translation": "dirty",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "tellement",
+    "translation": "so / such",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "pauvre",
+    "translation": "poor / lacking / measly",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "cher",
+    "translation": "expensive",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le décalage horaire",
+    "translation": "jet lag",
+    "article": "le",
+    "noun": "décalage horaire",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le neveu",
+    "translation": "nephew",
+    "article": "le",
+    "noun": "neveu",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le repas",
+    "translation": "meal",
+    "article": "le",
+    "noun": "repas",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'os",
+    "translation": "bone",
+    "article": "l'",
+    "noun": "os",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le vélo",
+    "translation": "bike",
+    "article": "le",
+    "noun": "vélo",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le verre",
+    "translation": "glass",
+    "article": "le",
+    "noun": "verre",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la tasse",
+    "translation": "cup",
+    "article": "la",
+    "noun": "tasse",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la honte",
+    "translation": "shame / disgrace",
+    "article": "la",
+    "noun": "honte",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la farine",
+    "translation": "flour",
+    "article": "la",
+    "noun": "farine",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la citronnade",
+    "translation": "lemonade (American-style)",
+    "article": "la",
+    "noun": "citronnade",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la climatisation",
+    "translation": "air-conditioning",
+    "article": "la",
+    "noun": "climatisation",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la chaussée",
+    "translation": "roadway",
+    "article": "la",
+    "noun": "chaussée",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les États-Unis",
+    "translation": "the United States",
+    "article": "les",
+    "noun": "États-Unis",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la caste",
+    "translation": "caste",
+    "article": "la",
+    "noun": "caste",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le système de castes",
+    "translation": "caste system",
+    "article": "le",
+    "noun": "système de castes",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la sorte",
+    "translation": "kind / sort",
+    "article": "la",
+    "noun": "sorte",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la viande",
+    "translation": "meat",
+    "article": "la",
+    "noun": "viande",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la bande",
+    "translation": "strip / band",
+    "article": "la",
+    "noun": "bande",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la graisse",
+    "translation": "fat",
+    "article": "la",
+    "noun": "graisse",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la classe",
+    "translation": "class",
+    "article": "la",
+    "noun": "classe",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le paysan",
+    "translation": "farmer / peasant",
+    "article": "le",
+    "noun": "paysan",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la plèbe",
+    "translation": "the common people / the plebs",
+    "article": "la",
+    "noun": "plèbe",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'Européen",
+    "translation": "European",
+    "article": "l'",
+    "noun": "Européen",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "mauvais",
+    "translation": "bad",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'état",
+    "translation": "state / condition",
+    "article": "l'",
+    "noun": "état",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pourcentage",
+    "translation": "percentage",
+    "article": "le",
+    "noun": "pourcentage",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le prix",
+    "translation": "price",
+    "article": "le",
+    "noun": "prix",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le reste",
+    "translation": "rest / leftover",
+    "article": "le",
+    "noun": "reste",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "destiné",
+    "translation": "intended / destined for",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la coutume",
+    "translation": "custom / tradition",
+    "article": "la",
+    "noun": "coutume",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la mise à jour",
+    "translation": "update",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "mise à jour",
+    "exampleSentence": "La dernière mise à jour.",
+    "exampleTranslation": "The latest update."
+  },
+  {
+    "language": "FRENCH",
+    "term": "D'habitude",
+    "translation": "usually",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "généralement",
+    "translation": "usually / generally",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "lentement",
+    "translation": "slowly",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "Pouvez-vous parler plus lentement, s'il vous plaît ?",
+    "exampleTranslation": "Can you speak more slowly, please?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "émouvant",
+    "translation": "moving / touching",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "C'était très émouvant. Merci.",
+    "exampleTranslation": "That was very moving. Thank you."
+  },
+  {
+    "language": "FRENCH",
+    "term": "davantage",
+    "translation": "more / to a greater extent",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "C'était très intéressant d'en apprendre davantage sur cette histoire.",
+    "exampleTranslation": "It was very interesting to learn more about this history."
+  },
+  {
+    "language": "FRENCH",
+    "term": "le besoin",
+    "translation": "need",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "besoin",
+    "exampleSentence": "Les chiens ont besoin de marcher.",
+    "exampleTranslation": "Dogs need to walk."
+  },
+  {
+    "language": "FRENCH",
+    "term": "la rivière",
+    "translation": "river",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "rivière"
+  },
+  {
+    "language": "FRENCH",
+    "term": "un timbre",
+    "translation": "stamp",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "timbre",
+    "exampleSentence": "Je voudrais un timbre international pour une carte postale aux États-Unis, s'il vous plaît.",
+    "exampleTranslation": "I'd like an international stamp for a postcard to the United States, please."
+  },
+  {
+    "language": "FRENCH",
+    "term": "le reçu",
+    "translation": "receipt",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "reçu"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le vol",
+    "translation": "flight",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "vol"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la couverture",
+    "translation": "blanket",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "couverture"
+  },
+  {
+    "language": "FRENCH",
+    "term": "une réservation",
+    "translation": "reservation",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "réservation",
+    "exampleSentence": "Bonjour, j'ai une réservation au nom de Popelka.",
+    "exampleTranslation": "Hello, I have a reservation under the name Popelka."
+  },
+  {
+    "language": "FRENCH",
+    "term": "les espèces",
+    "translation": "cash",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "les",
+    "noun": "espèces",
+    "exampleSentence": "Vous préférez que je paie par carte ou en espèces ?",
+    "exampleTranslation": "Would you prefer that I pay by card or in cash?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "une réduction",
+    "translation": "discount",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "réduction",
+    "exampleSentence": "Il y a une réduction si je paie en espèces ?",
+    "exampleTranslation": "Is there a discount if I pay in cash?"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les toilettes",
+    "translation": "toilets / restroom",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "les",
+    "noun": "toilettes"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la monnaie",
+    "translation": "change (money returned)",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "monnaie",
+    "exampleSentence": "Gardez la monnaie.",
+    "exampleTranslation": "Keep the change."
+  },
+  {
+    "language": "FRENCH",
+    "term": "la porte d'embarquement",
+    "translation": "boarding gate",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "la",
+    "noun": "porte d'embarquement"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le contrôle de sécurité",
+    "translation": "security screening",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "contrôle de sécurité"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le vol de correspondance",
+    "translation": "connecting flight",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "le",
+    "noun": "vol de correspondance"
+  },
+  {
+    "language": "FRENCH",
+    "term": "une exposition",
+    "translation": "exhibition",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "l'",
+    "noun": "exposition",
+    "exampleSentence": "Les expositions étaient vraiment magnifiques !",
+    "exampleTranslation": "The exhibitions were really magnificent!"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le marché",
+    "translation": "market",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "marché"
+  },
+  {
+    "language": "FRENCH",
+    "term": "les lèvres",
+    "translation": "lips",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "article": "les",
+    "noun": "lèvres"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le sommeil",
+    "translation": "sleep",
+    "article": "le",
+    "noun": "sommeil",
+    "exampleSentence": "J'ai sommeil maintenant.",
+    "exampleTranslation": "I'm sleepy now.",
+    "dateAdded": "2026-09-09",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "language": "FRENCH",
+    "term": "polyamoureux / polyamoureuse",
+    "translation": "polyamorous; having consensual romantic relationships with more than one person",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "non binaire",
+    "translation": "nonbinary",
+    "difficulty": "MEDIUM",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "sans nicotine",
+    "translation": "nicotine-free / without nicotine",
+    "difficulty": "MEDIUM",
+    "sync": true,
+    "explicit": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "Kreyòl ayisyen",
+    "translation": "Haitian Creole",
+    "difficulty": "EASY",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "tèt chaje",
+    "translation": "headache, trouble, stress, or a difficult situation",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "variant": "HAITI",
+    "spokenLanguage": "Haitian Creole",
+    "term": "diri djondjon",
+    "translation": "Haitian rice cooked with black mushrooms",
+    "difficulty": "HARD",
+    "sync": true
+  },
+  {
+    "language": "FRENCH",
+    "term": "la banque / le banc",
+    "translation": "bank / bench"
+  },
+  {
+    "language": "FRENCH",
+    "term": "l'arrêt de bus",
+    "translation": "bus stop"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le château / la serrure",
+    "translation": "castle / lock"
+  },
+  {
+    "language": "FRENCH",
+    "term": "arriéré / arriérée",
+    "translation": "backwards / behind the times",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "un rencard",
+    "translation": "a date / rendez-vous (informal)",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "une carafe d'eau",
+    "translation": "a carafe of tap water",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "différent / différente",
+    "translation": "different",
+    "dateAdded": "2026-09-02"
+  },
+  {
+    "language": "FRENCH",
+    "term": "pétillant / pétillante",
+    "translation": "sparkling",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09"
+  },
+  {
+    "language": "FRENCH",
+    "term": "doux / douce",
+    "translation": "soft / gentle",
+    "difficulty": "MEDIUM",
+    "dateAdded": "2026-09-09",
+    "exampleSentence": "J'adore tes lèvres douces.",
+    "exampleTranslation": "I love your soft lips."
+  },
+  {
+    "language": "FRENCH",
+    "term": "la pomme",
+    "translation": "apple",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "pomme"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la porte",
+    "translation": "door",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "porte"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la table",
+    "translation": "table",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "table"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la chaise",
+    "translation": "chair",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "chaise"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le café",
+    "translation": "coffee",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "café"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le lait",
+    "translation": "milk",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "lait"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le pain",
+    "translation": "bread",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "pain"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le soleil",
+    "translation": "sun",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "soleil"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la pluie",
+    "translation": "rain",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "pluie"
+  },
+  {
+    "language": "FRENCH",
+    "term": "la rue",
+    "translation": "street",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "la",
+    "noun": "rue"
+  },
+  {
+    "language": "FRENCH",
+    "term": "le jardin",
+    "translation": "garden",
+    "difficulty": "EASY",
+    "dateAdded": "2026-09-29",
+    "article": "le",
+    "noun": "jardin"
+  }
+]
